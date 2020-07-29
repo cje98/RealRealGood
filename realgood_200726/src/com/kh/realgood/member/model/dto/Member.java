@@ -8,6 +8,7 @@ public class Member {
 	private String pwd;
 	private String name;
 	private char gender;
+	private String gradeCode;
 	private String gradeName;
 	private String tel;
 	private Date enrollDate;
@@ -16,97 +17,19 @@ public class Member {
 	private char outYN;
 	private String smsReceive;
 	
-	public Member(String id, String pwd, String mame, char gender,
-			String gradeName, String tel, Date enrollDate, String nickName, String emailReceive, String smsReceive, char outYN) {
-		super();
-		this.id = id;
-		this.pwd = pwd;
-		this.name = mame;
-		this.gender = gender;
-		this.gradeName = gradeName;
-		this.tel = tel;
-		this.outYN = outYN;
-		this.enrollDate = enrollDate;
-		this.nickName = nickName;
+	public Member() {
 	}
 	
-	public Member(String id, String pwd) {
-		super();
-		this.id = id;
-		this.pwd = pwd;
-	}
-	
-	
-
-	public Member(String id, String tel, String emailReceive, String smsReceive) {
-		super();
-		this.id = id;
-		this.tel = tel;
-		this.emailReceive = emailReceive;
-		this.smsReceive = smsReceive;
-	}
-
-	public Member(String id, String pwd, String mame, char gender, String tel,
-			String nickName ,String emailReceive, String smsReceive) {
-		super();
-		this.id = id;
-		this.name = mame;
-		this.gender = gender;
-		this.tel = tel;
-		this.nickName = nickName;
-		this.emailReceive = emailReceive;
-		this.smsReceive = smsReceive;
-	}
-
-	public Member(String id, String name, char gender, String gradeName,
-			String tel, Date enrollDate, String nickName) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.gender = gender;
-		this.gradeName = gradeName;
-		this.tel = tel;
-		this.enrollDate = enrollDate;
-		this.nickName = nickName;
-	}
-	
-
-	public Member(String id, String name, char gender, String gradeName,
-			String tel, Date enrollDate, String nickName, String emailReceive, String smsReceive) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.gender = gender;
-		this.gradeName = gradeName;
-		this.tel = tel;
-		this.enrollDate = enrollDate;
-		this.nickName = nickName;
-		this.emailReceive = emailReceive;
-		this.smsReceive = smsReceive;
-	}
-	
-	
-	
-	
-	
-
-	
-	
-	
-
-	
-
-	
-
-	public Member(int no, String id, String pwd, String name, char gender,
-			String gradeName, String tel, Date enrollDate, String nickName, String emailReceive, char outYN,
-			String smsReceive) {
+	// 모두있는 기본 매개변수
+	public Member(int no, String id, String pwd, String name, char gender, String gradeCode, String gradeName,
+			String tel, Date enrollDate, String nickName, String emailReceive, char outYN, String smsReceive) {
 		super();
 		this.no = no;
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
 		this.gender = gender;
+		this.gradeCode = gradeCode;
 		this.gradeName = gradeName;
 		this.tel = tel;
 		this.enrollDate = enrollDate;
@@ -118,10 +41,46 @@ public class Member {
 	
 	
 	
+	// 로그인 DAO용 매개변수
+	public Member(String id, String pwd, String name, char gender, String gradeCode, String tel, String nickName,
+			String emailReceive, String smsReceive) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
+		this.name = name;
+		this.gender = gender;
+		this.gradeCode = gradeCode;
+		this.tel = tel;
+		this.nickName = nickName;
+		this.emailReceive = emailReceive;
+		this.smsReceive = smsReceive;
+	}
 	
+	// 회원가입용 매개변수
+	public Member(int no, String id, String name, char gender, String gradeName, String tel, Date enrollDate,
+			String nickName, String emailReceive, String smsReceive) {
+		super();
+		this.no = no;
+		this.id = id;
+		this.name = name;
+		this.gender = gender;
+		this.gradeName = gradeName;
+		this.tel = tel;
+		this.enrollDate = enrollDate;
+		this.nickName = nickName;
+		this.emailReceive = emailReceive;
+		this.smsReceive = smsReceive;
+	}
 
 	
+	// 로그인용 매개변수
+	public Member(String id, String pwd) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
+	}
 
+	// 관리자 회원 관리 매개변수
 	public Member(int no, String id, String name, char gender, String gradeName, String tel, Date enrollDate,
 			String nickName, char outYN) {
 		super();
@@ -134,6 +93,15 @@ public class Member {
 		this.enrollDate = enrollDate;
 		this.nickName = nickName;
 		this.outYN = outYN;
+	}
+
+	// 마이페이지 매개변수
+	public Member(String id, String tel, String emailReceive, String smsReceive) {
+		super();
+		this.id = id;
+		this.tel = tel;
+		this.emailReceive = emailReceive;
+		this.smsReceive = smsReceive;
 	}
 
 	public int getNo() {
@@ -151,6 +119,17 @@ public class Member {
 	public void setOutYN(char outYN) {
 		this.outYN = outYN;
 	}
+
+	public String getGradeCode() {
+		return gradeCode;
+	}
+
+
+	public void setGradeCode(String gradeCode) {
+		this.gradeCode = gradeCode;
+	}
+
+
 
 	public String getName() {
 		return name;
@@ -186,7 +165,6 @@ public class Member {
 	public void setMame(String mame) {
 		this.name = mame;
 	}
-	
 	public char getGender() {
 		return gender;
 	}
@@ -240,9 +218,10 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [no=" + no + ", id=" + id + ", pwd=" + pwd + ", name=" + name + ", gender=" + gender
-				+ ", gradeName=" + gradeName + ", tel=" + tel + ", enrollDate=" + enrollDate + ", nickName=" + nickName
-				+ ", emailReceive=" + emailReceive + ", outYN=" + outYN + ", smsReceive=" + smsReceive + "]";
+		return "Member [no=" + no + ", id=" + id + ", pwd=" + pwd + ", name=" + name + ", juminFront="
+				+ ", juminRear=" + ", gender=" + gender + ", gradeName=" + gradeName + ", tel=" + tel
+				+ ", enrollDate=" + enrollDate + ", nickName=" + nickName + ", emailReceive=" + emailReceive
+				+ ", outYN=" + outYN + ", smsReceive=" + smsReceive + "]";
 	}
 
 	

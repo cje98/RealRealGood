@@ -27,13 +27,13 @@ public class SignupController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		
 		// 파라미터 받기
 		String memberId = request.getParameter("id");
 		String memberPwd = request.getParameter("pwd1");
 
 		String memberName = request.getParameter("name");
 		
+		String memberGubun = request.getParameter("memberGubun");
 				
 		char gender = request.getParameter("gender").charAt(0);
 		
@@ -51,9 +51,9 @@ public class SignupController extends HttpServlet {
 		String smsReceive = request.getParameter("smsReceive");
 		
 		// 멤버에 담아서 service에 보내기
-		Member member = new Member(memberId, memberPwd, memberName, gender, phone, memberNickname, emailReceive, smsReceive);
+		Member member = new Member(memberId, memberPwd, memberName,  gender, memberGubun, phone, memberNickname, emailReceive, smsReceive);
 				
-		member.setPwd(memberPwd);
+//		member.setPwd(memberPwd);
 		
 		try {
 			int result = new MemberService().signUp(member);
