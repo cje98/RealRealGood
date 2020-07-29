@@ -11,10 +11,11 @@
 .menu-img {
 	width: 320px;
 	height: 300px;
+	/*테스트*/
 }
 
 h2, p {
-	font-size: 18px;
+	font-size: 17px;
 }
 
 .col-md-4 {
