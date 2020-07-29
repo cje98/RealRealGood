@@ -14,7 +14,7 @@
 }
 
 h2, p {
-	font-size: 18px;
+	font-size: 17px;
 }
 
 .col-md-4 {
