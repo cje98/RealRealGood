@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.kh.realgood.member.model.dao.MemberDAO;
+import com.kh.realgood.member.model.dto.BuyList;
 import com.kh.realgood.member.model.dto.Member;
 
 public class MemberService {
@@ -145,9 +146,13 @@ public class MemberService {
 		Connection conn = getConnection();
 		
 		int result = dao.removeUser(conn,id);
+		int count = 0;
 		
 		if (gradeName.equals("사장회원")) {
-			result = dao.removeStore(conn, id);
+			count = dao.removeStoreCount(conn, id);
+			if (count > 0) {
+				result = dao.removeStore(conn, id);
+			}
 		}
 		if (result > 0) {
 			conn.commit();
@@ -174,17 +179,27 @@ public class MemberService {
 
 	/** 관리자 - 회원 삭제 Service
 	 * @param idArr
+	 * @param gradeNameArr 
+	 * @param gradeNameArr 
 	 * @return result
 	 * @throws Exception
 	 */
-	public int deleteMember(String[] id) throws Exception{
+	public int deleteMember(String[] idArr, String[] gradeNameArr) throws Exception{
 		Connection conn = getConnection();
 		
 		int result = 0;
 		
-		for(String id2 : id) {
-			result = dao.deleteMember(id2, conn);
-			
+		for(int i=0; i<idArr.length; i++) {
+			String id = idArr[i];
+			String gradeName = gradeNameArr[i];
+			int count = 0;
+			result = dao.deleteMember(id, conn);
+			if (gradeName.equals("사장회원")) {
+				count = dao.removeStoreCount(conn, id);
+				if (count > 0) {
+					result = dao.removeStore(conn, id);
+				}
+			}
 			if(result == 0) break;
 		}
 		
@@ -196,31 +211,20 @@ public class MemberService {
 	
 		return result;
 	}
-	
 
-	
-	
-
-//	/** 사장 회원 탈퇴 서비스
-//	 * @param id
-//	 * @return return
-//	 * @throws Exception
-//	 */
-//	public int removeCeo(String id) throws Exception{
-//		Connection conn = getConnection();
-//		
-//		int result = dao.removeUser(conn,id);
-//		
-//		if (result > 0) {
-//			result = dao.removeStore(conn, id);
-//			if (result > 0) {
-//				conn.commit();
-//			}else {
-//				conn.rollback();
-//			}
-//		}
-//				
-//		return result;
-//	}
+	/** 구매목록 조회용 DAO
+	 * @param no
+	 * @return list
+	 * @throws Exception
+	 */
+	public List<BuyList> PurchaseList(int memberNo) throws Exception{
+		Connection conn = getConnection();
+		
+		List<BuyList> list = dao.PurchaseList(conn, memberNo);
+		
+		conn.close();
+		
+		return list;
+	}
 
 }

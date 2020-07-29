@@ -20,13 +20,13 @@ public class MemberDeleteController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		
-		String[] id = request.getParameterValues("id");
-		//String[] idArr = id.split(" ");
-		
+		String id = request.getParameter("id");
+		String[] idArr = id.split(" ");
+		String gradeName = request.getParameter("gradeName");
+		String[] gradeNameArr = gradeName.split(" ");
 		try {
 			
-			//int result = new MemberService().deleteMember(idArr);
-			int result = new MemberService().deleteMember(id);
+			int result = new MemberService().deleteMember(idArr,gradeNameArr);
 			
 			if(result > 0) {
 				request.getSession().setAttribute("status", "success");
@@ -37,7 +37,7 @@ public class MemberDeleteController extends HttpServlet {
 			}else {
 				request.getSession().setAttribute("status", "error");
 				request.getSession().setAttribute("msg", "삭제 실패");
-				request.getSession().setAttribute("text", "삭제 실패하였습니다.");
+				request.getSession().setAttribute("text", "삭제 실패하였다.");
 				response.sendRedirect(request.getHeader("referer"));
 			}
 			

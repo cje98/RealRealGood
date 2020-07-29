@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.realgood.member.model.dto.BuyList;
 import com.kh.realgood.member.model.dto.Member;
 
 public class MemberDAO {
@@ -46,10 +47,8 @@ public class MemberDAO {
 			pstmt.setString(2, member.getPwd());
 			
 			rset = pstmt.executeQuery();
-
 			if (rset.next()) {
-				loginMember = new Member(rset.getString("ID"), rset.getString("NAME"),
-						rset.getString("GENDER").charAt(0),
+				loginMember = new Member(rset.getInt("MEMBER_NUM"),rset.getString("ID"), rset.getString("NAME"), rset.getString("GENDER").charAt(0),
 						rset.getString("GRADE_NAME"), rset.getString("TEL"), rset.getDate("ENROLL_DATE"), rset.getString("NICKNAME"), rset.getString("EMAIL_RECEIVE"), rset.getString("SMS_RECEIVE"));
 			}
 		} finally {
@@ -79,10 +78,11 @@ public class MemberDAO {
 			pstmt.setString(2, member.getPwd());
 			pstmt.setString(3, member.getMame());
 			pstmt.setString(4, member.getGender()+"");
-			pstmt.setString(5, member.getTel());
-			pstmt.setString(6, member.getNickName());
-			pstmt.setString(7, member.getEmailReceive());
-			pstmt.setString(8, member.getSmsReceive());
+			pstmt.setString(5, member.getGradeCode());
+			pstmt.setString(6, member.getTel());
+			pstmt.setString(7, member.getNickName());
+			pstmt.setString(8, member.getEmailReceive());
+			pstmt.setString(9, member.getSmsReceive());
 
 			result = pstmt.executeUpdate();
 
@@ -161,6 +161,13 @@ public class MemberDAO {
 		return result;
 	}
 
+	/** 패스워드 체크
+	 * @param conn
+	 * @param id
+	 * @param oldPwd
+	 * @return
+	 * @throws Exception
+	 */
 	public int checkPwd(Connection conn, String id, String oldPwd) throws Exception{
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -294,7 +301,13 @@ public class MemberDAO {
 		return list;
 	}
 
-	public int deleteMember(String id2, Connection conn) throws Exception {
+	/** 회원 삭제용 dao
+	 * @param id
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteMember(String id, Connection conn) throws Exception {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -304,7 +317,7 @@ public class MemberDAO {
 		try {
 			
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, id2);
+			pstmt.setString(1, id);
 			
 			result = pstmt.executeUpdate();
 			
@@ -315,6 +328,72 @@ public class MemberDAO {
 		}
 		
 		return result;
+	}
+
+	/** 상점 갯수 체크 용(사장 삭제시 가게 삭제용)
+	 * @param conn
+	 * @param id
+	 * @return count
+	 * @throws Exception
+	 */
+	public int removeStoreCount(Connection conn, String id) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int count = 0;
+		
+		String query = prop.getProperty("storeCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+			
+			
+		} finally {
+			rset.close();
+			pstmt.close();
+		}
+		
+		return count;
+	}
+
+	/** 구매내역 표시 리스트 DAO
+	 * @param conn
+	 * @param no
+	 * @return list
+	 * @throws Exception
+	 */
+	public List<BuyList> PurchaseList(Connection conn, int no) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<BuyList> list = null;
+		BuyList buyList = null;
+		String query = prop.getProperty("purchaseList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			list = new ArrayList<BuyList>();
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+					buyList = new BuyList(rset.getInt("BUY_NUM"), rset.getInt("BUY_MEMBER_NO"), rset.getInt("BUY_STORE_NUM"),rset.getString("NAME"), 
+										  rset.getString("MENU_NAME"), rset.getDate("BUY_DATE"), rset.getString("BUY_QR_CODE_NUM"),
+										  rset.getDate("BUY_USED"));
+					list.add(buyList);
+			}
+			
+		} finally {
+			rset.close();
+			pstmt.close();
+		}
+
+		return list;
 	}
 }
 
