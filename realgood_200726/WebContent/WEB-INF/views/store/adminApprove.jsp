@@ -13,7 +13,7 @@
 <title>관리자 승인/대기</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
-	 /* 팝업 레이어 */
+	 /* 팝업 레이어1 */
   .idSelect {
      cursor: pointer;
   }
