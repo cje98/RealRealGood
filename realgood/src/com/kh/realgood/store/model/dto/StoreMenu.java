@@ -15,6 +15,31 @@ public class StoreMenu {
 	public StoreMenu() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public StoreMenu(int menuNo, String menuName, int price, String menuContents, String menuMakeTime) {
+		super();
+		this.menuNo = menuNo;
+		this.menuName = menuName;
+		this.price = price;
+		this.menuContents = menuContents;
+		this.menuMakeTime = menuMakeTime;
+	}
+	
+	
+
+
+
+	public StoreMenu(String menuName, int price, String menuContents, String menuMakeTime) {
+		super();
+		this.menuName = menuName;
+		this.price = price;
+		this.menuContents = menuContents;
+		this.menuMakeTime = menuMakeTime;
+	}
+
+
 
 	public StoreMenu(int menuNo, String menuName, int price, int storeNo, Date storeEnrolldate, char cancleYN,
 			String menuContents, String menuMakeTime) {

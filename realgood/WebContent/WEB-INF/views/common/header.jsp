@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.kh.realgood.member.model.dto.Member"%>
+<%@page import="com.kh.realgood.store.model.dto.Store"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
+	Store loginStore = (Store)session.getAttribute("loginStore");
 %>
 <!DOCTYPE html>
 <html>
@@ -121,11 +123,15 @@
 						<% if(loginMember.getGradeName().equals("사장회원") || loginMember.getGradeName().equals("관리자")) {%>	
 							<!-- <li><a class="dropdown-item" href="#">점주정보수정&raquo </a> -->
 							<li><a class="dropdown-item" href="#" data-toggle="collapse"
-								data-target="#navbarsExample05" aria-controls="navbarsExample05">점주정보수정</a>
+								data-target="#navbarsExample05" aria-controls="navbarsExample05">점주페이지</a>
 								<ul class="submenu dropdown-menu" id="navbarsExample05">
-									<li><a class="dropdown-item" href="#"> 가게정보수정</a></li>
+									<%if(loginStore == null){ %>
+									<li><a class="dropdown-item" href="<%=request.getContextPath()%>/store/storeInsert.do"> 가게정보등록</a></li>
+									<%}else{ %>
+									<li><a class="dropdown-item" href="<%=request.getContextPath()%>/store/storeModify.do"> 가게정보수정</a></li>
+									<%} %>
 								</ul></li>
-							<% } if(loginMember.getGradeName().equals("관리자")){ %>
+							<%if(loginMember.getGradeName().equals("관리자")){ %>
 							<!-- <li><a class="dropdown-item" href="#"> 관리자정보수정&raquo </a> -->
 							<li><a class="dropdown-item" href="#" data-toggle="collapse"
 								data-target="#navbarsExample06" aria-controls="navbarsExample06">관리자정보수정</a>
@@ -136,7 +142,7 @@
 							<% } %>
 					<% } %>
 					</ul></li>
-				
+				<% } %>
 			</ul>
 			<form class="form-inline my-2 my-md-0" action="<%=request.getContextPath()%>/store/storeAll.do" method="post">
 				<input class="form-control" type="text" id="address" name="address"

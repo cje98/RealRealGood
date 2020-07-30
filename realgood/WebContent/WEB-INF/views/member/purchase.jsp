@@ -45,7 +45,7 @@
 		                            <td><%= list.get(i).getBuyUsed()%></td>
 		                        </tr>
 	                        <% } %>
-                        <% } %>
+                        <% } %> 
                 	</table>
                 </div>
             </form>
