@@ -144,7 +144,7 @@
                     </tr>
                    <tr>
 		            	<td>
-		            		<label class="input-group-addon mr-6 insert-label">대표 이미지(선택)/label>
+		            		<label class="input-group-addon mr-6 insert-label">대표 이미지(선택)</label>
 		            	</td>
 		            	<td>
 		            	
