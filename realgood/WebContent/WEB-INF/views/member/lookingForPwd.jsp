@@ -19,7 +19,7 @@
                     <div class="row mb-3 form-row">
                     	<tr>
                     		<td>이름</td>
-                    		<td><input type="text" required></td>
+                    		<td><input type="text" name="name" required></td>
                         </tr>
                 </table>
             </form>

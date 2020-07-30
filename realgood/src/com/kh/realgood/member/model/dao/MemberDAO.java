@@ -14,6 +14,10 @@ import java.util.Properties;
 import com.kh.realgood.member.model.dto.BuyList;
 import com.kh.realgood.member.model.dto.Member;
 
+/**
+ * @author home
+ *
+ */
 public class MemberDAO {
 
 	private Properties prop = null;
@@ -393,6 +397,44 @@ public class MemberDAO {
 			pstmt.close();
 		}
 
+		return list;
+	}
+
+	/** 아이디 찾기 DAO
+	 * @param conn
+	 * @param name
+	 * @param tel
+	 * @return iist
+	 * @throws Exception
+	 */
+	public List<String> findId(Connection conn, String name, String tel) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String id = "";
+		// 같은 이름 같은 번호 아이디가 한개가 아닐 수 있기 때문에 list로 받아옴
+		List<String> list = null;
+		String query = prop.getProperty("findId");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setString(2, tel);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<String>();
+			
+			
+			while(rset.next()) {
+				list.add(rset.getString("ID"));
+			}
+			
+		} finally {
+			rset.close();
+			pstmt.close();
+		}
+		
+		
 		return list;
 	}
 }

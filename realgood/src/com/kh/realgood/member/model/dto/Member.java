@@ -103,6 +103,13 @@ public class Member {
 		this.emailReceive = emailReceive;
 		this.smsReceive = smsReceive;
 	}
+	
+	
+	// 아이디 찾기 매개변수
+	public Member(String id) {
+		super();
+		this.id = id;
+	}
 
 	public int getNo() {
 		return no;

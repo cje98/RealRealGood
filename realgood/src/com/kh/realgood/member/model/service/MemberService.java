@@ -227,4 +227,29 @@ public class MemberService {
 		return list;
 	}
 
+	/** 아이디 찾기 
+	 * @param name
+	 * @param tel
+	 * @return id
+	 * @throws Exception
+	 */
+	public List<String> findId(String name, String tel) throws Exception{
+	
+		Connection conn = getConnection();
+		
+		List<String> list = dao.findId(conn,name,tel);
+		
+		if(!list.isEmpty()) {
+			for(int i=0; i<list.size(); i++) {
+				String prefix = list.get(i).substring(0, list.get(i).indexOf("@") - 4 );
+				String suffix = list.get(i).substring(list.get(i).indexOf("@"), list.get(i).length());
+				list.set(i,  prefix + "****" + suffix);
+			}
+		}
+		
+		conn.close();
+		
+		return list;
+	}
+
 }
