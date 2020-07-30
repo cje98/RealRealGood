@@ -40,8 +40,7 @@
     <div class="row my-5">
         <%@ include file="../common/adminSideMenu.jsp"%>
         <div class="col-sm-5">
-            <form action="<%=request.getContextPath()%>/store/adminApprove.do" method="POST"
-                onsubmit="return validate();">
+            <form action="<%=request.getContextPath()%>/store/adminApprove.do" method="POST">
                     <h1>관리자 승인/대기</h1>
                     <div class="row mb-3 form-row">
                 <table class="table table-hover">
@@ -100,24 +99,20 @@
     
     $("#adminBtn").on("click", function(){
     	
-        var rowData = new Array();
-        var idSum = "";
+        var no = "";
+        var noSum = "";
         var checkbox = $("input[name=adminStore]:checked");
-		var id = "";
-        
+		
 		$.each(checkbox, function(index, item) {
 
 		   var tr = checkbox.parent().parent().eq(index);
            var td = tr.children();
-
-           rowData.push(tr.text());
-
-           id = td.eq(3).text();
-           
-           idSum += id + " ";
+	
+           no = td.eq(1).text();
+           noSum += no + " ";
         });
         
-           location.href = "<%=request.getContextPath()%>/store/storeAdmin.do?id=" + id;
+           location.href = "<%=request.getContextPath()%>/store/storeAdmin.do?no=" + noSum;
         
     });
 

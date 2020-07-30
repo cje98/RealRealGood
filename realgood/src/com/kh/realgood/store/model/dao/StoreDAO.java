@@ -151,7 +151,13 @@ public class StoreDAO {
 		return list;
 	}
 
-	public int adminStore(String id, Connection conn) throws Exception{
+	/** 관리자 - 가게 승인
+	 * @param no
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int adminStore(String no, Connection conn) throws Exception{
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -159,7 +165,7 @@ public class StoreDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, id);
+			pstmt.setString(1, no);
 			
 			result = pstmt.executeUpdate();
 			
@@ -284,5 +290,65 @@ public class StoreDAO {
 		
 		
 		return mList;
+	}
+
+	/** 관리자 - 가게 이미지 사용 승인
+	 * @param no
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int adminStoreImg(String no, Connection conn) throws Exception{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("adminStoreImg");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+		
+			pstmt.close();
+		}
+		
+		
+		return result;
+	}
+
+	/** 관리자 - 가게 이미지 존재 확인
+	 * @param no
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int selectStoreImg(String no, Connection conn) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("selectStoreImg");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, no);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} finally {
+			rset.close();
+			pstmt.close();
+		
+		}
+		
+		
+		return result;
 	}
 }
