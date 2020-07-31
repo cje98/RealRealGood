@@ -340,7 +340,7 @@
 		
 		
 		$("#mailCertifyEnterBtn").on("click", function(){
-			if($("#mailCertify").val() == $("#mailCertifyCode").text()) {
+			if($("#mailCertify").val() == $("#mailCertifyCode").text() && $("#mailCertify").val() != "" ) {
 				$("#mailCertifyNote").text("인증 번호가 일치 합니다").css("color", "green");
 				$("#idDupCheck").prop("disabled","true");
 				$("#mailCertify").prop("disabled","true");

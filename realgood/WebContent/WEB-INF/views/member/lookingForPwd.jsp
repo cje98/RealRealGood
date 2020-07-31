@@ -17,10 +17,6 @@
                 <table class="table table-hover">
                     <div class="row mb-3 form-row">
                     	<tr>
-<<<<<<< HEAD
-                    		<td>이름</td>
-                    		<td><input type="text" name="name" required></td>
-=======
                     		<td><label for="id">아이디</label></td>
                     		<td>
                     			<input type="email" class="form-control" name="id" id="id"
@@ -30,7 +26,6 @@
 							<td>
 								<span id="idCheck"></span>
 							</td>
->>>>>>> branch 'master' of https://github.com/cje98/RealRealGood.git
                         </tr>
                         <tr>
                         	<td><label for="mailCertify">메일인증</label></td>

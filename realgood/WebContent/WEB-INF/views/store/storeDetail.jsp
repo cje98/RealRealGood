@@ -4,8 +4,9 @@
 <%@page import="com.kh.realgood.store.model.dto.Store"%>
 <%@page import="java.util.List"%>
 <%
-   List<StoreInfoMenu> mList = (List<StoreInfoMenu>)request.getAttribute("mList");
+	List<StoreInfoMenu> mList = (List<StoreInfoMenu>)request.getAttribute("mList");
 %>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -38,11 +39,11 @@
         }
         
        #totalSum{
-           display : inline-block;
+       	 display : inline-block;
        }
        
        span{
-           font-weight: bold;
+       	 font-weight: bold;
        }
       }
     </style>
@@ -88,7 +89,7 @@
   <div class="row">
     <div class="col-md-8 blog-main">
       <h3 class="pb-4 mb-4 font-italic border-bottom">
-           독수리 다방
+        	독수리 다방
       </h3>
 
       <div class="blog-post">
@@ -194,124 +195,117 @@
         </div>
           <select class="custom-select" id="inputGroupSelect01">
             <option>메뉴를 선택해주세요.</option>
-             <%for(int i = 0; i < mList.size(); i++ ) {%>
+          	<%for(int i = 0; i < mList.size(); i++ ) {%>
               <option value="<%=mList.get(i).getMenuNum()%>"><%=mList.get(i).getMenuName() + "-" + mList.get(i).getPrice()+ "원"%></option>
-             <%}%>
+          	<%}%>
            
           </select>
 
           <script>
           
-             var priceSum;
-             $("#inputGroupSelect01").on("change",function(){
-                var $p = $("<p>").text($("#inputGroupSelect01>option:checked").text());
-                var $minus = $("<button>").addClass("minusBtn").text("-");
-                var $span = $("<span>").text(1);
-                var $plus = $("<button>").addClass("plusBtn").text("+");
-                var $delete = $("<button>").addClass("deleteBtn").text("x");
-                $p.append($minus, $span, $plus, $delete);
-                
-                $("#menuCal").append($p);
-                $("#inputGroupSelect01>option").eq(0).prop("selected", true);
-                $("#inputGroupSelect01").blur();
+          	var priceSum;
+          	$("#inputGroupSelect01").on("change",function(){
+          		var $p = $("<p>").text($("#inputGroupSelect01>option:checked").text());
+          		var $minus = $("<button>").addClass("minusBtn").text("-");
+          		var $span = $("<span>").text(1);
+          		var $plus = $("<button>").addClass("plusBtn").text("+");
+          		var $delete = $("<button>").addClass("deleteBtn").text("x");
+          		$p.append($minus, $span, $plus, $delete);
+          		
+          		$("#menuCal").append($p);
+          		$("#inputGroupSelect01>option").eq(0).prop("selected", true);
+          		$("#inputGroupSelect01").blur();
 
-                totalSum();
-             });
-             
-         function totalSum(){
-            $menu = $("#menuCal > p"); // 선택된 메뉴를 모두 얻어옴
-            // 메뉴 모양 -->  탕수육-11500원
-            var sum = 0;
-            if (priceSum == null) priceSum = 0;
-           
-            $menu.each(function(index, item){ // 메뉴 반복 접근
-            	
-/*             	// 이름을 불러오기위해 배열 선언
-               var ary = new Array;
-            	// - 앞에 있는 값을 nameEnd로 변경
-               var nameEnd = $(item).text().indexOf("-"); */
-            	
-               var start = $(item).text().indexOf("-")+1;
-               var end = $(item).text().indexOf("원");
-            	
-               sum += new Number($(item).text().substring(start, end));
-              
-            });
-            
-            var $p = $("<p>").text(sum + priceSum);
-            /* $p.attr({"name":"totalSum"}); */
-            
-            //$menu.eq($menu.length-1).remove();
-                $("#totalSum").html($p);
-            
-         } 
-         
-         
-         // 동적으로 추가된 플러스 버튼 클릭 시
-         $(document).on("click", ".plusBtn", function(){
-            var count = $(this).prev().text();
-            $(this).prev().text(new Number(count)+1);
-            
-            var selectMenu = $(this).parent().text();
-            
-            var start = selectMenu.indexOf("-")+1;
-            var end = selectMenu.indexOf("원");
-            
-            var price = new Number(selectMenu.substring(start, end));
-            if (priceSum == null) priceSum = 0;
-            priceSum += price;
-                        
-            var sum = new Number($("#totalSum > p").text());
-            
-            $("#totalSum > p").text(sum + price);
-         });
-         
-         
-         // 동적으로 추가된 마이너스 버튼 클릭 시
-         $(document).on("click", ".minusBtn", function(){
-            var count = $(this).next().text();
-            if(count > 1){
-               $(this).next().text(new Number(count)-1);
-            
-               var selectMenu = $(this).parent().text();
-               
-               var start = selectMenu.indexOf("-")+1;
-               var end = selectMenu.indexOf("원");
-               
-               var start2 = selectMenu.indexOf("원")+2;
-               var end2 = selectMenu.indexOf("+");
-               
-               var price = new Number(selectMenu.substring(start, end));
-               var priceCount = new Number(selectMenu.substring(start2, end2));
-               
-               if(priceSum != null && priceSum != 0) 
-                  priceSum -= price * (priceCount);
-                           
-               var sum = new Number($("#totalSum > p").text());
-               
-               $("#totalSum > p").text(sum - price);
-            }
-         });
-         
-         // 동적으로 추가된 삭제 버튼 클릭 시
-         $(document).on("click", ".deleteBtn", function(){
-            
-            var selectMenu = $(this).parent().text();
-            var start = selectMenu.indexOf("-")+1;
-            var end = selectMenu.indexOf("원");
-            
-            var start2 = selectMenu.indexOf("원")+2;
-            var end2 = selectMenu.indexOf("+");
-            
-            var price = new Number(selectMenu.substring(start, end));
-            var priceCount = new Number(selectMenu.substring(start2, end2));
-            
-            if(priceSum != null && priceSum != 0) 
-               priceSum -= price * (priceCount-1);
-            $(this).parent().text("");
-            totalSum();
-            
-         });
+          		totalSum();
+          	});
+          	
+			function totalSum(){
+				$menu = $("#menuCal > p"); // 선택된 메뉴를 모두 얻어옴
+				
+				// 메뉴 모양 -->  탕수육-11500원
+				var sum = 0;
+				if (priceSum == null) priceSum = 0;
+				
+				$menu.each(function(index, item){ // 메뉴 반복 접근
+					var start = $(item).text().indexOf("-")+1;
+					var end = $(item).text().indexOf("원");
+					
+					sum += new Number($(item).text().substring(start, end));
+				});
+				
+				var $p = $("<p>").text(sum + priceSum);
+				/* $p.attr({"name":"totalSum"}); */
+				
+				//$menu.eq($menu.length-1).remove();
+          		$("#totalSum").html($p);
+				
+			} 
+			
+			
+			// 동적으로 추가된 플러스 버튼 클릭 시
+			$(document).on("click", ".plusBtn", function(){
+				var count = $(this).prev().text();
+				$(this).prev().text(new Number(count)+1);
+				
+				var selectMenu = $(this).parent().text();
+				var start = selectMenu.indexOf("-")+1;
+				var end = selectMenu.indexOf("원");
+				
+				var price = new Number(selectMenu.substring(start, end));
+				if (priceSum == null) priceSum = 0;
+				priceSum += price;
+								
+				var sum = new Number($("#totalSum > p").text());
+				
+				$("#totalSum > p").text(sum + price);
+			});
+			
+			
+			// 동적으로 추가된 마이너스 버튼 클릭 시
+			$(document).on("click", ".minusBtn", function(){
+				var count = $(this).next().text();
+				if(count > 1){
+					$(this).next().text(new Number(count)-1);
+				
+					var selectMenu = $(this).parent().text();
+					
+					var start = selectMenu.indexOf("-")+1;
+					var end = selectMenu.indexOf("원");
+					
+					var start2 = selectMenu.indexOf("원")+2;
+					var end2 = selectMenu.indexOf("+");
+					
+					var price = new Number(selectMenu.substring(start, end));
+					var priceCount = new Number(selectMenu.substring(start2, end2));
+					
+					if(priceSum != null && priceSum != 0) 
+						priceSum -= price * (priceCount);
+									
+					var sum = new Number($("#totalSum > p").text());
+					
+					$("#totalSum > p").text(sum - price);
+				}
+			});
+			
+			// 동적으로 추가된 삭제 버튼 클릭 시
+			$(document).on("click", ".deleteBtn", function(){
+				
+				var selectMenu = $(this).parent().text();
+				var start = selectMenu.indexOf("-")+1;
+				var end = selectMenu.indexOf("원");
+				
+				var start2 = selectMenu.indexOf("원")+2;
+				var end2 = selectMenu.indexOf("+");
+				
+				var price = new Number(selectMenu.substring(start, end));
+				var priceCount = new Number(selectMenu.substring(start2, end2));
+				
+				if(priceSum != null && priceSum != 0) 
+					priceSum -= price * (priceCount-1);
+				$(this).parent().text("");
+				totalSum();
+				
+			});
           
           </script>
          
@@ -319,14 +313,19 @@
             <br><br><br><br><br><br><br><br>
             <button type="button" id="buyPurchase" class="btn btn-warning" >구매하기</button>
           </div>
+
           
           <script type="text/javascript">
 
-        $("#buyPurchase").click(function() {
-         // 팝업창을 이용하여 아이디 유효성, 중복검사 진행
-         window.open("buyPurchaseForm.do", "buyPurchase", "width=850, height=550");
-         // 팝업창 요청 주소      팝업창의 이름(name)      팝업창 크기 설정  << 새로 입력 되는 것들
-      });
+  		$("#buyPurchase").click(function() {
+			// 팝업창을 이용하여 아이디 유효성, 중복검사 진행
+			<% if(loginMember != null) {%>
+				window.open("buyPurchaseForm.do?no="+<%=request.getParameter("no")%>+"&memberId="+"<%=loginMember.getId()%>", "buyPurchase", "width=850, height=550");
+				// 팝업창 요청 주소		팝업창의 이름(name)		팝업창 크기 설정  << 새로 입력 되는 것들
+			<% } else { %>
+				swal("로그인 이후 이용 바랍니다.");
+			<% } %>
+		});
           </script>
           
         </div>

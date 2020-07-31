@@ -269,5 +269,43 @@ public class MemberService {
 		conn.close();
 		return result;
 	}
+	
+	/** 마이페이지에서 qr코드 값을 눌렀을 때의 로그인 한 사람의 구매 키값을 가져오기 위한 작업 Service
+	 * @param qrNum
+	 * @param loginMemberNum
+	 * @return buyNum
+	 */
+	public int selectMenuNum(String qrNum, int loginMemberNum) throws Exception {
+		Connection conn = getConnection();
+		
+		int buyNum = dao.selectMenuNum(conn, qrNum, loginMemberNum);
+		
+		conn.close();
+		
+		return buyNum;
+	}
+	
+	/** 메뉴 결제 용도 서비스
+	 * @param buyList
+	 * @param storeNo
+	 * @param memberId
+	 * @return result
+	 * @throws Exception
+	 */
+	public int menuPay(List<String> buyList, int storeNo, String memberId) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = 0;
+		
+		for (int i = 0; i < buyList.size(); i++) {
+			result = dao.menuPay(buyList.get(i).toString(), storeNo, memberId, conn);
+		}
+		
+		
+		if(result > 0) conn.commit();
+		else           conn.rollback();
+		
+		return result;
+	}
 
 }
