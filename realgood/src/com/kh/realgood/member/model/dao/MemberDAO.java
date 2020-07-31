@@ -7,7 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -536,6 +538,73 @@ public class MemberDAO {
 			pstmt.close();
 		}
 		return store;
+	}
+	
+	/** qr코드아 아이디 값을 통해 buyNum값을 가져오는 DAO
+	 * @param conn
+	 * @param qrNum
+	 * @param loginMemberNum
+	 * @return buyNum
+	 */
+	public int selectMenuNum(Connection conn, String qrNum, int loginMemberNum) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int buyNum = 0;
+		
+		String query = prop.getProperty("selectMenuNum");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, loginMemberNum);
+			pstmt.setString(2, qrNum);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				buyNum = rset.getInt(1);
+			}
+			
+		} finally {
+			rset.close();
+			pstmt.close();
+		}
+		return buyNum;
+	}
+	
+	/** 메뉴결제용 DAO
+	 * @param buyList
+	 * @param storeNo
+	 * @param memberId
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int menuPay(String buyList, int storeNo, String memberId, Connection conn) throws Exception {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String[] buyListTmp = buyList.split("\\|\\|");
+		SimpleDateFormat format1 = new SimpleDateFormat ("yyyy.MM.dd.HH.mm.ss");
+		Date time = new Date();
+		String time1 = format1.format(time);
+		
+		String query = prop.getProperty("memberMenuPay");
+		
+		for (int i = 0; i < Integer.parseInt(buyListTmp[2]); i++) {
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, storeNo);
+				pstmt.setString(2, memberId);
+				pstmt.setInt(3, storeNo);
+				pstmt.setString(4, buyListTmp[0]);
+				pstmt.setString(5, storeNo+"_"+buyListTmp[0]+"_"+buyListTmp[1]+"_"+time1+"_"+memberId);
+				
+				result = pstmt.executeUpdate();
+				
+			} finally {
+				pstmt.close();
+			}
+		}
+		
+		return result;
 	}
 	
 }
