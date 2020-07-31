@@ -226,10 +226,10 @@
            
             $menu.each(function(index, item){ // 메뉴 반복 접근
             	
-            	// 이름을 불러오기위해 배열 선언
+/*             	// 이름을 불러오기위해 배열 선언
                var ary = new Array;
             	// - 앞에 있는 값을 nameEnd로 변경
-               var nameEnd = $(item).text().indexOf("-");
+               var nameEnd = $(item).text().indexOf("-"); */
             	
                var start = $(item).text().indexOf("-")+1;
                var end = $(item).text().indexOf("원");

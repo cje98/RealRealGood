@@ -1,5 +1,8 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,14 +15,14 @@
     <div class="row my-5">
         <%@ include file="sideIdPwdMenu.jsp"%>
         <div class="col-sm-5">
-            <form action="<%=request.getContextPath()%>/member/purchase.do" method="POST"
+            <form action="<%=request.getContextPath()%>/member/lookingForFormId.do" method="POST"
                 onsubmit="return validate();">
                 <table class="table table-hover">
                     <h1>아이디 찾기</h1>
                     <div class="row mb-3 form-row">
                     	<tr>
                     		<td>이름</td>
-                    		<td><input type="text" required></td>
+                    		<td><input type="text" id="name" name="name" required></td>
                         </tr>
                         <tr>
                         	<td><label for="phone1">전화번호</label></td>
@@ -49,8 +52,32 @@
 					</div>
 				</div></td>
                         </tr>
+                        	<%
+								List<String> list = (List<String>)request.getAttribute("idList");
+	                        	if (list == null){ 
+	                        %>   	
+	                        <tr>
+	                        	<td>정보를 입력해주세요.</td>
+	                        	<span></span>
+	                        	<%}else { %>
+	                        	<td>찾은 결과 : </td>
+	                        	<td>
+	                        	<script>
+	                        	$("#name").value(name);
+	                        	$("#phone1").value(phone1);
+	                        	$("#phone2").value(phone2);
+	                        	$("#phone3").value(phone3);
+	                        	</script>
+	                        	<% for(int i=0; i<list.size(); i++){ %>
+	                        	<span><%= list.get(i) %><br></span>
+	                        	<%} %>
+	                        	<%} %>
+                        	
+                        	
+                        	</td>
+                        </tr>
                         <tr>
-                        	<td><button class="btn btn-primary">완료</button>
+                        	<td><button class="btn btn-primary">아이디 찾기</button>
                         </tr>
                 </table>
             </form>
@@ -79,6 +106,8 @@
 			signUpCheck.phone3 = true;
 		}
 	});
+ 
+	
     </script>
     <%@ include file="../common/footer.jsp"%><br>
 </body>
