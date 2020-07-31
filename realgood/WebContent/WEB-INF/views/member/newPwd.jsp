@@ -76,9 +76,51 @@ label{
 			type="password" id="checkNewPwd" name="checkNewPwd" class="form-control"
 			placeholder="비밀번호 확인" required>
 		
-		<button class="btn btn-lg btn-primary btn-block" type="submit">확인</button>
+		<button id="checkBtn" class="btn btn-lg btn-primary btn-block" type="submit">확인</button>
 		<p class="mt-5 mb-3 text-muted">&copy; 2020-2023</p>
 	</form>
+	<script>
+		// 비밀번호 유효성검사
+		
+		var $pwd1 = $("#newPwd");
+		var $pwd2 = $("#checkNewPwd");
+		var $pwd = $("#newPwd, #checkNewPwd");
+		
+		$("#checkBtn").on("click",
+			function() {
+				var regExp = /^[A-Za-z0-9]{6,12}$/;
+
+				if(!regExp.test($("#pwd1").val())) {
+					alert("비밀번호 형식이 유효하지 않습니다.");
+					return false;
+				}
+
+				if($pwd2.val().length > 0) {
+					swal("유효한 비밀번호를 작성해 주세요.");
+					$pwd2.val("");
+					$pwd1.focus();
+				} else if (signUpCheck.pwd1
+						&& $pwd2.val().length > 0) {
+					if ($("#pwd1").val().trim() != $("#pwd2").val()
+							.trim()) {
+						$("#checkPwd2").text("비밀번호 불일치").css(
+								"color", "red");
+						signUpCheck.pwd2 = false;
+					} else {
+						$("#checkPwd2").text("비밀번호 일치").css(
+								"color", "green");
+						signUpCheck.pwd2 = true;
+					}
+				}
+
+			});
+	
+	</script>
+	
+	
+	
+	
+	
 	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
