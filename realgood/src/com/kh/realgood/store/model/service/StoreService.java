@@ -129,8 +129,7 @@ public class StoreService {
 		return mList;
 	}
 	
-	//-----영인
-	
+	// --영인
 	/** 가게 정보 등록하기 service
 	 * @param storeInfo
 	 * @return result
@@ -373,6 +372,4 @@ public class StoreService {
 		conn.close();
 		return result;
 	}
-	
-	
 }

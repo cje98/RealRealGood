@@ -292,11 +292,67 @@ public class StoreDAO {
 		
 		return mList;
 	}
-<<<<<<< HEAD
+
+	/** 관리자 - 가게 이미지 사용 승인
+	 * @param no
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int adminStoreImg(String no, Connection conn) throws Exception{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("adminStoreImg");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, no);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+		
+			pstmt.close();
+		}
+		
+		
+		return result;
+	}
+
+	/** 관리자 - 가게 이미지 존재 확인
+	 * @param no
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int selectStoreImg(String no, Connection conn) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("selectStoreImg");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, no);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} finally {
+			rset.close();
+			pstmt.close();
+		
+		}
+		
+		
+		return result;
+	}
 	
-	
-	
-	//-----------------------------영인
 	/** 가게 정보 등록 dao
 	 * @param conn
 	 * @param storeInfo
@@ -649,7 +705,7 @@ public class StoreDAO {
 	 * @param conn
 	 * @param storeMenu
 	 * @param storeNo
-	 * @return result
+	 * @return
 	 * @throws Exception
 	 */
 	public int menuInsert(Connection conn, StoreMenu storeMenu, int storeNo) throws Exception{
@@ -703,66 +759,4 @@ public class StoreDAO {
 		return result;
 	}
 	
-=======
-
-	/** 관리자 - 가게 이미지 사용 승인
-	 * @param no
-	 * @param conn
-	 * @return result
-	 * @throws Exception
-	 */
-	public int adminStoreImg(String no, Connection conn) throws Exception{
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String query = prop.getProperty("adminStoreImg");
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, no);
-			
-			result = pstmt.executeUpdate();
-			
-		} finally {
-		
-			pstmt.close();
-		}
-		
-		
-		return result;
-	}
-
-	/** 관리자 - 가게 이미지 존재 확인
-	 * @param no
-	 * @param conn
-	 * @return result
-	 * @throws Exception
-	 */
-	public int selectStoreImg(String no, Connection conn) throws Exception {
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		int result = 0;
-		
-		String query = prop.getProperty("selectStoreImg");
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, no);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				result = rset.getInt(1);
-			}
-			
-		} finally {
-			rset.close();
-			pstmt.close();
-		
-		}
-		
-		
-		return result;
-	}
->>>>>>> branch 'master' of https://github.com/cje98/RealRealGood.git
 }
