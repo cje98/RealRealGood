@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.kh.realgood.member.model.dto.BuyList;
 import com.kh.realgood.member.model.dto.Member;
+import com.kh.realgood.store.model.dto.Store;
 
 /**
  * @author home
@@ -464,5 +465,78 @@ public class MemberDAO {
 		
 		return result;
 	}
+	
+	// -- 영인
+	/** 로그인한 회원의 가게정보 확인용 dao (가게정보 count(*)로 받아서 0보다 크면 등록되어있는것)
+	 * @param id
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int loginCheck(String id, Connection conn) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("loginCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+			
+		}finally {
+			rset.close();
+			pstmt.close();
+		}
+				
+				
+		return result;
+	}
+
+	/** 가게정보 불러와 저장하기 dao
+	 * @param id
+	 * @param conn
+	 * @return store
+	 * @throws Exception
+	 */
+	public Store loginMemberStore(String id, Connection conn) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Store store = null;
+		
+		String query = prop.getProperty("loginMemberStore");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				store = new Store(rset.getInt("STORE_NUM"), 
+						rset.getString("COR_NUM"),
+						rset.getString("NAME"),
+						rset.getString("STORE_CONTENT"),
+						rset.getString("STORE_TEL"), 
+						rset.getString("STORE_CODE"),
+						rset.getString("STORE_ADDR"),
+						rset.getString("STORE_ZIP"), 
+						rset.getDate("ENROLL_DATE"));
+						
+			}
+		}finally {
+			rset.close();
+			pstmt.close();
+		}
+		return store;
+	}
+	
 }
 

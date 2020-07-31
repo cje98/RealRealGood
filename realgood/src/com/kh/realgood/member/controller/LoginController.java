@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.realgood.member.model.dto.Member;
 import com.kh.realgood.member.model.service.MemberService;
+import com.kh.realgood.store.model.dto.Store;
 
 @WebServlet("/member/login.do")
 public class LoginController extends HttpServlet {
@@ -35,6 +36,7 @@ public class LoginController extends HttpServlet {
 		
 		// 3. Member 객체를 생성하여 id, pwd를 저장하여 한 번에 전달할 수 있게함.
 		Member member = new Member(memberId, memberPwd);
+		Store store = null;
 		try {
 			// 4. 비즈니스 로직 처리를 하는 Service 메소드를 호출하고
 			//    반환값을 저장함.
@@ -44,7 +46,14 @@ public class LoginController extends HttpServlet {
 			
 			// 요청성공
 			if(loginMember != null) {
+				
+				//-- 로그인한 멤버의 등급명이 "사장회원"일 경우 store에 가게 정보를 저장한다.
+				if(loginMember.getGradeName().equals("사장회원")) {
+					store = new MemberService().loginMemberStore(loginMember.getId());
+				}
+				
 				session.setAttribute("loginMember", loginMember);
+				session.setAttribute("loginStore", store);
 				
 				session.setMaxInactiveInterval(1800); // 1800초 (30분) 
 				response.sendRedirect(request.getContextPath());

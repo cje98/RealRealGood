@@ -26,6 +26,35 @@ public class Store {
 		this.storeName = storeName;
 		this.storeGroupName = storeGroupName;
 	}
+	
+	
+	
+
+	public Store(String storeContent, String storeTel, String storeGroupName, String storeAddress, String storeZip) {
+		super();
+		this.storeContent = storeContent;
+		this.storeTel = storeTel;
+		this.storeGroupName = storeGroupName;
+		this.storeAddress = storeAddress;
+		this.storeZip = storeZip;
+	}
+
+
+
+
+	public Store(String corNum, String storeName, String storeContent, String storeTel, String storeGroupName,
+			String storeAddress, String storeZip) {
+		super();
+		this.corNum = corNum;
+		this.storeName = storeName;
+		this.storeContent = storeContent;
+		this.storeTel = storeTel;
+		this.storeGroupName = storeGroupName;
+		this.storeAddress = storeAddress;
+		this.storeZip = storeZip;
+	}
+
+
 
 	public Store(int storeNum, String corNum, String storeName, String storeContent, String storeTel,
 			String storeGroupName, String storeAddress, String storeZip, Date enrollDate, String storeTitleImg) {
