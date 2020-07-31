@@ -6,6 +6,7 @@ import static com.kh.realgood.common.DBCP.getConnection;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import com.kh.realgood.member.model.dao.MemberDAO;
@@ -41,7 +42,7 @@ public class MemberService {
 	
 	/** 회원 가입용 Service
 	 * @param member
-	 * @return
+	 * @return result
 	 * @throws Exception
 	 */
 	public int signUp(Member member) throws  Exception{
@@ -63,7 +64,7 @@ public class MemberService {
 	
 	/** 아이디 중복 체크용 Service
 	 * @param id
-	 * @return
+	 * @return result
 	 */
 	public int idDupCheck(String id) throws Exception {
 		
@@ -250,6 +251,23 @@ public class MemberService {
 		conn.close();
 		
 		return list;
+	}
+	/** 비밀번호 찾기 - 새로운 비밀번호 설정
+	 * @param id
+	 * @param newPwd
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updatePwd(String id, String newPwd) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.updatePwd(id, newPwd, conn);
+		
+		if(result > 0) conn.commit();
+		else conn.rollback();
+		
+		conn.close();
+		return result;
 	}
 
 }

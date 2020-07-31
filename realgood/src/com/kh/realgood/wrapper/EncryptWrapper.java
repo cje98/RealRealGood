@@ -25,7 +25,7 @@ public class EncryptWrapper extends HttpServletRequestWrapper{
 		
 		// 요청 파라미터 중 비밀번호와 관련된 파라미터만을 검출
 		switch(name) {
-		case "memberPwd" : case "pwd" :
+		case "memberPwd" : case "pwd" : case "newPwd" :
 		case "pwd1" : case "pw1" :
 			
 			encPwd = getSha512(super.getParameter(name)); break;

@@ -436,6 +436,33 @@ public class MemberDAO {
 		
 		
 		return list;
+}
+/** 비밀번호 찾기 - 새로운 비밀번호 설정
+	 * @param id
+	 * @param newPwd
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updatePwd(String id, String newPwd, Connection conn) throws Exception{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, newPwd);
+			pstmt.setString(2, id);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			pstmt.close();
+		}
+		
+		
+		return result;
 	}
 }
 

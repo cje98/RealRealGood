@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.kh.realgood.wrapper.EncryptWrapper;
 
-@WebFilter(urlPatterns = {"/member/login.do", "/member/signup.do", "/member/changePwd.do","/member/removeMember.do"})
+@WebFilter(urlPatterns = {"/member/login.do", "/member/signup.do", "/member/changePwd.do","/member/removeMember.do", "/member/insertNewPwd.do"})
 public class EncryptFilter implements Filter {
 
     public EncryptFilter() {
