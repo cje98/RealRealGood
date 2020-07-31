@@ -8,12 +8,42 @@ public class StoreImg {
 	private String originImgName;
 	private String realImgName;
 	private Date enrollDate;
+    private String filePath;
+    private int fileLevel;
+    private String fileStatus;
 
 	public StoreImg() {
 	}
 	
 	
 	
+	
+
+
+
+	public StoreImg(String realImgName, int fileLevel) {
+		super();
+		this.realImgName = realImgName;
+		this.fileLevel = fileLevel;
+	}
+
+
+
+
+
+
+	public StoreImg(int storeImgNum, String realImgName, String filePath, int fileLevel) {
+		super();
+		this.storeImgNum = storeImgNum;
+		this.realImgName = realImgName;
+		this.filePath = filePath;
+		this.fileLevel = fileLevel;
+	}
+
+
+
+
+
 	public StoreImg(int storeImgNum, int storeNum, String originImgName, String realImgName, Date enrollDate) {
 		super();
 		this.storeImgNum = storeImgNum;
@@ -71,6 +101,44 @@ public class StoreImg {
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
 	}
+	
+	
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+
+
+	public int getFileLevel() {
+		return fileLevel;
+	}
+
+
+
+	public void setFileLevel(int fileLevel) {
+		this.fileLevel = fileLevel;
+	}
+
+
+
+	public String getFileStatus() {
+		return fileStatus;
+	}
+
+
+
+	public void setFileStatus(String fileStatus) {
+		this.fileStatus = fileStatus;
+	}
+
+
 
 	@Override
 	public String toString() {

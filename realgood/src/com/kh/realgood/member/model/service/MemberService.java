@@ -12,6 +12,7 @@ import java.util.List;
 import com.kh.realgood.member.model.dao.MemberDAO;
 import com.kh.realgood.member.model.dto.BuyList;
 import com.kh.realgood.member.model.dto.Member;
+import com.kh.realgood.store.model.dto.Store;
 
 public class MemberService {
 	private MemberDAO dao;
@@ -270,6 +271,7 @@ public class MemberService {
 		return result;
 	}
 	
+<<<<<<< HEAD
 	/** 마이페이지에서 qr코드 값을 눌렀을 때의 로그인 한 사람의 구매 키값을 가져오기 위한 작업 Service
 	 * @param qrNum
 	 * @param loginMemberNum
@@ -308,4 +310,26 @@ public class MemberService {
 		return result;
 	}
 
+=======
+	//-- 영인
+	/** 로그인한 멤버의 가게정보 확인용 service
+	 * @param id
+	 * @return store
+	 * @throws Exception
+	 */
+	public Store loginMemberStore(String id) throws Exception{
+		Connection conn = getConnection();
+		int result = dao.loginCheck(id, conn);
+		Store store = null;
+		
+		if(result > 0) { // 가게 정보가 있다면
+			store = dao.loginMemberStore(id, conn); // 가게정보를 가져와서 store에 저장
+		}else { // 가게정보없으면 null 가리킴
+			store = null;
+		}
+		
+		conn.close();
+		return store;
+	}
+>>>>>>> branch 'master' of https://github.com/cje98/RealRealGood.git
 }
