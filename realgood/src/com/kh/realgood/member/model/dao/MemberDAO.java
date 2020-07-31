@@ -15,6 +15,10 @@ import com.kh.realgood.member.model.dto.BuyList;
 import com.kh.realgood.member.model.dto.Member;
 import com.kh.realgood.store.model.dto.Store;
 
+/**
+ * @author home
+ *
+ */
 public class MemberDAO {
 
 	private Properties prop = null;
@@ -396,6 +400,7 @@ public class MemberDAO {
 
 		return list;
 	}
+<<<<<<< HEAD
 	
 	// -- 영인
 	
@@ -468,6 +473,72 @@ public class MemberDAO {
 			pstmt.close();
 		}
 		return store;
+=======
+
+	/** 아이디 찾기 DAO
+	 * @param conn
+	 * @param name
+	 * @param tel
+	 * @return iist
+	 * @throws Exception
+	 */
+	public List<String> findId(Connection conn, String name, String tel) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String id = "";
+		// 같은 이름 같은 번호 아이디가 한개가 아닐 수 있기 때문에 list로 받아옴
+		List<String> list = null;
+		String query = prop.getProperty("findId");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setString(2, tel);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<String>();
+			
+			
+			while(rset.next()) {
+				list.add(rset.getString("ID"));
+			}
+			
+		} finally {
+			rset.close();
+			pstmt.close();
+		}
+		
+		
+		return list;
+}
+/** 비밀번호 찾기 - 새로운 비밀번호 설정
+	 * @param id
+	 * @param newPwd
+	 * @param conn
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updatePwd(String id, String newPwd, Connection conn) throws Exception{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, newPwd);
+			pstmt.setString(2, id);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			pstmt.close();
+		}
+		
+		
+		return result;
+>>>>>>> branch 'master' of https://github.com/cje98/RealRealGood.git
 	}
 }
 

@@ -58,24 +58,33 @@ public class StoreService {
 		return list;
 	}
 	/** 관리자 - 가게 승인
-	 * @param idArr
+	 * @param noArr
 	 * @return result
 	 * @throws Exception
 	 */
-	public int adminStore(String[] idArr) throws Exception{
+	public int adminStore(String[] noArr) throws Exception{
 		Connection conn = getConnection();
 		
 		int result = 0;
 		
-		for(String id : idArr) {
+		for(String no : noArr) {
 			
-			result = dao.adminStore(id, conn);
+			result = dao.selectStoreImg(no,conn);
+			
+			if(result > 0){
+				result = dao.adminStoreImg(no, conn);
+			}
+			result = dao.adminStore(no, conn);
 			
 			if(result == 0) break;
 			
+			
 		}
 		
+		if(result > 0) conn.commit();
+		else conn.rollback();
 		
+		conn.close();
 		return result;
 	}
 	/** 관리자 - 가게 승인 내역 확인

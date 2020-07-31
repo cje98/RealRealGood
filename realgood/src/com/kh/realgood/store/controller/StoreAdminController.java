@@ -19,13 +19,11 @@ public class StoreAdminController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		
-		String id = request.getParameter("id");
-		String[] idArr = id.split(" ");
+		String no = request.getParameter("no");
+		String noArr[] = no.split(" ");
 		
 		try {
-			
-			int result = new StoreService().adminStore(idArr);
+			int result = new StoreService().adminStore(noArr);
 			
 			if(result > 0) {
 				request.getSession().setAttribute("status", "success");
