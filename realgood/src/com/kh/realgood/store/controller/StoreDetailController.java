@@ -19,7 +19,7 @@ public class StoreDetailController extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int storeNo = Integer.parseInt(request.getParameter("no"));
+		int storeNo = Integer.parseInt(request.getParameter("storeNum"));
 		
 		try {
 			

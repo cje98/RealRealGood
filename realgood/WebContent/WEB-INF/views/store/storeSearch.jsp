@@ -211,7 +211,7 @@
 	%>
 		<%if(storeList.size()-1 != i) {%>
 			'<%=storeList.get(i).getStoreAddress()%>',
-		<%} else {%>
+			<%} else {%>
 			'<%=storeList.get(i).getStoreAddress()%>'
 		<%}%>
 	<%
