@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.realgood.member.model.dto.Board;
 import com.kh.realgood.member.model.dto.BuyList;
 import com.kh.realgood.member.model.dto.Member;
 import com.kh.realgood.store.model.dto.Store;
@@ -388,6 +389,7 @@ public class MemberDAO {
 			list = new ArrayList<BuyList>();
 			
 			rset = pstmt.executeQuery();
+			System.out.println(rset);
 			while(rset.next()) {
 					buyList = new BuyList(rset.getInt("BUY_NUM"), rset.getInt("BUY_MEMBER_NO"), rset.getInt("BUY_STORE_NUM"),rset.getString("NAME"), 
 										  rset.getString("MENU_NAME"), rset.getDate("BUY_DATE"), rset.getString("BUY_QR_CODE_NUM"),
@@ -468,7 +470,6 @@ public class MemberDAO {
 		return result;
 	}
 	
-	// -- 영인
 	/** 로그인한 회원의 가게정보 확인용 dao (가게정보 count(*)로 받아서 0보다 크면 등록되어있는것)
 	 * @param id
 	 * @param conn
@@ -605,6 +606,41 @@ public class MemberDAO {
 		}
 		
 		return result;
+	}
+
+	/** 내가 작성한 게시글 확인 DAO
+	 * @param conn
+	 * @param memberNo
+	 * @return list
+	 * @throws Exception
+	 */
+	public List<Board> myBoardList(Connection conn, int memberNo) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<Board> list = null;
+		Board Boardlist = null;
+		String query = prop.getProperty("myBoardList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			list = new ArrayList<Board>();
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Boardlist = new Board(rset.getInt("BOARD_NO"), rset.getString("BOARD_CONTENT"), rset.getInt("READ_COUNT"),rset.getDate("BOARD_CREATE_DT"), 
+										  rset.getDate("BOARD_MODIFY_DT"), rset.getString("BOARD_STATUS").charAt(0), rset.getInt("BOARD_WRITER"),
+										  rset.getInt("STORE_NUM"),rset.getString("NAME"));
+					list.add(Boardlist);
+			}
+			
+		} finally {
+			rset.close();
+			pstmt.close();
+		}
+
+		return list;
 	}
 	
 }

@@ -44,6 +44,7 @@
                         		}
                         	}, error : function() {
                         		console.log("Ajax 통신 실패");
+                        		alert(msg);
                         	}
                         	});
             } else {
