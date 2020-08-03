@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.kh.realgood.store.model.dto.Store;
 import com.kh.realgood.store.model.dto.StoreImg;
 import com.kh.realgood.store.model.service.StoreService;
+import com.kh.realgood.store.model.vo.PageInfo;
 
 @WebServlet("/store/search.do")
 public class StoreSearchController extends HttpServlet {
@@ -32,14 +33,25 @@ public class StoreSearchController extends HttpServlet {
 
 		String group = request.getParameter("group");
 		String addr = request.getParameter("address");
+		String currentPage = request.getParameter("cp");
+		
+		addr = addr == null ? "" : addr;
+		group = group == null ? "" : group;
 		
 		try {
-			List<Store> addrArr = new StoreService().searchAddr(group, addr);
+			PageInfo pInfo = new StoreService().getPageInfo(currentPage, group, addr);
+			List<Store> storeList = new StoreService().selectList(pInfo);
+			request.setAttribute("pInfo", pInfo);
+			request.setAttribute("storeList", storeList);
+			
+			
 			HttpSession session = request.getSession();
 			
+			
+			
 			// 요청성공
-			if(!addrArr.isEmpty()) {
-				session.setAttribute("addrArr", addrArr);
+			if(!storeList.isEmpty()) {
+				session.setAttribute("storeList", storeList);
 				
 				String path = "/WEB-INF/views/store/storeSearch.jsp";
 				RequestDispatcher rd = request.getRequestDispatcher(path);
@@ -47,12 +59,16 @@ public class StoreSearchController extends HttpServlet {
 			} else {
 				String msg = "검색 실패!";
 				String status = "error";
-				String text = "조회결과가 없는듯 합니다.";
+				String text = "조회결과가 없습니다.";
 				
 				request.getSession().setAttribute("msg", msg);
 				request.getSession().setAttribute("status", status);
 				request.getSession().setAttribute("text", text);
-				response.sendRedirect(request.getHeader("referer"));
+				/* response.sendRedirect(request.getHeader("referer")); */
+				
+				String path = "/WEB-INF/views/store/storeSearch.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(path);
+				rd.forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
