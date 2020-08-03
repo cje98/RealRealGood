@@ -468,7 +468,6 @@ public class MemberDAO {
 		return result;
 	}
 	
-<<<<<<< HEAD
 	/** qr코드아 아이디 값을 통해 buyNum값을 가져오는 DAO
 	 * @param conn
 	 * @param qrNum
@@ -535,7 +534,6 @@ public class MemberDAO {
 		
 		return result;
 	}
-=======
 	// -- 영인
 	/** 로그인한 회원의 가게정보 확인용 dao (가게정보 count(*)로 받아서 0보다 크면 등록되어있는것)
 	 * @param id
@@ -608,6 +606,5 @@ public class MemberDAO {
 		return store;
 	}
 	
->>>>>>> branch 'master' of https://github.com/cje98/RealRealGood.git
 }
 

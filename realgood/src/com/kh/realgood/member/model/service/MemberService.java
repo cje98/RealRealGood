@@ -271,7 +271,6 @@ public class MemberService {
 		return result;
 	}
 	
-<<<<<<< HEAD
 	/** 마이페이지에서 qr코드 값을 눌렀을 때의 로그인 한 사람의 구매 키값을 가져오기 위한 작업 Service
 	 * @param qrNum
 	 * @param loginMemberNum
@@ -310,7 +309,6 @@ public class MemberService {
 		return result;
 	}
 
-=======
 	//-- 영인
 	/** 로그인한 멤버의 가게정보 확인용 service
 	 * @param id
@@ -331,5 +329,4 @@ public class MemberService {
 		conn.close();
 		return store;
 	}
->>>>>>> branch 'master' of https://github.com/cje98/RealRealGood.git
 }
