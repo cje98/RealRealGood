@@ -44,7 +44,10 @@
                         		}
                         	}, error : function() {
                         		console.log("Ajax 통신 실패");
+<<<<<<< HEAD
                         		alert(msg);
+=======
+>>>>>>> branch 'master' of https://github.com/cje98/RealRealGood.git
                         	}
                         	});
             } else {

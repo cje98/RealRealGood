@@ -143,7 +143,7 @@
 					</ul></li>
 				
 			</ul>
-			<form class="form-inline my-2 my-md-0" action="<%=request.getContextPath()%>/store/storeAll.do" method="post">
+			<form class="form-inline my-2 my-md-0" action="<%=request.getContextPath()%>/store/search.do" method="post">
 				<input class="form-control" type="text" id="address" name="address"
 					placeholder="위치검색"> <input type="button"
 					class="btn btn-secondary" onclick="sample5_execDaumPostcode()"
@@ -156,9 +156,6 @@
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
-		$(document).on('click', '.dropdown-item', function(e) {
-			e.stopPropagation();
-		});
 
 		function sample5_execDaumPostcode() {
 			new daum.Postcode({

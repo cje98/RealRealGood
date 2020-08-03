@@ -16,6 +16,7 @@ import com.kh.realgood.store.model.dto.Store;
 import com.kh.realgood.store.model.dto.StoreImg;
 import com.kh.realgood.store.model.dto.StoreInfoMenu;
 import com.kh.realgood.store.model.dto.StoreMenu;
+import com.kh.realgood.store.model.vo.PageInfo;
 
 public class StoreDAO {
 	private Properties prop = null;
@@ -759,4 +760,114 @@ public class StoreDAO {
 		return result;
 	}
 	
+	/** 게시글 목록 조회
+	 * @param conn
+	 * @param pInfo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Store> selectList(Connection conn, PageInfo pInfo)throws Exception {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		List<Store> storeList = null;
+		
+		String query = prop.getProperty("selectList");
+		
+		try {
+			
+			int startRow = (pInfo.getCurrentPage()-1) * pInfo.getLimit()+1;
+			
+			int endRow = startRow + pInfo.getLimit()-1;
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pInfo.getAddress());
+			pstmt.setString(2, pInfo.getGroup());
+			pstmt.setInt(3, startRow );
+			pstmt.setInt(4, endRow);
+			rset = pstmt.executeQuery();
+			Store store = null;
+			storeList = new ArrayList<Store>();
+			
+			
+			while(rset.next()) {
+				store = new Store(rset.getInt("STORE_NUM"),
+						rset.getString("COR_NUM"),
+						rset.getString("NAME"),
+						rset.getString("STORE_CONTENT"),
+						rset.getString("STORE_TEL"),
+						rset.getString("GROUP_NAME"),
+						rset.getString("STORE_ADDR"),
+						rset.getString("STORE_ZIP"),
+						rset.getDate("ENROLL_DATE"));
+					
+				storeList.add(store);
+			}
+		}finally {
+			rset.close();
+			pstmt.close();
+		}
+		
+		return storeList;
+	}
+	
+	/** 전체 게시글 수 조회
+	 * @param conn
+	 * @param group
+	 * @param addr
+	 * @return listCount
+	 * @throws Exception
+	 */
+	public int getListCount(Connection conn, String group, String addr) throws Exception {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("getListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, addr);
+			pstmt.setString(2, group);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) listCount = rset.getInt(1);
+			
+		}finally {
+			rset.close();
+			pstmt.close();
+		}
+		
+		return listCount;
+	}
+
+	public List<Store> selectListImg(Connection conn, List<Store> storeList) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		List<Store> newStoreList = null;
+		
+		String query = prop.getProperty("searchStoreTitleImg");
+		for (int i = 0; i < storeList.size(); i++) {
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, storeList.get(i).getStoreNum());
+	
+				rset = pstmt.executeQuery();
+				if (rset.next()) {
+					storeList.get(i).setStoreTitleImg(rset.getString(1));
+				} else {
+					storeList.get(i).setStoreTitleImg("storeBaseImg.png");
+				}
+			} finally {
+				rset.close();
+				pstmt.close();
+			}
+		}
+		return storeList;
+	}
+
 }
