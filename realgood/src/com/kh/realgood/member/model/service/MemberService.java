@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 
 import com.kh.realgood.member.model.dao.MemberDAO;
+import com.kh.realgood.member.model.dto.Board;
 import com.kh.realgood.member.model.dto.BuyList;
 import com.kh.realgood.member.model.dto.Member;
 import com.kh.realgood.store.model.dto.Store;
@@ -309,7 +310,6 @@ public class MemberService {
 		return result;
 	}
 
-	//-- 영인
 	/** 로그인한 멤버의 가게정보 확인용 service
 	 * @param id
 	 * @return store
@@ -328,5 +328,20 @@ public class MemberService {
 		
 		conn.close();
 		return store;
+	}
+
+	/** 내가 작성한 게시글 확인
+	 * @param memberNo
+	 * @return 
+	 * @throws Exception
+	 */
+	public List<Board> myBoardList(int memberNo) throws Exception{
+Connection conn = getConnection();
+		
+		List<Board> list = dao.myBoardList(conn, memberNo);
+		
+		conn.close();
+		
+		return list;
 	}
 }

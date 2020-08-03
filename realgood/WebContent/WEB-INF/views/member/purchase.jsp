@@ -38,7 +38,7 @@
 	               		    <% for(int i = 0; i < list.size(); i++) { %>
 		                        <tr>
 		                            <td><%=i+1%></td>
-		                            <td><a href="<%=request.getContextPath()%>/store/detail.do?no=<%= list.get(i).getBuyStoreNum() %>" class="getStoreNo"><%= list.get(i).getBuyStoreName()%></a></td>
+		                            <td><a href="<%=request.getContextPath()%>/store/detail.do?storeNum=<%= list.get(i).getBuyStoreNum() %>" class="getStoreNo"><%= list.get(i).getBuyStoreName()%></a></td>
 		                            <td><%= list.get(i).getBuyMenuName()%></td>
 		                            <td><%= list.get(i).getBuyDate()%></td>
 		                            <td><a href="#" onclick="window.open('<%=request.getContextPath()%>/member/qrcodeCreate.do?qrNum=<%=list.get(i).getBuyQrCodeNum()%>','qrCode','resizable=no width=250 height=250');return false">사용하기</a></td>
