@@ -11,7 +11,6 @@ public class StoreMenu {
 	private char cancleYN;
 	private String menuContents;
 	private String menuMakeTime;
-	
 	public StoreMenu() {
 		// TODO Auto-generated constructor stub
 	}

@@ -199,8 +199,6 @@
 	          	<%for(int i = 0; i < mList.size(); i++ ) {%>
 	              <option value="<%=mList.get(i).getMenuNum()%>"><%=mList.get(i).getMenuName() + "-" + mList.get(i).getPrice()+ "원"%></option>
 	          	<%}%>
-          	<%} else {%>
-          		  <option>메뉴없음</option>
           	<%}%>
            
           </select>

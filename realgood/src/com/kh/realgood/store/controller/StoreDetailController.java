@@ -24,12 +24,10 @@ public class StoreDetailController extends HttpServlet {
 		try {
 			
 			List<StoreInfoMenu> mList = new StoreService().searchMenu(storeNo);
-			if(!mList.isEmpty()) {
-				request.setAttribute("mList", mList);
-				String path = "/WEB-INF/views/store/storeDetail.jsp";
-				RequestDispatcher view = request.getRequestDispatcher(path);
-				view.forward(request, response);
-			}
+			request.setAttribute("mList", mList);
+			String path = "/WEB-INF/views/store/storeDetail.jsp";
+			RequestDispatcher view = request.getRequestDispatcher(path);
+			view.forward(request, response);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
