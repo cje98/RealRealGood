@@ -18,7 +18,7 @@ public class MemberMenuPayController extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String input = request.getParameter("input").replaceAll("원", "");
-		int storeNo = Integer.parseInt(request.getParameter("storeNo"));
+		int storeNo = Integer.parseInt(request.getParameter("storeNum"));
 		String memberId = request.getParameter("memberId");
 
 		String[] buyListTmp = input.split("-|\\+x");
