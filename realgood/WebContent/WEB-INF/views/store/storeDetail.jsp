@@ -195,8 +195,12 @@
         </div>
           <select class="custom-select" id="inputGroupSelect01">
             <option>메뉴를 선택해주세요.</option>
-          	<%for(int i = 0; i < mList.size(); i++ ) {%>
-              <option value="<%=mList.get(i).getMenuNum()%>"><%=mList.get(i).getMenuName() + "-" + mList.get(i).getPrice()+ "원"%></option>
+            <%if(!mList.isEmpty()) { %>
+	          	<%for(int i = 0; i < mList.size(); i++ ) {%>
+	              <option value="<%=mList.get(i).getMenuNum()%>"><%=mList.get(i).getMenuName() + "-" + mList.get(i).getPrice()+ "원"%></option>
+	          	<%}%>
+          	<%} else {%>
+          		  <option>메뉴없음</option>
           	<%}%>
            
           </select>
@@ -320,7 +324,7 @@
   		$("#buyPurchase").click(function() {
 			// 팝업창을 이용하여 아이디 유효성, 중복검사 진행
 			<% if(loginMember != null) {%>
-				window.open("buyPurchaseForm.do?no="+<%=request.getParameter("no")%>+"&memberId="+"<%=loginMember.getId()%>", "buyPurchase", "width=850, height=550");
+				window.open("buyPurchaseForm.do?storeNum="+<%=request.getParameter("storeNum")%>+"&memberId="+"<%=loginMember.getId()%>", "buyPurchase", "width=850, height=550");
 				// 팝업창 요청 주소		팝업창의 이름(name)		팝업창 크기 설정  << 새로 입력 되는 것들
 			<% } else { %>
 				swal("로그인 이후 이용 바랍니다.");

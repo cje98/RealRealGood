@@ -34,7 +34,7 @@
                         var memberIdTmp = "<%=request.getParameter("memberId")%>";
                             $.ajax({
                         	url : "../member/menuPay.do",
-                        	data : {"input" : opener.$("#menuCal > p").text(), "storeNo" : <%=request.getParameter("no")%>, "memberId" : memberIdTmp},
+                        	data : {"input" : opener.$("#menuCal > p").text(), "storeNum" : <%=request.getParameter("storeNum")%>, "memberId" : memberIdTmp},
                         	type : "get",
                         	success : function(result) {
                         		if(result > 0) {
