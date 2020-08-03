@@ -340,7 +340,11 @@
 		
 		
 		$("#mailCertifyEnterBtn").on("click", function(){
+<<<<<<< HEAD
+			if($("#mailCertify").val() == $("#mailCertifyCode").text() && $("#mailCertify").val() != "" ) {
+=======
 			if($("#mailCertify").val() == $("#mailCertifyCode").text() && $("#mailCertify").val() != "") {
+>>>>>>> branch 'master' of https://github.com/cje98/RealRealGood.git
 				$("#mailCertifyNote").text("인증 번호가 일치 합니다").css("color", "green");
 				$("#idDupCheck").prop("disabled","true");
 				$("#mailCertify").prop("disabled","true");
