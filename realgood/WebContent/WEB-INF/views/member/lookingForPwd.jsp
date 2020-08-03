@@ -12,15 +12,12 @@
     <div class="row my-5">
         <%@ include file="sideIdPwdMenu.jsp"%>
         <div class="col-sm-5">
-            <form action="newPwd.do" method="POST" onsubmit="return validate();">
-                    <h1>비밀번호 찾기</h1>
-                <table class="table table-hover">
-                    <div class="row mb-3 form-row">
+        	<!-- onsubmit="return validate();" -->
+            <form action="newPwd.do" method="POST" onsubmit="return mailCertifyEnterBtnFunc();">
+                   <h1>비밀번호 찾기</h1>
+                   <div class="row mb-3 form-row">
+                	<table class="table table-hover">
                     	<tr>
-<<<<<<< HEAD
-                    		<td>이름</td>
-                    		<td><input type="text" name="name" required></td>
-=======
                     		<td><label for="id">아이디</label></td>
                     		<td>
                     			<input type="email" class="form-control" name="id" id="id"
@@ -30,7 +27,6 @@
 							<td>
 								<span id="idCheck"></span>
 							</td>
->>>>>>> branch 'master' of https://github.com/cje98/RealRealGood.git
                         </tr>
                         <tr>
                         	<td><label for="mailCertify">메일인증</label></td>
@@ -48,8 +44,8 @@
 								<div id="loadingImg"></div>
 							</td>
                         </tr>
-                    </div>
-                </table>
+                	</table>
+                   </div>
               
             </form>
         </div>
@@ -65,8 +61,14 @@
 			type : "post",
 			data : {"id":$("#id").val()},
 			success : function(result){
-				if(result > 0)$("#idCheck").text("아이디가 존재합니다.").css("color","green");
-				else $("#idCheck").text("아이디가 존재하지 않습니다.").css("color","red");
+				if(result > 0){
+					$("#idCheck").text("아이디가 존재합니다.").css("color","green");
+					return true;
+				}
+				else{
+					$("#idCheck").text("아이디가 존재하지 않습니다.").css("color","red");
+					return false;
+				}
 			}, error : function(result){
 				console.log("ajax 통신불가");
 			}
@@ -74,6 +76,8 @@
 		});
 		
 	});
+    
+   
 	
 	$("#mailCertifyBtn").on("click", function(){
 		if($("#idCheck").text().trim().length != 0) {
@@ -99,26 +103,42 @@
 	
 	
 	//$("#mailCertifyEnterBtn").on("click", function(){
+		//function validate(){
+		//}
 		
-	function vaildate(){
-		if($("#mailCertify").val() == $("#mailCertifyCode").text()) {
-			alert("인증 번호가 일치 합니다");
-			$("#mailCertify").prop("disabled","true");
-			$("#mailCertifyBtn").prop("disabled","true");
-			$("#id").prop("readonly","true");
+		
+/* 			$("#mailCertifyEnterBtn").on("click", function(){
+				if($("#mailCertify").val() == $("#mailCertifyCode").text() && $("#mailCertifyCode").text() != "") {
+						alert("인증번호가 일치합니다.");
+						$("#mailCertify").prop("disabled","true");
+						$("#mailCertifyBtn").prop("disabled","true");
+						$("#id").prop("readonly","true");
+						$("#mailCertifyEnterBtn").prop("disabled","true");
+						return true;
+				} else {
+					alert("인증 번호가 일치하지 않습니다");
+					return false;
+				}
+			});
+		 */
+		 
+  			function mailCertifyEnterBtnFunc() {
+					if($("#mailCertify").val() == $("#mailCertifyCode").text() && $("#mailCertifyCode").text() != "") {
+							alert("인증번호가 일치합니다.");
+							$("#mailCertify").prop("disabled","true");
+							$("#mailCertifyBtn").prop("disabled","true");
+							$("#id").prop("readonly","true");
+							$("#mailCertifyEnterBtn").prop("disabled","true");
+							return true;
+					} else {
+						alert("인증 번호가 일치하지 않습니다");
+						return false;
+					}
+			}
 
-			$("#mailCertifyEnterBtn").prop("disabled","true");
-			signUpCheck.mailCode = true;
-			return true;
-		} else {
-			alert("인증 번호가 일치하지 않습니다");
-			signUpCheck.mailCode = false;
-			return false;
-		}
 		//var id = $("#id").val();
 		//location.href="newPwd.do?id=" + id;
-	}
-	//});
+	
 	
 	
 	

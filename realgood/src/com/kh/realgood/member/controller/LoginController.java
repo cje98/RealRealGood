@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +47,20 @@ public class LoginController extends HttpServlet {
 			
 			// 요청성공
 			if(loginMember != null) {
+				
+				// 아이디 저장하기
+				String saveId = request.getParameter("saveId");
+				Cookie cookie = new Cookie("saveId", memberId);
+				
+				if(saveId != null) {	
+					cookie.setMaxAge(60 * 60 * 24 * 7); // 유효기간 7일 설정
+				}else {
+					cookie.setMaxAge(0); // 0초인 경우 쿠키 삭제
+				}
+				
+				
+				cookie.setPath("/"); 
+				response.addCookie(cookie);
 				
 				//-- 로그인한 멤버의 등급명이 "사장회원"일 경우 store에 가게 정보를 저장한다.
 				if(loginMember.getGradeName().equals("사장회원")) {

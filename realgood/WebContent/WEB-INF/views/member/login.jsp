@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	boolean isSave = false; 
+	String saveId = "";	
+	Cookie[] cookies = request.getCookies();	
+	
+	if(cookies != null){
+		for(Cookie c : cookies){
+			
+			if("saveId".equals(c.getName())){
+				saveId = c.getValue(); 
+				isSave = true;
+			}
+		}
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,12 +91,12 @@ label{
 		<br>
 		<br> <label for="inputEmail" class="sr-only">Email
 			address</label> <input type="email" id="memberId" name="memberId"
-			class="form-control" placeholder="이메일 주소 입력(필수)" required autofocus>
+			class="form-control" placeholder="이메일 주소 입력(필수)" value="<%=saveId%>" required autofocus>
 		<label for="inputPassword" class="sr-only">Password</label> <input
 			type="password" id="memberPwd" name="memberPwd" class="form-control"
 			placeholder="비밀번호 입력" required>
 		<div class="checkbox mb-3">
-			<label> <input type="checkbox" value="remember-me">
+			<label> <input type="checkbox" name="saveId" <%= isSave ? "checked" : "" %>>
 				아이디 저장하기
 			</label>
 		</div>
