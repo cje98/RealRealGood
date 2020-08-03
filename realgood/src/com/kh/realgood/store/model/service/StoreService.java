@@ -14,6 +14,7 @@ import com.kh.realgood.store.model.dto.Store;
 import com.kh.realgood.store.model.dto.StoreImg;
 import com.kh.realgood.store.model.dto.StoreInfoMenu;
 import com.kh.realgood.store.model.dto.StoreMenu;
+import com.kh.realgood.store.model.vo.PageInfo;
 
 public class StoreService {
 	private StoreDAO dao;
@@ -371,5 +372,46 @@ public class StoreService {
 		
 		conn.close();
 		return result;
+	}
+	
+	/** 페이징 처리
+	 * @param currentPage
+	 * @param group
+	 * @param addr
+	 * @return
+	 * @throws Exception
+	 */
+	public PageInfo getPageInfo(String currentPage, String group, String addr) throws Exception{
+
+		Connection conn = getConnection();
+		
+		int cp = currentPage == null? 1 : Integer.parseInt(currentPage);
+
+		int listCount = dao.getListCount(conn, group, addr);
+
+		conn.close();
+		
+		return new PageInfo(cp, listCount, addr, group);
+	}
+	
+	
+	
+	/** 게시글 목록 조회
+	 * @param pInfo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Store> selectList(PageInfo pInfo) throws Exception{
+
+		Connection conn = getConnection();
+
+		List<Store> storeList = dao.selectList(conn, pInfo);
+		
+		if(storeList != null) {
+			storeList = dao.selectListImg(conn, storeList);
+		}
+		conn.close();
+		
+		return storeList;
 	}
 }
