@@ -178,11 +178,12 @@ public class StoreModifyServlet extends HttpServlet {
 				msg = "가게 정보 수정 성공";
 				text = "가게 정보가 성공적으로 수정되었습니다.";
 				
-				
+				// session 수정된걸로 다시 넣기
 				loginStore.setStoreContent(store.getStoreContent());
 				loginStore.setStoreGroupName(store.getStoreGroupName());
-				
-//				response.sendRedirect("storeModify.do");
+				loginStore.setStoreTel(store.getStoreTel());
+				loginStore.setStoreZip(store.getStoreZip());
+				loginStore.setStoreAddress(store.getStoreAddress());
 				
 				
 			}else {
