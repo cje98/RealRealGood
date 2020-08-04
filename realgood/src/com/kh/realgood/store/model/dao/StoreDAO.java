@@ -869,5 +869,36 @@ public class StoreDAO {
 		}
 		return storeList;
 	}
+	
+	
+	/** 가게 이미지 수정 중 추가 DAO (쿼리문 file-status default -> 'Y'로 변경)
+	 * @param conn
+	 * @param newFiles
+	 * @param storeNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int imgInsert2(Connection conn, StoreImg newFiles, int storeNo) throws Exception{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("imgInsert2");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, storeNo);
+			pstmt.setString(2, newFiles.getOriginImgName());
+			pstmt.setString(3, newFiles.getRealImgName());
+			pstmt.setString(4, newFiles.getFilePath());
+			pstmt.setInt(5, newFiles.getFileLevel());
+			
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			pstmt.close();
+		}
+		return result;
+	}
 
 }

@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.kh.realgood.member.model.dto.Member;
 import com.kh.realgood.store.model.dto.StoreInfoMenu;
 import com.kh.realgood.store.model.service.StoreService;
 
@@ -24,8 +26,20 @@ public class StoreDetailController extends HttpServlet {
 		try {
 			
 			List<StoreInfoMenu> mList = new StoreService().searchMenu(storeNo);
+			HttpSession session = request.getSession();
+			System.out.println(storeNo);
+			
+			
 			if(!mList.isEmpty()) {
 				request.setAttribute("mList", mList);
+				Member loginMember = (Member)session.getAttribute("loginMember");
+				
+				if(loginMember != null) {
+					int memberNo = loginMember.getNo();
+					System.out.println(memberNo);
+					request.setAttribute("memberNo", memberNo);
+				}
+				
 				String path = "/WEB-INF/views/store/storeDetail.jsp";
 				RequestDispatcher view = request.getRequestDispatcher(path);
 				view.forward(request, response);
