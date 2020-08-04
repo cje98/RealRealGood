@@ -47,7 +47,12 @@
        span{
        	 font-weight: bold;
        }
+       
       }
+       
+       #favoBtn{
+       		cursor : pointer;
+       }
     </style>
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
@@ -103,7 +108,7 @@
       			success : function(rNo){
       				if(rNo == 1) {
 	      				alert("즐겨찾기에 추가되었습니다. [마이페이지->내가 즐겨찾는 가게]에서 확인하세요.");
-      					$("#favoBtn").css("color", "yellow");
+      					$("#favoBtn").css("color", "rgb(255, 168, 0)");
       				}else if(rNo == 0){
       					alert("즐겨찾기가 삭제되었습니다.");
       					$("#favoBtn").css("color", "black");
