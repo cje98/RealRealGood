@@ -436,5 +436,20 @@ public class StoreService {
 		return storeList;
 	}
 	
+	/** 즐겨찾기 여부 확인 Service
+	 * @param storeNo
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int checkStar(int storeNo, int memberNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.checkStar(conn, storeNo, memberNo);
+		
+		conn.close();
+		return result;
+	}
+	
 	
 }
