@@ -28,41 +28,33 @@ public class StoreDetailController extends HttpServlet {
 			List<StoreInfoMenu> mList = new StoreService().searchMenu(storeNo);
 			HttpSession session = request.getSession();
 			
-			System.out.println(storeNo);
-
+			Member loginMember = (Member)session.getAttribute("loginMember");
 			
 			if(!mList.isEmpty()) {
 				request.setAttribute("mList", mList);
 				
-				Member loginMember = (Member)session.getAttribute("loginMember");
-				
 				// 로그인되어있을때 로그인 한 멤버의 멤버 번호를 요청객체에 set하기
 				if(loginMember != null) {
 					int memberNo = loginMember.getNo();
-					System.out.println(memberNo);
 					request.setAttribute("memberNo", memberNo);
 					
 					int result = new StoreService().checkStar(storeNo, memberNo);
 					
 					session.setAttribute("starColor", result);
+					
 				}
-				
-				
 				String path = "/WEB-INF/views/store/storeDetail.jsp";
 				RequestDispatcher view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			}
 			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-		
+			request.setAttribute("errorMsg", "상세페이지 조회 안됨");
+			request.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(request, response);
 		}
 		
-		
-	
-	
-	
-	
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

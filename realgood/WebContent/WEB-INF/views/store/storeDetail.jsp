@@ -8,7 +8,7 @@
 	int storeNo = Integer.parseInt(request.getParameter("storeNum"));
 	
 	int tmp = ((Member)session.getAttribute("loginMember")) != null ? ((Member)session.getAttribute("loginMember")).getNo() : -1;
-	int starColor = (Integer)(session.getAttribute("starColor"));
+	int starColor = session.getAttribute("starColor") == null ? 0 : (Integer)(session.getAttribute("starColor"));
 %>
 
 <!doctype html>
