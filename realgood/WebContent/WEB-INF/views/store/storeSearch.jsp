@@ -90,6 +90,7 @@
 					<div class="mb-1 text-muted"><%=store.getStoreTel()%></div>
 					<p class="card-text mb-auto"><%=store.getStoreContent()%></p>
 					<p class="card-text mb-auto"><%=store.getStoreAddress()%></p>
+					<p><span class="ico-star1" style="color:rgb(255, 168, 0);">★ <%=store.getStoreGpaScore() %></span></p>
 		          <a class="stretched-link"></a>
 					
 				</div>
@@ -113,7 +114,7 @@
 					<div class="mb-1 text-muted"><%=store.getStoreTel()%></div>
 					<p class="card-text mb-auto"><%=store.getStoreContent()%></p>
 					<p class="card-text mb-auto"><%=store.getStoreAddress()%></p>
-					<p><span class="star1">★ 4.7</span></p>
+					<p><span class="ico-star1" style="color:rgb(255, 168, 0);">★ <%=store.getStoreGpaScore() %></span></p>
 		          <a class="stretched-link"></a>
 				</div>
 				<div class="col-auto d-none d-lg-block">

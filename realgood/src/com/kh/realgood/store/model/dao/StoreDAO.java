@@ -844,6 +844,12 @@ public class StoreDAO {
 		return listCount;
 	}
 
+	/** 조회 결과 이미지 출력용
+	 * @param conn
+	 * @param storeList
+	 * @return
+	 * @throws Exception
+	 */
 	public List<Store> selectListImg(Connection conn, List<Store> storeList) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -862,6 +868,38 @@ public class StoreDAO {
 				} else {
 					storeList.get(i).setStoreTitleImg("storeBaseImg.png");
 				}
+			} finally {
+				rset.close();
+				pstmt.close();
+			}
+		}
+		return storeList;
+	}
+
+	/** 조회 결과 가게 평점 출력용 메소드
+	 * @param conn
+	 * @param storeList
+	 * @return
+	 */
+	public List<Store> storeGpaScore(Connection conn, List<Store> storeList) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		List<Store> newStoreList = null;
+		
+		String query = prop.getProperty("storeGpaScore");
+		for (int i = 0; i < storeList.size(); i++) {
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, storeList.get(i).getStoreNum());
+	
+				rset = pstmt.executeQuery();
+				if (rset.next()) {
+					storeList.get(i).setStoreGpaScore(rset.getDouble(1));
+				} else {
+					storeList.get(i).setStoreGpaScore(0);
+				}
+				
 			} finally {
 				rset.close();
 				pstmt.close();

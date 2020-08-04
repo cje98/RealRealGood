@@ -16,6 +16,7 @@ public class Store {
 	private char outYN;	// 탈퇴 여부
 	private char useYN; // 승인 여부
 	private String storeTitleImg; // 가게 대표 이미지
+	private double storeGpaScore; // 가게 평점
 	
 	
 	
@@ -195,6 +196,20 @@ public class Store {
 	}
 
 	
+	public double getStoreGpaScore() {
+		return storeGpaScore;
+	}
+
+
+
+
+	public void setStoreGpaScore(double storeGpaScore) {
+		this.storeGpaScore = storeGpaScore;
+	}
+
+
+
+
 	public String getStoreTitleImg() {
 		return storeTitleImg;
 	}
