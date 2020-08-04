@@ -5,6 +5,8 @@
 <%@page import="java.util.List"%>
 <%
 	List<StoreInfoMenu> mList = (List<StoreInfoMenu>)request.getAttribute("mList");
+	int storeNo = (int)request.getAttribute("storeNo");
+	int memberNo = (int)request.getAttribute("memberNo");
 %>
 
 <!doctype html>
@@ -88,9 +90,28 @@
 <main role="main" class="container">
   <div class="row">
     <div class="col-md-8 blog-main">
-      <h3 class="pb-4 mb-4 font-italic border-bottom">
-        	독수리 다방
-      </h3>
+       <h3 class="pb-4 mb-4 font-italic border-bottom">
+        	독수리 다방 <span id="favoBtn">★</span>
+       </h3>
+      <script>
+     
+      	$("#favoBtn").on("click", function(){
+      		// 비동기 통신으로 회원번호,가게 정보 저장
+      		$.ajax({
+      			url: "favorite.do",
+      			data : {"storeNo": <%=storeNo%>, "memberNo": <%=memberNo%>},
+      			success : function(str){
+      				alert(str);
+      				$("#favoBtn").css("color", "yellow");
+      			}, error : function(str){
+      				console.log("ajax통신실패");
+      			}
+      		});
+      		
+      		
+      	});
+      
+      </script>
 
       <div class="blog-post">
         <h2 class="blog-post-title">Sample blog post</h2>

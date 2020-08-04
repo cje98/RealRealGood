@@ -118,7 +118,7 @@
 		          <a class="stretched-link"></a>
 				</div>
 				<div class="col-auto d-none d-lg-block">
-					<img width="200" height="250"
+					<img width="200" height="200"
 						src="<%=request.getContextPath()%>/resources/images/<%=store.getStoreTitleImg()%>" />
 				</div>
 			</div>
