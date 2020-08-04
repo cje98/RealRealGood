@@ -51,7 +51,7 @@ public class MyPageController extends HttpServlet {
 			String text = null;
 			
 			if(result > 0) {
-				status = "`";
+				status = "success";
 				msg = "회원 수정 성공";
 				text = "회원 수정을 성공하였습니다.";
 				

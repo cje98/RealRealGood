@@ -46,13 +46,8 @@ public class StoreModifyServlet extends HttpServlet {
 			
 			// 메뉴 정보를 요청객체에 저장하기
 			request.setAttribute("storeMenu", storeMenu);
-			
-			
-			
-			
-			
 		}catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		// 가게정보 수정 버튼을 누르면 storeModify.jsp 화면으로 이동하기
 		String path = "/WEB-INF/views/store/storeModify.jsp";
@@ -159,7 +154,6 @@ public class StoreModifyServlet extends HttpServlet {
 			}
 		}
 		
-		System.out.println(list);
 		
 		if(list != null) {
 			for(int i=0; i < list.size()/4 ; i++) {
@@ -168,15 +162,13 @@ public class StoreModifyServlet extends HttpServlet {
 			}
 		}
 		
-		System.out.println("메뉴 : " + menu);
-		
-		
 		String status = null;
 		String msg = null;
 		String text = null;
 		
 		try {
 			HttpSession session = request.getSession();
+			Store loginStore = (Store)session.getAttribute("loginStore");
 			int storeNo = ((Store)session.getAttribute("loginStore")).getStoreNum();
 			
 			int result = new StoreService().updateStore(store, fList, menu, storeNo);
@@ -185,6 +177,14 @@ public class StoreModifyServlet extends HttpServlet {
 				status = "success";
 				msg = "가게 정보 수정 성공";
 				text = "가게 정보가 성공적으로 수정되었습니다.";
+				
+				
+				loginStore.setStoreContent(store.getStoreContent());
+				loginStore.setStoreGroupName(store.getStoreGroupName());
+				
+//				response.sendRedirect("storeModify.do");
+				
+				
 			}else {
 				status = "error";
 				msg = "가게 정보 수정 실패";
@@ -195,21 +195,10 @@ public class StoreModifyServlet extends HttpServlet {
 			request.getSession().setAttribute("msg", msg);
 			request.getSession().setAttribute("text", text);
 			
-		}catch (Exception e) {
 			
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
-				
-				
-				
-				
-		
-		
-		
 		
 		doGet(request, response);
 	}

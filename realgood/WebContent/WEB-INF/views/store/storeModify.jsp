@@ -120,8 +120,8 @@
                                 <option>010</option>
                                 <option>02</option>
                             </select>
-                             <input type="number" class="form-control phone col-md-3" id="phone2"  maxlength="4" name="phone2" value="<%=phone[1] %>" required>
-                             <input type="number" class="form-control phone col-md-3" id="phone3"  maxlength="4" name="phone3" value="<%=phone[2] %>" required>
+                             <input type="text" class="form-control phone col-md-3" id="phone2"  maxlength="4" name="phone2" value="<%=phone[1] %>" required>
+                             <input type="text" class="form-control phone col-md-3" id="phone3"  maxlength="4" name="phone3" value="<%=phone[2] %>" required>
                              <span id="checkPhone">&nbsp;</span>
                              </div>
                    		 </td>
@@ -414,6 +414,48 @@
     		}
     		
     	});
+    	
+    	
+    	// 각 유효성 검사 결과를 저장할 객체
+    	var signUpCheck = {
+    		"storeContent" : false
+    	};
+
+    	// jQuery 변수 : 변수에 직접적으로 jQuery메소드를 사용할 수 있음.
+    	var $storeContent = $("#storeContent");
+         
+        $storeContent.on("input",function(){
+        	var regExp = /^[a-zA-Z가-힣\d ]{1,200}$/;
+        	if(!regExp.test($storeContent.val())){
+        		signUpCheck.storeContent = false;
+        	}else {
+        		signUpCheck.storeContent = true;
+        	}
+        });
+        
+     	function validate() {
+
+    	for ( var key in signUpCheck) {
+    		
+    		if (!signUpCheck[key]) {
+    			// 인덱스 
+
+    			var msg;
+    			switch (key) {
+    			case "storeContent":
+    				msg = "가게 설명이 ";
+    				break;
+    			}
+
+    			alert(msg + "유효하지 않습니다.");
+    			var el = "#" + key;
+    			$(el).focus();
+    			
+    			return false;
+    		}
+    	
+    		}
+     	}
 					
                     
 </script>

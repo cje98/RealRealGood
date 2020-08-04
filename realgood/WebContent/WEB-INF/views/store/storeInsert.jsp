@@ -52,16 +52,16 @@
 			            <td>
 			            	<!-- 사업자번호1 -->
 				            <div class="col-md-3">
-	                          <input type="number" class="form-control corNum" id="corNum1"  maxlength="3" name="corNum1" required>
+	                          <input type="text" class="form-control corNum" id="corNum1"  maxlength="3" name="corNum1" required>
 	                        </div>
 	                        <!-- 사업자번호2 -->
 	                        <div class="col-md-3">
-	                            <input type="number" class="form-control corNum" id="corNum2"  maxlength="2" name="corNum2" required>
+	                            <input type="text" class="form-control corNum" id="corNum2"  maxlength="2" name="corNum2" required>
 	                        </div>
 	                        
 	                        <!-- 사업자번호3 -->
 	                        <div class="col-md-3">
-	                            <input type="number" class="form-control corNum" id="corNum3"  maxlength="5" name="corNum3" required>
+	                            <input type="text" class="form-control corNum" id="corNum3"  maxlength="5" name="corNum3" required>
 	                        </div>
 			            </td>
 			       
@@ -110,8 +110,8 @@
 	                                <option>010</option>
 	                                <option>02</option>
 	                            </select>
-	                            <input type="number" class="form-control phone col-md-3" id="phone2"  maxlength="4" name="phone2" required>
-	                            <input type="number" class="form-control phone col-md-3" id="phone3"  maxlength="4" name="phone3" required>
+	                            <input type="text" class="form-control phone col-md-3" id="phone2"  maxlength="4" name="phone2" required>
+	                            <input type="text" class="form-control phone col-md-3" id="phone3"  maxlength="4" name="phone3" required>
 	                        </div>
 	                       
 		            	</td>
@@ -322,6 +322,69 @@
   		reader.readAsDataURL(value.files[0]);
   	}
   }
+     
+ // 각 유효성 검사 결과를 저장할 객체
+	var signUpCheck = {
+		"storeName" : false,
+		"storeContent" : false
+		
+	};
+
+	// jQuery 변수 : 변수에 직접적으로 jQuery메소드를 사용할 수 있음.
+	var $storeName = $("#storeName");
+	var $storeContent = $("#storeContent");
+     
+     
+    $storeName.on("input",function(){
+	    var regExp = /^[a-zA-Z가-힣\d ]{1,20}$/; 
+	    if(!regExp.test($storeName.val())){
+	    	signUpCheck.storeName = false;
+	    }else{	    	
+	    	signUpCheck.storeName = true;
+	    }
+    });
+    
+	  
+    	
+    $storeContent.on("input",function(){
+    	var regExp = /^[a-zA-Z가-힣\d ]{1,200}$/;
+    	if(!regExp.test($storeContent.val())){
+    		signUpCheck.storeContent = false;
+    	}else {
+    		signUpCheck.storeContent = true;
+    	}
+    });
+    
+ 
+    
+    
+ 	function validate() {
+
+	for ( var key in signUpCheck) {
+		
+		if (!signUpCheck[key]) {
+			// 인덱스 
+
+			var msg;
+			switch (key) {
+			case "storeName":
+				msg = "가게명이 ";
+				break;
+			case "storeContent":
+				msg = "가게 설명이 ";
+				break;
+			}
+
+			alert(msg + "유효하지 않습니다.");
+			var el = "#" + key;
+			$(el).focus();
+			
+			return false;
+		}
+	
+		}
+ 	}
+
 </script>
 
 	
