@@ -71,11 +71,15 @@
 				if (i == 0) {
 	%>
 	<div class="row mb-6">
-		<%
-			}
-					if (i % 2 == 0) {
-		%>
-		<div class="col-md-6">
+		         <%
+            }
+                  if (i % 2 == 0) {
+                     if (storeList.size() == 1) {
+         %>
+            <div class="col-auto">
+                     <% } else {%>
+            <div class="col-md-6">
+                     <% } %>
 			<div
 				class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				<div class="col p-4 d-flex flex-column position-static">
@@ -100,7 +104,7 @@
 		%>
 		<div class="col-md-6">
 			<div
-				class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+				class="row no-gutters border rounded overflow-hidden flex-md-row mb-6 shadow-sm h-md-250 position-relative">
 				<div class="col p-4 d-flex flex-column position-static">
 					    <strong class="d-inline-block mb-2 text-primary"><%=store.getStoreGroupName()%></strong>
 			        <input type="hidden" value="<%=store.getStoreNum()%>">
@@ -112,7 +116,7 @@
 		          <a class="stretched-link"></a>
 				</div>
 				<div class="col-auto d-none d-lg-block">
-					<img width="200" height="200"
+					<img width="200" height="250"
 						src="<%=request.getContextPath()%>/resources/images/<%=store.getStoreTitleImg()%>" />
 				</div>
 			</div>
