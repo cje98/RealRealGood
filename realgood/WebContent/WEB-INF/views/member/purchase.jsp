@@ -42,7 +42,11 @@
 		                            <td><%= list.get(i).getBuyMenuName()%></td>
 		                            <td><%= list.get(i).getBuyDate()%></td>
 		                            <td><a href="#" onclick="window.open('<%=request.getContextPath()%>/member/qrcodeCreate.do?qrNum=<%=list.get(i).getBuyQrCodeNum()%>','qrCode','resizable=no width=250 height=250');return false">사용하기</a></td>
-		                            <td><%= list.get(i).getBuyUsed()%></td>
+		                            <%if(list.get(i).getBuyUsed() != null){ %>
+	                                  <td><%= list.get(i).getBuyUsed()%></td>
+	                                <%}else { %>
+	                                  <td>사용 안함</td>
+	                                  <%} %>
 		                        </tr>
 	                        <% } %>
                         <% } %>
