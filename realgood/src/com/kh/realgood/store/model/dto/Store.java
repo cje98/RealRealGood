@@ -16,6 +16,7 @@ public class Store {
 	private char outYN;	// 탈퇴 여부
 	private char useYN; // 승인 여부
 	private String storeTitleImg; // 가게 대표 이미지
+	private double storeGpaScore;
 	
 	
 	
@@ -201,6 +202,14 @@ public class Store {
 
 	public void setStoreTitleImg(String storeTitleImg) {
 		this.storeTitleImg = storeTitleImg;
+	}
+	
+	public double getStoreGpaScore() {
+		return storeGpaScore;
+	}
+
+	public void setStoreGpaScore(double storeGpaScore) {
+		this.storeGpaScore = storeGpaScore;
 	}
 
 	@Override

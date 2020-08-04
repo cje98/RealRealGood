@@ -46,25 +46,27 @@
            height: 50px;
         }
         
+        .ico-star1 {
+        	color : rgb(255, 168, 0);
+        }
    </style>
 </head>
 <body>
 
 	<%@ include file="../common/header.jsp"%>
 	
-	<div class="col-md-12">
-		<ul class="pagination">
-		  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/store/search.do?group=치킨&address=<%=address%>&cp=1">치킨</a></li>
-		  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/store/search.do?group=중식&address=<%=address%>&cp=1">중식</a></li>
-		  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/store/search.do?group=한식&address=<%=address%>&cp=1">한식</a></li>
-		  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/store/search.do?group=분식&address=<%=address%>&cp=1">분식</a></li>
-		  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/store/search.do?group=일식&address=<%=address%>&cp=1">일식</a></li>
-		  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/store/search.do?group=피자/양식&address=<%=address%>&cp=1">피자/양식</a></li>
-		  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/store/search.do?group=족발&address=<%=address%>&cp=1">족발</a></li>
-		  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/store/search.do?group=디저트&address=<%=address%>&cp=1">디저트</a></li>
-		  <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/store/search.do?group=야식&address=<%=address%>&cp=1">야식</a></li>
-		</ul>
-	</div>
+      <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/store/search.do?group=&address=<%=address%>&cp=1"><strong>전체</strong></a></li>
+        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/store/search.do?group=치킨&address=<%=address%>&cp=1">치킨</a></li>
+        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/store/search.do?group=중식&address=<%=address%>&cp=1">중식</a></li>
+        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/store/search.do?group=한식&address=<%=address%>&cp=1">한식</a></li>
+        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/store/search.do?group=분식&address=<%=address%>&cp=1">분식</a></li>
+        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/store/search.do?group=일식&address=<%=address%>&cp=1">일식</a></li>
+        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/store/search.do?group=피자/양식&address=<%=address%>&cp=1">피자/양식</a></li>
+        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/store/search.do?group=족발&address=<%=address%>&cp=1">족발</a></li>
+        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/store/search.do?group=디저트&address=<%=address%>&cp=1">디저트</a></li>
+        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/store/search.do?group=야식&address=<%=address%>&cp=1">야식</a></li>
+      </ul>
 		
 	
 	
@@ -93,6 +95,7 @@
 					<div class="mb-1 text-muted"><%=store.getStoreTel()%></div>
 					<p class="card-text mb-auto"><%=store.getStoreContent()%></p>
 					<p class="card-text mb-auto"><%=store.getStoreAddress()%></p>
+					<p><span class="ico-star1">★ <%=store.getStoreGpaScore() %></span></p>
 		          <a class="stretched-link"></a>
 					
 				</div>
@@ -115,10 +118,11 @@
 					<div class="mb-1 text-muted"><%=store.getStoreTel()%></div>
 					<p class="card-text mb-auto"><%=store.getStoreContent()%></p>
 					<p class="card-text mb-auto"><%=store.getStoreAddress()%></p>
+					<p><span class="ico-star1">★ <%=store.getStoreGpaScore() %></span></p>
 		          <a class="stretched-link"></a>
 				</div>
 				<div class="col-auto d-none d-lg-block">
-					<img width="200" height="200"
+					<img width="200" height="250"
 						src="<%=request.getContextPath()%>/resources/images/<%=store.getStoreTitleImg()%>" />
 				</div>
 			</div>

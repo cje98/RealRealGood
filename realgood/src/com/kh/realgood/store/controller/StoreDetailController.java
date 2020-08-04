@@ -27,7 +27,6 @@ public class StoreDetailController extends HttpServlet {
 			
 			List<StoreInfoMenu> mList = new StoreService().searchMenu(storeNo);
 			HttpSession session = request.getSession();
-			System.out.println(storeNo);
 			
 			
 			if(!mList.isEmpty()) {
@@ -36,7 +35,6 @@ public class StoreDetailController extends HttpServlet {
 				
 				if(loginMember != null) {
 					int memberNo = loginMember.getNo();
-					System.out.println(memberNo);
 					request.setAttribute("memberNo", memberNo);
 				}
 				
