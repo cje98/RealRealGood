@@ -336,7 +336,7 @@ public class MemberService {
 	 * @throws Exception
 	 */
 	public List<Board> myBoardList(int memberNo) throws Exception{
-Connection conn = getConnection();
+		Connection conn = getConnection();
 		
 		List<Board> list = dao.myBoardList(conn, memberNo);
 		
