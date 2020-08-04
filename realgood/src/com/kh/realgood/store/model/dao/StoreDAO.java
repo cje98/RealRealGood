@@ -981,5 +981,38 @@ public class StoreDAO {
 	      }
 	      return storeList;
 	   }
+	   
+	   
+	/** 즐겨찾기 여부 확인 DAO
+	 * @param conn
+	 * @param storeNo
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int checkStar(Connection conn, int storeNo, int memberNo) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("checkStar");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, storeNo);
+			pstmt.setInt(2, memberNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		}finally {
+			rset.close();
+			pstmt.close();
+		}
+		return result;
+	}
 
 }

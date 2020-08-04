@@ -6,7 +6,9 @@
 <%
 	List<StoreInfoMenu> mList = (List<StoreInfoMenu>)request.getAttribute("mList");
 	int storeNo = Integer.parseInt(request.getParameter("storeNum"));
+	
 	int tmp = ((Member)session.getAttribute("loginMember")) != null ? ((Member)session.getAttribute("loginMember")).getNo() : -1;
+	int starColor = (Integer)(session.getAttribute("starColor"));
 %>
 
 <!doctype html>
@@ -47,12 +49,12 @@
        span{
        	 font-weight: bold;
        }
-       
       }
-       
-       #favoBtn{
-       		cursor : pointer;
-       }
+      
+      #favoBtn{
+      	cursor : pointer;
+      }
+      
     </style>
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
@@ -92,13 +94,21 @@
   </div>
 </div>
 
+	<%
+	String color = "";
+	if (starColor > 0) {
+	    color = "rgb(255, 168, 0)";
+	}else{
+	    color = "black";
+	}	
+	%>
 <main role="main" class="container">
   <div class="row">
     <div class="col-md-8 blog-main">
-       <h3 class="pb-4 mb-4 font-italic border-bottom">
-        	독수리 다방 <span id="favoBtn">★</span>
-       </h3>
-       <script>
+      <h3 class="pb-4 mb-4 font-italic border-bottom">
+        	독수리 다방 <span id="favoBtn" style="color: <%= color %>">★</span>
+      </h3>
+      <script>
      
        	$("#favoBtn").on("click", function(){
       		// 비동기 통신으로 회원번호,가게 정보 저장
@@ -126,6 +136,8 @@
       	});
       
       </script>
+      
+      
 
       <div class="blog-post">
         <h2 class="blog-post-title">Sample blog post</h2>
