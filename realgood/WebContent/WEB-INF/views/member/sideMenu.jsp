@@ -7,6 +7,7 @@
 		<li class="list-group-item list-group-item-action"><a href="changePwd.do">비밀번호 변경</a></li>
 		<li class="list-group-item list-group-item-action"><a href="myBoadrCk.do">작성게시글 확인</a></li>
 		<li class="list-group-item list-group-item-action"><a href="purchase.do">구매내역</a></li>
+		<li class="list-group-item list-group-item-action"><a href="selectBookmark.do">즐겨찾기</a></li>
 		<li class="list-group-item list-group-item-action"><a href="removeMember.do">회원 탈퇴</a></li>
 	</ul>
 </div>

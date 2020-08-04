@@ -105,6 +105,9 @@
 				<li class="nav-item"><a class="nav-link disabled"><strong><%=loginMember.getNickName()%>님</strong></a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="<%=request.getContextPath()%>/member/logout.do">로그아웃</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="<%=request.getContextPath()%>/member/selectBookmark.do">즐겨찾기</a>
+				</li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
 						마이페이지 </a>
@@ -138,10 +141,13 @@
 									<li><a class="dropdown-item" href="<%=request.getContextPath()%>/store/adminApprove.do"> 관리자 승인/대기</a></li>
 									<li><a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberManage.do"> 회원관리 페이지</a></li>
 								</ul></li>
+								
 							<% } %>
 					<% } %>
+					
 					</ul></li>
-				
+					
+					
 			</ul>
 			<form class="form-inline my-2 my-md-0" action="<%=request.getContextPath()%>/store/search.do" method="post">
 				<input class="form-control" type="text" id="address" name="address"
