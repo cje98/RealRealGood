@@ -5,8 +5,8 @@
 <%@page import="java.util.List"%>
 <%
 	List<StoreInfoMenu> mList = (List<StoreInfoMenu>)request.getAttribute("mList");
-	int storeNo = (int)request.getAttribute("storeNo");
-	int memberNo = (int)request.getAttribute("memberNo");
+	int storeNo = Integer.parseInt(request.getParameter("storeNum"));
+	int tmp = ((Member)session.getAttribute("loginMember")) != null ? ((Member)session.getAttribute("loginMember")).getNo() : -1;
 %>
 
 <!doctype html>
@@ -94,22 +94,21 @@
         	독수리 다방 <span id="favoBtn">★</span>
        </h3>
       <script>
-     
-      	$("#favoBtn").on("click", function(){
-      		// 비동기 통신으로 회원번호,가게 정보 저장
-      		$.ajax({
-      			url: "favorite.do",
-      			data : {"storeNo": <%=storeNo%>, "memberNo": <%=memberNo%>},
-      			success : function(str){
-      				alert(str);
-      				$("#favoBtn").css("color", "yellow");
-      			}, error : function(str){
-      				console.log("ajax통신실패");
-      			}
-      		});
-      		
-      		
-      	});
+	     
+	  	$("#favoBtn").on("click", function(){
+	  		// 비동기 통신으로 회원번호,가게 정보 저장
+	  		$.ajax({
+	  			url: "favorite.do",
+	  			data : {"storeNo": <%=storeNo%>, "memberNo": <%=tmp%>},
+	  			success : function(str){
+	  				alert(str);
+	  				if(str != "즐겨찾기 저장에 실패했습니다.") $("#favoBtn").css("color", "yellow");
+	  			}, error : function(str){
+	  				console.log("ajax통신실패");
+	  			}
+	  		});
+	  		
+	  	});
       
       </script>
 

@@ -17,17 +17,22 @@ public class BookmarkServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int storeNo = Integer.parseInt(request.getParameter("storeNo"));
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		
+		System.out.println(memberNo);
+		System.out.println(storeNo);
+		int result = 0;
+		String str = "";
 		
 		try {
-			int result = new BookmarkService().insertNo(storeNo, memberNo);
+			if(memberNo != -1) result = new BookmarkService().insertNo(storeNo, memberNo);
+			System.out.println(result);
 			
 			if(result > 0) {
-				String str = "즐겨찾기에 추가되었습니다. [마이페이지->내가 즐겨찾는 가게]에서 확인하세요.";
-				response.getWriter().print(str);	
+				str = "즐겨찾기에 추가되었습니다. [마이페이지->내가 즐겨찾는 가게]에서 확인하세요.";
 			}else {
-				String str = "즐겨찾기 저장에 실패했습니다.";
+				str = "즐겨찾기 저장에 실패했습니다.";
 			}
+			
+			response.getWriter().print(str);	
 			
 			
 		}catch (Exception e) {
