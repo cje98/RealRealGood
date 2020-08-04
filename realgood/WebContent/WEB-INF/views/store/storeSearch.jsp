@@ -78,7 +78,7 @@
 				Store store = storeList.get(i);
 				if (i == 0) {
 	%>
-	<div class="row mb-2">
+	<div class="row mb-6">
 		<%
 			}
 					if (i % 2 == 0) {
@@ -87,7 +87,7 @@
 			<div
 				class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				<div class="col p-4 d-flex flex-column position-static">
-					    <strong class="d-inline-block mb-2 text-primary"><%=store.getStoreGroupName()%></strong>
+					    <strong class="d-inline-block mb-6 text-primary"><%=store.getStoreGroupName()%></strong>
 			        <input type="hidden" value="<%=store.getStoreNum()%>">
 					<h3 class="mb-0"><%=store.getStoreName()%></h3>
 					<div class="mb-1 text-muted"><%=store.getStoreTel()%></div>
@@ -109,7 +109,7 @@
 			<div
 				class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 				<div class="col p-4 d-flex flex-column position-static">
-					    <strong class="d-inline-block mb-2 text-primary"><%=store.getStoreGroupName()%></strong>
+					    <strong class="d-inline-block mb-6 text-primary"><%=store.getStoreGroupName()%></strong>
 			        <input type="hidden" value="<%=store.getStoreNum()%>">
 					<h3 class="mb-0"><%=store.getStoreName()%></h3>
 					<div class="mb-1 text-muted"><%=store.getStoreTel()%></div>

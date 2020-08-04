@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="col-sm-2 mt-1">
-	<h3>회원 정보 수정</h3>
+	<h3>마이페이지</h3>
 	<ul class="list-group">
 		<li class="list-group-item list-group-item-action"><a href="myPage.do">내정보</a></li>
 		<li class="list-group-item list-group-item-action"><a href="changePwd.do">비밀번호 변경</a></li>

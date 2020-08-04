@@ -875,7 +875,7 @@ public class StoreDAO {
 	 * @param conn
 	 * @param newFiles
 	 * @param storeNo
-	 * @return
+	 * @return 
 	 * @throws Exception
 	 */
 	public int imgInsert2(Connection conn, StoreImg newFiles, int storeNo) throws Exception{
@@ -899,6 +899,55 @@ public class StoreDAO {
 			pstmt.close();
 		}
 		return result;
+	}
+
+	/** 즐겨찾기 조회 DAO
+	 * @param conn
+	 * @param pInfo
+	 * @param memberNum 
+	 * @return 
+	 * @throws Exception
+	 */
+	public List<Store> myBookmark(Connection conn, PageInfo pInfo, int memberNum) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		List<Store> storeList = null;
+		
+		String query = prop.getProperty("myBookmark");
+		
+		try {
+			
+			int startRow = (pInfo.getCurrentPage()-1) * pInfo.getLimit()+1;
+			
+			int endRow = startRow + pInfo.getLimit()-1;
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNum);
+			rset = pstmt.executeQuery();
+			Store store = null;
+			storeList = new ArrayList<Store>();
+			
+			
+			while(rset.next()) {
+				store = new Store(rset.getInt("STORE_NUM"),
+						rset.getString("COR_NUM"),
+						rset.getString("NAME"),
+						rset.getString("STORE_CONTENT"),
+						rset.getString("STORE_TEL"),
+						rset.getString("GROUP_NAME"),
+						rset.getString("STORE_ADDR"),
+						rset.getString("STORE_ZIP"),
+						rset.getDate("ENROLL_DATE"));
+					
+				storeList.add(store);
+			}
+		}finally {
+			rset.close();
+			pstmt.close();
+		}
+		
+		return storeList;
 	}
 
 }

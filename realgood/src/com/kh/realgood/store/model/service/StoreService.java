@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.realgood.member.model.dto.Board;
 import com.kh.realgood.store.model.dao.StoreDAO;
 import com.kh.realgood.store.model.dto.Store;
 import com.kh.realgood.store.model.dto.StoreImg;
@@ -406,6 +407,24 @@ public class StoreService {
 		Connection conn = getConnection();
 
 		List<Store> storeList = dao.selectList(conn, pInfo);
+		
+		if(storeList != null) {
+			storeList = dao.selectListImg(conn, storeList);
+		}
+		conn.close();
+		
+		return storeList;
+	}
+	/** 즐겨찾기 조회
+	 * @param pInfo
+	 * @param memberNum 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Store> myBookmark(PageInfo pInfo, int memberNum) throws Exception{
+		Connection conn = getConnection();
+
+		List<Store> storeList = dao.myBookmark(conn, pInfo, memberNum);
 		
 		if(storeList != null) {
 			storeList = dao.selectListImg(conn, storeList);
