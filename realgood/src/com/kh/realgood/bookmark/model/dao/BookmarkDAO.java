@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
 
 import com.kh.realgood.member.model.dao.MemberDAO;
@@ -39,6 +40,66 @@ public class BookmarkDAO {
 			result = pstmt.executeUpdate();
 			
 			
+		}finally {
+			pstmt.close();
+		}
+		return result;
+	}
+	
+
+	/** 즐겨찾기 삭제를 위한 체크 DAO
+	 * @param conn
+	 * @param storeNo
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int checkBookmark(Connection conn, int storeNo, int memberNo) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int result = 0;
+		
+		String qeury = prop.getProperty("checkBookmark");
+		
+		try {
+			pstmt = conn.prepareStatement(qeury);
+			pstmt.setInt(1, storeNo);
+			pstmt.setInt(2, memberNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+			
+		}finally {
+			rset.close();
+			pstmt.close();
+		}
+		return result;
+	}
+
+	/** 즐겨찾기 삭제 DAO
+	 * @param conn
+	 * @param storeNo
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteBookmark(Connection conn, int storeNo, int memberNo) throws Exception{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String qeury = prop.getProperty("deleteBookmark");
+		
+		try {
+			pstmt = conn.prepareStatement(qeury);
+			pstmt.setInt(1, storeNo);
+			pstmt.setInt(2, memberNo);
+			
+			result = pstmt.executeUpdate();
 		}finally {
 			pstmt.close();
 		}
