@@ -303,8 +303,8 @@ public class StoreService {
 				// flag 상태에 따라 알맞은 dao 호출
 				if(flag) { // 같은 레벨에 기존 파일이 있는 경우 update
 					result = dao.updateStoreImg(conn, newFiles);
-				}else {
-					result = dao.imgInsert(conn, newFiles, storeNo);
+				}else { // 같은 레벨 아닌경우 이미지 추가 (file status 바로 Y로 들어가게)
+					result = dao.imgInsert2(conn, newFiles, storeNo);
 				}
 				
 				if(result == 0) break;
