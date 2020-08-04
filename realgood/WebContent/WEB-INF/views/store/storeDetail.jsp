@@ -93,22 +93,32 @@
        <h3 class="pb-4 mb-4 font-italic border-bottom">
         	독수리 다방 <span id="favoBtn">★</span>
        </h3>
-      <script>
-	     
-	  	$("#favoBtn").on("click", function(){
-	  		// 비동기 통신으로 회원번호,가게 정보 저장
-	  		$.ajax({
-	  			url: "favorite.do",
-	  			data : {"storeNo": <%=storeNo%>, "memberNo": <%=tmp%>},
-	  			success : function(str){
-	  				alert(str);
-	  				if(str != "즐겨찾기 저장에 실패했습니다.") $("#favoBtn").css("color", "yellow");
-	  			}, error : function(str){
-	  				console.log("ajax통신실패");
-	  			}
-	  		});
-	  		
-	  	});
+       <script>
+     
+       	$("#favoBtn").on("click", function(){
+      		// 비동기 통신으로 회원번호,가게 정보 저장
+      		$.ajax({
+      			url: "favorite.do",
+      			data : {"storeNo": <%=storeNo%>, "memberNo": <%=tmp%>},
+      			success : function(rNo){
+      				if(rNo == 1) {
+	      				alert("즐겨찾기에 추가되었습니다. [마이페이지->내가 즐겨찾는 가게]에서 확인하세요.");
+      					$("#favoBtn").css("color", "yellow");
+      				}else if(rNo == 0){
+      					alert("즐겨찾기가 삭제되었습니다.");
+      					$("#favoBtn").css("color", "black");
+      				}else if(rNo == -1){
+      					alert("알 수 없는 에러 발생 하였습니다.");
+      				}else{
+      					alert("즐겨찾기 저장에 실패했습니다. 로그인 후 다시 시도해주세요.")
+      				}
+      				
+      			}, error : function(str){
+      				console.log("ajax통신실패");
+      			}
+      		});
+      		
+      	});
       
       </script>
 

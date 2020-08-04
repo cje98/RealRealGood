@@ -17,26 +17,43 @@ public class BookmarkServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int storeNo = Integer.parseInt(request.getParameter("storeNo"));
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		System.out.println(memberNo);
-		System.out.println(storeNo);
+	
 		int result = 0;
 		String str = "";
-		
+		int rNo = 0;
 		try {
-			if(memberNo != -1) result = new BookmarkService().insertNo(storeNo, memberNo);
-			System.out.println(result);
-			
-			if(result > 0) {
-				str = "즐겨찾기에 추가되었습니다. [마이페이지->내가 즐겨찾는 가게]에서 확인하세요.";
-			}else {
-				str = "즐겨찾기 저장에 실패했습니다.";
+			if(memberNo != -1) { // 로그인이 된 상태라면
+				// storeNo, memberNo를 보내서 bookmark에 정보가 저장되어있는지 체크
+				result = new BookmarkService().checkBookmark(storeNo, memberNo);
+				
+				if(result > 0) {
+					// 체크해서 만약 db에 있다면 delete(별 색깔x)/
+					result = new BookmarkService().deleteBookmark(storeNo, memberNo);
+					
+						if(result > 0) { // 삭제가 됐다면
+							
+							rNo = 0;
+						}
+						
+						
+				}else { // 없다면 정보 insert(별 색깔o)
+					result = new BookmarkService().insertNo(storeNo, memberNo);
+						if(result > 0) {
+							
+							rNo = 1;
+						}else {
+							rNo = -1;
+						}
+				}
+				
+			}else { // 로그인이 안됐을때
+				rNo=2;
 			}
-			
-			response.getWriter().print(str);	
+			response.getWriter().print(rNo);
 			
 			
 		}catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		
 		
