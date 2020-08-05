@@ -82,7 +82,7 @@
                         <%
                         	loginStore.setStoreContent(loginStore.getStoreContent().replace("<br>", "\r\n"));
                         %>
-                        <td><label for="pwd1">가게 설명(필수)</label></td>                     
+                        <td><label for="storeContent">가게 설명(필수)</label></td>                     
                         <td>
                         	<div class="col-md-8">
                         	<textarea cols="20" span="10" class="form-control" id="storeContent"
@@ -93,7 +93,7 @@
                   		
                     </tr>
                     <tr>
-                    	<td><label for="name">업종 분류(필수)</label></td>
+                    	<td><label for="code">업종 분류(필수)</label></td>
                     	<td>  
 	                    	<div class="col-md-4">
 	                            <select class="form-control" id="code" name="code" required>
@@ -421,6 +421,8 @@
     		"storeContent" : false
     	};
 
+    	 /* 	var tmp = 0;
+
     	// jQuery 변수 : 변수에 직접적으로 jQuery메소드를 사용할 수 있음.
     	var $storeContent = $("#storeContent");
          
@@ -428,6 +430,7 @@
         	var regExp = /^[a-zA-Z가-힣\d ]{1,200}$/;
         	if(!regExp.test($storeContent.val())){
         		signUpCheck.storeContent = false;
+        		tmp = 1;
         	}else {
         		signUpCheck.storeContent = true;
         	}
@@ -435,27 +438,31 @@
         
      	function validate() {
 
-    	for ( var key in signUpCheck) {
+    	for (var key in signUpCheck) {
     		
     		if (!signUpCheck[key]) {
     			// 인덱스 
-
-    			var msg;
-    			switch (key) {
-    			case "storeContent":
-    				msg = "가게 설명이 ";
-    				break;
-    			}
-
-    			alert(msg + "유효하지 않습니다.");
-    			var el = "#" + key;
-    			$(el).focus();
+				if(tmp == 1){
+	    			var msg;
+	    			switch (key) {
+	    			case "storeContent":
+	    				msg = "가게 설명이 ";
+	    				break;
+	    			}
+	
+	    			alert(msg + "유효하지 않습니다.");
+	    			var el = "#" + key;
+	    			$(el).focus();
+	    			
+				}else{
+					alert("수정x");
+					
+				}
     			
-    			return false;
+	    			return false;
     		}
-    	
     		}
-     	}
+     	} */
 					
                     
 </script>
