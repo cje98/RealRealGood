@@ -15,7 +15,7 @@
 	List<Board> boardList = (List<Board>)request.getAttribute("boardList");
 
 	
-	List<StoreInfoMenu> storeInfoList = (List<StoreInfoMenu>)request.getAttribute("storeInfoList");
+	StoreInfoMenu storeInfo = (StoreInfoMenu)request.getAttribute("storeInfoList");
 
 %>
 
@@ -162,9 +162,8 @@
 	
 	
 	
-    <% if(storeInfoList != null){ %>
+    <% if(storeInfo != null){ %>
     
-     <% for(StoreInfoMenu storeInfo : storeInfoList){ %>
   <div class="row" style="flex-wrap: nowrap;">
     <div class="col-md-8" style="margin: 15px 10% 0 -5% ">
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -303,7 +302,6 @@
 				    <%=storeInfo.getPriceMax() %> 원
 				    </td>                      
 				</tr>
-			<% } %>
 		<% } %>
 		</table>
 		
@@ -422,8 +420,6 @@
 	          	<%for(int i = 0; i < mList.size(); i++ ) {%>
 	              <option value="<%=mList.get(i).getMenuNum()%>"><%=mList.get(i).getMenuName() + "-" + mList.get(i).getPrice()+ "원"%></option>
 	          	<%}%>
-          	<%} else {%>
-          		  <option>메뉴없음</option>
           	<%}%>
            
           </select>

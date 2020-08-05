@@ -34,7 +34,7 @@ public class StoreDetailController extends HttpServlet {
 			
 			
 			
-			List<StoreInfoMenu> storeInfoList = new StoreService().storeInfoList(storeNo);
+			StoreInfoMenu storeInfoList = new StoreService().storeInfoList(storeNo);
 
 			List<Board> boardList = new BoardService().getBoardList(storeNo);
 

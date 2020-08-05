@@ -1021,10 +1021,9 @@ public class StoreDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<StoreInfoMenu> storeInfoList(Connection conn, int storeNum) throws Exception {
+	public StoreInfoMenu storeInfoList(Connection conn, int storeNum) throws Exception {
 
 		PreparedStatement pstmt = null;
-		List<StoreInfoMenu> storeInfoList = null;
 		StoreInfoMenu storeInfo = null;
 		ResultSet rset = null;
 		
@@ -1037,8 +1036,7 @@ public class StoreDAO {
 			
 			rset = pstmt.executeQuery();
 			
-			storeInfoList = new ArrayList<StoreInfoMenu>();
-			while(rset.next()) {
+			if(rset.next()) {
 				storeInfo = new StoreInfoMenu(rset.getString("STORE_ADDR"),
 						rset.getString("STORE_TEL"),
 						rset.getString("GROUP_NAME"),
@@ -1048,7 +1046,6 @@ public class StoreDAO {
 						rset.getString("STORE_CONTENT"),
 						rset.getInt("S_IMG_NUM"));
 						
-				storeInfoList.add(storeInfo);
 
 			}
 
@@ -1060,7 +1057,7 @@ public class StoreDAO {
 		
 		
 		
-		return storeInfoList;
+		return storeInfo;
 	}
 
 }
