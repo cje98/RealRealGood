@@ -46,9 +46,11 @@ public class BoardReviewController extends HttpServlet {
 			
 			String boardContent = mRequest.getParameter("content");
 			int storeNum = Integer.parseInt(mRequest.getParameter("storeNum"));
+			int starScore = mRequest.getParameter("starScore").length() != 0 ? Integer.parseInt(mRequest.getParameter("starScore")) : 0;
 			
 			String memberId = ((Member)request.getSession().getAttribute("loginMember")).getId();
 			Board board = new Board(boardContent, memberId, storeNum);
+			board.setStarScore(starScore);
 			// 파일정보 저장할 List 생성
 			List<Attachment> attachList = new ArrayList<Attachment>();
 			

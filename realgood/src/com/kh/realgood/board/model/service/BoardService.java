@@ -58,6 +58,7 @@ public class BoardService {
 		}
 		
 		if(result > 0) {
+			result = dao.insertStoreStarScore(conn, board);
 			result = boardNo;
 			conn.commit();
 		}else {

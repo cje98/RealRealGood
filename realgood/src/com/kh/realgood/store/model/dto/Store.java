@@ -16,7 +16,8 @@ public class Store {
 	private char outYN;	// 탈퇴 여부
 	private char useYN; // 승인 여부
 	private String storeTitleImg; // 가게 대표 이미지
-	private double storeGpaScore;
+	private double storeGpaScore; // 가게 평점
+	private int RipleCount; // 가게 댓글 개수 
 	
 	
 	
@@ -210,6 +211,13 @@ public class Store {
 
 	public void setStoreGpaScore(double storeGpaScore) {
 		this.storeGpaScore = storeGpaScore;
+	}
+	
+	public int getRipleCount() {
+		return RipleCount;
+	}
+	public void setRipleCount(int ripleCount) {
+		RipleCount = ripleCount;
 	}
 
 	@Override
