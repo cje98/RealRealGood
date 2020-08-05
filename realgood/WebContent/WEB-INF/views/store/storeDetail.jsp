@@ -340,12 +340,17 @@
 						break;
 				}
 				var $div = $("<div>");
-				var $p = $("<p>");
 				var $input = $("<input type=\"hidden\" value=\"" + bList[i].boardNo + "\">");
+				var $p = $("<p>");
+				var $br = $("<br>");
+				var $hr = $("<hr>");
 			    $p.addClass("pclass");
-
-			   	$p.text(bList[i].nickName +  "        11111111111111                  "  + bList[i].boardContent +"1111111111111"+ bList[i].boardModifyDate);
-			   	$("#tmp-area").append($div.append($p, $input));
+			    $p.css({
+					width: "500px",
+					height: "250px",
+				   });
+			   	$p.html("닉네임 : " + bList[i].nickName + "<br>" + bList[i].boardContent +"<br>"+ bList[i].boardModifyDate);
+			   	$("#tmp-area").append($div.append($p, $input, $hr));
 			}
 		}
 		
@@ -359,12 +364,17 @@
 						break;
 				   }
 				   var $div = $("<div>");
-				   var $p = $("<p>");
 				   var $input = $("<input type=\"hidden\" value=\"" + bList[i].boardNo + "\">");
-				   $p.addClass("pclass");
-				   
-				   $p.text(bList[i].nickName +  "글자"  + bList[i].boardContent + bList[i].boardModifyDate);
-			       $("#tmp-area").append($div.append($p, $input)); 
+			       	var $p = $("<p>");
+					var $br = $("<br>");
+					var $hr = $("<hr>");
+				    $p.addClass("pclass");
+				    $p.css({
+						width: "500px",
+						height: "250px",
+					   });
+				   	$p.html("닉네임 : " + bList[i].nickName + "<br>" + bList[i].boardContent +"<br>"+ bList[i].boardModifyDate);
+				   	$("#tmp-area").append($div.append($p, $input, $hr));
 			   }
 		 }
 		   }); 
