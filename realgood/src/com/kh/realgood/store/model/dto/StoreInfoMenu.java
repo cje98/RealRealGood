@@ -2,6 +2,7 @@ package com.kh.realgood.store.model.dto;
 
 import java.sql.Date;
 
+
 public class StoreInfoMenu {
 	private String storeName; // 가게 이름
 	private String storeContent; // 가게 설명
@@ -11,17 +12,72 @@ public class StoreInfoMenu {
 	private String menuName; // 메뉴 이름
 	private String menuMakeTime; // 만드는 시간
 	private String menuContents; // 메뉴 설명
-	private int price;	// 메뉴 가격
+	private int price;
+	private int priceMin;	// 메뉴 가격
+	private int priceMax;	// 메뉴 가격
 	private Date enrollDate; // 가게 등록 날짜
 	private String id; // 회원 아이디
+	private String groupName;
+	private int storeImgNum;
+	
 	
 	public StoreInfoMenu() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
+
 	
 	
 	
+	
+	
+	public int getStoreImgNum() {
+		return storeImgNum;
+	}
+
+
+
+
+
+
+
+	public void setStoreImgNum(int storeImgNum) {
+		this.storeImgNum = storeImgNum;
+	}
+
+
+
+
+
+
+
+	public StoreInfoMenu(String storeName, String storeContent, String storeTel, String storeAddress, int menuNum,
+			String menuName, String menuMakeTime, String menuContents, int price, int priceMin, int priceMax,
+			Date enrollDate, String id, String groupName, int storeImgNum) {
+		super();
+		this.storeName = storeName;
+		this.storeContent = storeContent;
+		this.storeTel = storeTel;
+		this.storeAddress = storeAddress;
+		this.menuNum = menuNum;
+		this.menuName = menuName;
+		this.menuMakeTime = menuMakeTime;
+		this.menuContents = menuContents;
+		this.price = price;
+		this.priceMin = priceMin;
+		this.priceMax = priceMax;
+		this.enrollDate = enrollDate;
+		this.id = id;
+		this.groupName = groupName;
+		this.storeImgNum = storeImgNum;
+	}
+
+
+
+
+
+
+
 	public StoreInfoMenu(String storeName, String storeContent, String storeTel, String storeAddress, int menuNum,
 			String menuName, String menuMakeTime, String menuContents, int price, Date enrollDate, String id) {
 		super();
@@ -38,6 +94,9 @@ public class StoreInfoMenu {
 		this.id = id;
 	}
 
+	
+	
+	
 
 
 
@@ -57,6 +116,17 @@ public class StoreInfoMenu {
 	}
 	
 	
+	public StoreInfoMenu(String storeTel, String storeAddress, String groupName, int priceMin, int priceMax, String storeName,String storeContent, int storeImgNum) {
+		super();
+		this.storeTel = storeTel;
+		this.storeAddress = storeAddress;
+		this.groupName = groupName;
+		this.priceMin = priceMin;
+		this.priceMax = priceMax;
+		this.storeName = storeName;
+		this.storeContent = storeContent;
+		this.storeImgNum = storeImgNum;
+	}
 
 	
 
@@ -191,14 +261,78 @@ public class StoreInfoMenu {
 
 
 
+	public int getPriceMin() {
+		return priceMin;
+	}
+
+
+
+
+
+
+
+	public void setPriceMin(int priceMin) {
+		this.priceMin = priceMin;
+	}
+
+
+
+
+
+
+
+	public int getPriceMax() {
+		return priceMax;
+	}
+
+
+
+
+
+
+
+	public void setPriceMax(int priceMax) {
+		this.priceMax = priceMax;
+	}
+
+
+
+
+
+
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+
+
+
+
+
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+
+
+
+
+
 
 	@Override
 	public String toString() {
 		return "StoreInfoMenu [storeName=" + storeName + ", storeContent=" + storeContent + ", storeTel=" + storeTel
 				+ ", storeAddress=" + storeAddress + ", menuNum=" + menuNum + ", menuName=" + menuName
 				+ ", menuMakeTime=" + menuMakeTime + ", menuContents=" + menuContents + ", price=" + price
-				+ ", enrollDate=" + enrollDate + ", id=" + id + "]";
+				+ ", priceMin=" + priceMin + ", priceMax=" + priceMax + ", enrollDate=" + enrollDate + ", id=" + id
+				+ ", groupName=" + groupName + "]";
 	}
+
+
+
+
 
 
 	

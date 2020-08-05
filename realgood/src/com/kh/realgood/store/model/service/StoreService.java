@@ -452,4 +452,24 @@ public class StoreService {
 	}
 	
 	
+	
+	/** 상세페이지 가게 정보 
+	 * @param storeNum
+	 * @return storeInfoList
+	 * @throws Exception
+	 */
+	public List<StoreInfoMenu> storeInfoList(int storeNum) throws Exception{
+
+		Connection conn = getConnection();
+
+		List<StoreInfoMenu> storeInfoList = dao.storeInfoList(conn, storeNum);
+		
+		conn.close();
+
+		return storeInfoList;
+	}
+	
+	
+	
+	
 }

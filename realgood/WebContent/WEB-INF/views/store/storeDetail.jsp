@@ -1,3 +1,4 @@
+<%@page import="com.kh.realgood.board.model.dto.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="com.kh.realgood.store.model.dto.StoreInfoMenu"%>
@@ -9,10 +10,17 @@
 	
 	int tmp = ((Member)session.getAttribute("loginMember")) != null ? ((Member)session.getAttribute("loginMember")).getNo() : -1;
 	int starColor = session.getAttribute("starColor") == null ? 0 : (Integer)(session.getAttribute("starColor"));
+	
+	
+	List<Board> boardList = (List<Board>)request.getAttribute("boardList");
+
+	
+	List<StoreInfoMenu> storeInfoList = (List<StoreInfoMenu>)request.getAttribute("storeInfoList");
+
 %>
 
 <!doctype html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,9 +32,9 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/blog/">
 
     <!-- Bootstrap core CSS -->
-    <link href="<%=request.getContextPath()%>/resources/css/storeDetailAll.css" rel="stylesheet"> <!-- 부트스트랩 -->
-    <link href="<%=request.getContextPath()%>/resources/css/storeDetail.css" rel="stylesheet"> <!-- 블로그 -->
-    
+    <link type="text/css" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" rel="stylesheet">
+	<link type="text/css" href="<%=request.getContextPath()%>/resources/css/blog.css" rel="stylesheet">
+	
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -55,44 +63,42 @@
       	cursor : pointer;
       }
       
+              #searchForm>*{
+            top : 0;
+        }
+        
+       
+       .pagination {
+            justify-content: center;
+        }
+        #searchForm{
+            position: relative;
+        }
+
+        #searchForm>*{
+            top : 0;
+        }
+        
+        .boardTitle > img{
+           width: 50px;
+           height: 50px;
+        }
+      
     </style>
+    
+    
+    
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   </head>
   <body>
-  <%@ include file="../common/header.jsp" %>
+  	<%@ include file="../common/header.jsp"%>
+  
     <div class="container">
   <header class="">
     
   </header>
-
-  
-  
-
-  <div class="row mb-2">
-    <div class="col-md-6">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <h3 class="mb-0">업체 사진</h3>
-          <a href="#" class="stretched-link">Continue reading</a>
-        </div>
-        <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-        </div>
-      </div>
-    </div>
-    <div class="map-image">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <h3 class="mb-0">지도</h3>
-          <a href="#" class="stretched-link">Continue reading</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 	<%
 	String color = "";
@@ -102,134 +108,175 @@
 	    color = "black";
 	}	
 	%>
-<main role="main" class="container">
-  <div class="row">
-    <div class="col-md-8 blog-main">
+	
+	
+	
+    <% if(storeInfoList != null){ %>
+    
+     <% for(StoreInfoMenu storeInfo : storeInfoList){ %>
+  <div class="row" style="flex-wrap: nowrap;">
+    <div class="col-md-8" style="margin: 15px 10% 0 -5% ">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static" >
+          <h3 class="mb-0"></h3>
+          <input type="hidden" value="<%=storeInfo.getStoreImgNum() %>">
+        </div>
+      </div>
+    </div>
+    <div class="map-image" style="margin-top: 15px">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p d-flex flex-column position-static">
+        
+            <div id="map" style="width:400px;height:300px;" ></div> <!--지도-->
+   
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+	  <div class="row" style="flex-wrap: nowrap; margin-left: 15%">
+	
+    <div class="col-md-6 blog-main" style="display: inline-block;">
       <h3 class="pb-4 mb-4 font-italic border-bottom">
-        	독수리 다방 <span id="favoBtn" style="color: <%= color %>">★</span>
+       	<%=storeInfo.getStoreName() %>
       </h3>
-      <script>
-     
-       	$("#favoBtn").on("click", function(){
-      		// 비동기 통신으로 회원번호,가게 정보 저장
-      		$.ajax({
-      			url: "favorite.do",
-      			data : {"storeNo": <%=storeNo%>, "memberNo": <%=tmp%>},
-      			success : function(rNo){
-      				if(rNo == 1) {
-	      				alert("즐겨찾기에 추가되었습니다. [마이페이지->내가 즐겨찾는 가게]에서 확인하세요.");
-      					$("#favoBtn").css("color", "rgb(255, 168, 0)");
-      				}else if(rNo == 0){
-      					alert("즐겨찾기가 삭제되었습니다.");
-      					$("#favoBtn").css("color", "black");
-      				}else if(rNo == -1){
-      					alert("알 수 없는 에러 발생 하였습니다.");
-      				}else{
-      					alert("즐겨찾기 저장에 실패했습니다. 로그인 후 다시 시도해주세요.")
-      				}
-      				
-      			}, error : function(str){
-      				console.log("ajax통신실패");
-      			}
-      		});
-      		
-      	});
-      
-      </script>
-      
-      
 
-      <div class="blog-post">
-        <h2 class="blog-post-title">Sample blog post</h2>
-        <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-
-        <p>주소</p>
-        
-        <br><br><br><br><br><br>
-        <h2>리뷰</h2>
-
-
-        <div class="col-md-12">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="member profile">
-              <div class="col p-4 d-flex flex-column position-static" >
-              <h3 class="mb-0"><img name="member-profile" src="evaluation.JPG" style="float: left;"></h3>
-              </div>
-              <div class="member-profile-name" >닉네임</div>
-            </div>
-            <div class="col-auto d-none d-lg-block">
+      <div class="blog-post" >
+        <h2 class="blog-post-title"></h2>
+        <p class="blog-post-meta"><%=storeInfo.getStoreContent() %> </p>
            
-               <svg class="bd-placeholder-img" width="400" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-               <rect width="100%" height="100%" fill="#55595c"/>
-               <text x="50%" y="50%" fill="#eceeef" dy=".3em">리뷰 작성</text></svg>
-            </div>
-            <div class="col p-4 d-flex flex-column position-static" >
-              <h3 class="mb-0"><img name="evaluation" src="evaluation.JPG" style="float: left;"></h3>
-            </div>
-          </div>
-        </div>
+       <hr>
+       
+        <p >조회수</p>
 
-        <div class="col-md-12">
-          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="member profile">
-              <div class="col p-4 d-flex flex-column position-static" >
-              <h3 class="mb-0"><img name="member-profile" src="evaluation.JPG" style="float: left;"></h3>
-              </div>
-              <div class="member-profile-name" >닉네임</div>
-            </div>
-            <div class="col-auto d-none d-lg-block">
-              <svg class="bd-placeholder-img" width="400" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-                <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">리뷰 작성</text></svg>
-            </div>
-            <div class="col p-4 d-flex flex-column position-static" >
-              <h3 class="mb-0"><img name="evaluation" src="evaluation.JPG" style="float: left;"></h3>
-            </div>
-          </div>
-        </div>
+          
 
-
+		<table class="table">
+		
+ 
+	        
+				<tr>
+				    <th width="100px">주소</th>
+				    <td><%=storeInfo.getStoreAddress() %></td>  
+				</tr>
+				<tr>
+				    <th>전화번호</th>
+				    <td><%=storeInfo.getStoreTel() %></td>                      
+				</tr>
+				<tr>
+				    <th>음식종류</th>
+				    <td><%=storeInfo.getGroupName()%></td>             
+				</tr>
+				<tr>
+				    <th>가격대</th>
+				    <td><%=storeInfo.getPriceMin()%>~
+				    <%=storeInfo.getPriceMax() %> 원
+				    </td>                      
+				</tr>
+			<% } %>
+		<% } %>
+		</table>
+		
+		<hr>
+         
+         <% if(loginMember != null) {%> 
+	        <button type="button" class="btn btn-primary float-right" id="insertBtn" onclick="location.href = '../board/insertForm.do?storeNum=<%=storeNo%>';">리뷰 작성</button>
+         <% } %> 
+          <br><br><br><br>      
                
+	            
+	<% if (boardList != null){ %>
+      <div id="tmp-area"></div>      
+
+		<% if(boardList.size() > 10) { %>
+		<button type="button" id="tmp">↓</button>
+		<% } %>
+		
+		<script>
+		var bList = [];
+
+			<% for(Board b : boardList){ %>
+				<%-- console.log(JSON.parse('<%=b%>')); --%>
+				bList.push(JSON.parse('<%=b%>'));
+			<% } %>
+
+		//console.log(bList);
+		var loopTmp = 0;
+		var tmpSize = 1;
+		var bSize = bList.length;
+		
+		if(bList.length != 0){
+			for(var i=0; i < 10; i++){
+				if(bSize <= i){
+					   	tmpSize = i;
+						break;
+				}
+				var $div = $("<div>");
+				var $p = $("<p>");
+				var $input = $("<input type=\"hidden\" value=\"" + bList[i].boardNo + "\">");
+			    $p.addClass("pclass");
+
+			   	$p.text(bList[i].nickName +  "        11111111111111                  "  + bList[i].boardContent +"1111111111111"+ bList[i].boardModifyDate);
+			   	$("#tmp-area").append($div.append($p, $input));
+			}
+		}
+		
+		
+		 $("#tmp").on("click",function(){
+			 if(tmpSize != bSize){
+			   tmpSize = ++tmpSize * 10;
+			   for(var i=10*(++loopTmp)+1; i < tmpSize; i++) {
+				   if(bSize == i){
+					   tmpSize = i;
+						break;
+				   }
+				   var $div = $("<div>");
+				   var $p = $("<p>");
+				   var $input = $("<input type=\"hidden\" value=\"" + bList[i].boardNo + "\">");
+				   $p.addClass("pclass");
+				   
+				   $p.text(bList[i].nickName +  "글자"  + bList[i].boardContent + bList[i].boardModifyDate);
+			       $("#tmp-area").append($div.append($p, $input)); 
+			   }
+		 }
+		   }); 
+		
+</script>       
+
+    <script>
+     $("div").on("click",".pclass", function(){
+	        
+	        var name = $(this).parent().children().eq(1).val();
+	        console.log(name);
+	
+	        location.href="<%=request.getContextPath()%>/board/reviewCheck.do?boardNo="+name+"&storeNum=<%=request.getParameter("storeNum")%>";        
+			
+	     }).on("mouseenter", function(){
+	      $(this).parent().css("cursor","pointer");
+	   });
+	  
+	  
+	  </script>
+	<%} %>
+	            
         <br><br><br><br><br><br>
-        <h3>Sub-heading</h3>
-        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
         
-      </div><!-- /.blog-post -->
+        
+    
+    
+    
 
-      <div class="blog-post">
-        <h2 class="blog-post-title">Another blog post</h2>
-        <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>
+    
 
-        <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-        <blockquote>
-          <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-        </blockquote>
-        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-        <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-      </div><!-- /.blog-post -->
+          
 
-      <div class="blog-post">
-        <h2 class="blog-post-title">New feature</h2>
-        <p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>
-
-        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <ul>
-          <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-          <li>Donec id elit non mi porta gravida at eget metus.</li>
-          <li>Nulla vitae elit libero, a pharetra augue.</li>
-        </ul>
-        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-        <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-      </div><!-- /.blog-post -->
-
-      <nav class="blog-pagination">
-        <a class="btn btn-outline-primary" href="#">Older</a>
-        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
-      </nav>
-
-    </div><!-- /.blog-main -->
-
-    <div class="col-md-4 blog-sidebar">
+          
+      </div>
+  </div><!-- /.row -->
+  
+  
+  <div class="col-md-3" style="max-width: 33%; display: inline-block; margin-left: 6%">
       <div class="p-4 mb-3 bg-light rounded">
         <h4 class="font-italic border-bottom">메뉴판</h4>
         <div id="menuCal" class="mb-0"></div>
@@ -252,7 +299,31 @@
            
           </select>
 
-          <script>
+         
+          <div style="text-align: center;">
+            <br><br><br><br><br><br><br><br>
+            <button type="button" id="buyPurchase" class="btn btn-warning" >구매하기</button>
+          </div>
+  
+  	</div>
+
+</div>
+
+          <script type="text/javascript">
+
+  		$("#buyPurchase").click(function() {
+			// 팝업창을 이용하여 아이디 유효성, 중복검사 진행
+			<% if(loginMember != null) {%>
+				window.open("buyPurchaseForm.do?storeNum="+<%=request.getParameter("storeNum")%>+"&memberId="+"<%=loginMember.getId()%>", "buyPurchase", "width=850, height=550");
+				// 팝업창 요청 주소		팝업창의 이름(name)		팝업창 크기 설정  << 새로 입력 되는 것들
+			<% } else { %>
+				swal("로그인 이후 이용 바랍니다.");
+			<% } %>
+		});
+          </script>
+  
+  
+    <script>
           
           	var priceSum;
           	$("#inputGroupSelect01").on("change",function(){
@@ -359,44 +430,87 @@
 			});
           
           </script>
-         
-          <div style="text-align: center;">
-            <br><br><br><br><br><br><br><br>
-            <button type="button" id="buyPurchase" class="btn btn-warning" >구매하기</button>
-          </div>
-
           
-          <script type="text/javascript">
-
-  		$("#buyPurchase").click(function() {
-			// 팝업창을 이용하여 아이디 유효성, 중복검사 진행
-			<% if(loginMember != null) {%>
-				window.open("buyPurchaseForm.do?storeNum="+<%=request.getParameter("storeNum")%>+"&memberId="+"<%=loginMember.getId()%>", "buyPurchase", "width=850, height=550");
-				// 팝업창 요청 주소		팝업창의 이름(name)		팝업창 크기 설정  << 새로 입력 되는 것들
-			<% } else { %>
-				swal("로그인 이후 이용 바랍니다.");
-			<% } %>
-		});
-          </script>
-          
-        </div>
-      </div>
-    </class>
+           <script>
+     
+       	$("#favoBtn").on("click", function(){
+      		// 비동기 통신으로 회원번호,가게 정보 저장
+      		$.ajax({
+      			url: "favorite.do",
+      			data : {"storeNo": <%=storeNo%>, "memberNo": <%=tmp%>},
+      			success : function(rNo){
+      				if(rNo == 1) {
+	      				alert("즐겨찾기에 추가되었습니다. [마이페이지->내가 즐겨찾는 가게]에서 확인하세요.");
+      					$("#favoBtn").css("color", "rgb(255, 168, 0)");
+      				}else if(rNo == 0){
+      					alert("즐겨찾기가 삭제되었습니다.");
+      					$("#favoBtn").css("color", "black");
+      				}else if(rNo == -1){
+      					alert("알 수 없는 에러 발생 하였습니다.");
+      				}else{
+      					alert("즐겨찾기 저장에 실패했습니다. 로그인 후 다시 시도해주세요.")
+      				}
+      				
+      			}, error : function(str){
+      				console.log("ajax통신실패");
+      			}
+      		});
+      		
+      	});
       
+      </script>
+  
+  
+  
+  
+  
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c97c952ea049cff96693a7ef6202037d&libraries=services"></script>
+    
+    
+    <script>
+    
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
 
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('서울 서대문구 연세로 36', function(result, status) {
 
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
 
-      <div class="p-4">
-        <h4 class="font-italic">Elsewhere</h4>
-        <ol class="list-unstyled">
-          <li><a href="#">GitHub</a></li>
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">Facebook</a></li>
-        </ol>
-      </div>
-    </aside><!-- /.blog-sidebar -->
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-  </div><!-- /.row -->
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+        
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">독수리다방</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+    
+    
+    </script>
+  
+  
 
 </main><!-- /.container -->
 
