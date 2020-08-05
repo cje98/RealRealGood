@@ -31,7 +31,6 @@ public class StoreDetailController extends HttpServlet {
 			Member loginMember = (Member)session.getAttribute("loginMember");
 			
 			if(!mList.isEmpty()) {
-				request.setAttribute("mList", mList);
 				
 				// 로그인되어있을때 로그인 한 멤버의 멤버 번호를 요청객체에 set하기
 				if(loginMember != null) {
@@ -43,10 +42,11 @@ public class StoreDetailController extends HttpServlet {
 					session.setAttribute("starColor", result);
 					
 				}
-				String path = "/WEB-INF/views/store/storeDetail.jsp";
-				RequestDispatcher view = request.getRequestDispatcher(path);
-				view.forward(request, response);
 			}
+			request.setAttribute("mList", mList);
+			String path = "/WEB-INF/views/store/storeDetail.jsp";
+			RequestDispatcher view = request.getRequestDispatcher(path);
+			view.forward(request, response);
 			
 			
 		} catch (Exception e) {
