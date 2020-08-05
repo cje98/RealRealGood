@@ -83,6 +83,57 @@
            width: 50px;
            height: 50px;
         }
+        
+        /* 즐겨찾기 별모양 */
+        .icon-hook:after {
+		  content: "";
+		  top: 0;
+		  left: 0;
+		  width: 100%;
+		  height: 100%;
+		}
+		
+		.icon-hook > svg {
+		  pointer-events: none;
+		}
+		
+		.star-dashes-1 {
+		  opacity: 0;
+		}
+		
+		.star-check-1 {
+		  opacity: 1;
+		  stroke-dasharray: 22;
+		  stroke-dashoffset: 22;
+		  transform-origin: 50% 50%;
+		}
+		
+		.active .star-dashes-1 {
+		  animation: flash-1 1s forwards;
+		}
+		
+		.active .star-check-1 {
+		  animation: star-checked-1 1s forwards;
+		}
+		
+		@keyframes flash-1 {
+		  50% {
+		    opacity: 1;
+		  }
+		}
+		
+		@keyframes star-checked-1 {
+		  50% {
+		    stroke-dashoffset: 0;
+		  }
+		  75% {
+		    stroke-dashoffset: 0;
+		    transform: rotate(360deg) scale(1.5);
+		  }
+		  100% {
+		    stroke-dashoffset: 0;
+		  }
+		}
       
     </style>
     
@@ -100,14 +151,14 @@
     
   </header>
 
-	<%
+	<%-- <%
 	String color = "";
 	if (starColor > 0) {
 	    color = "rgb(255, 168, 0)";
 	}else{
 	    color = "black";
 	}	
-	%>
+	%> --%>
 	
 	
 	
@@ -138,8 +189,86 @@
 	
     <div class="col-md-6 blog-main" style="display: inline-block;">
       <h3 class="pb-4 mb-4 font-italic border-bottom">
-       	<%=storeInfo.getStoreName() %>
+       	<%=storeInfo.getStoreName() %> 
+       	<a href="#" class="contain-icon icon-hook">
+	      
+        	 <svg class="star-icon star-icon-1" version="1.1" width="40px" height="40px" viewBox="0 0 105.602 102.931">
+	          <path class="main-star-1" fill="none" stroke="rgb(230, 167, 177)" stroke-width="6" stroke-miterlimit="10" d="M52.35,3.11c0.475-0.963,1.253-0.963,1.728,0  l12.211,24.742c0.475,0.963,1.734,1.877,2.796,2.032l27.305,3.968c1.063,0.154,1.303,0.894,0.534,1.644L77.167,54.754
+	          c-0.769,0.75-1.25,2.229-1.068,3.287l4.664,27.194c0.182,1.058-0.448,1.516-1.398,1.016L54.942,73.413
+	          c-0.951-0.5-2.506-0.5-3.456,0L27.064,86.252c-0.951,0.5-1.58,0.043-1.398-1.016l4.664-27.194c0.182-1.058-0.299-2.538-1.068-3.287
+	          L9.504,35.495c-0.769-0.75-0.529-1.489,0.534-1.644l27.305-3.968c1.063-0.154,2.321-1.069,2.796-2.032L52.35,3.11z"/>
+	          
+	          <path class="star-dashes-1" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" d="M20.881,6.26
+	          l6.333,7.333 M103.214,63.961l-9.173-3.122 M78.519,13.835l5.724-7.818 M52.777,100.544l0.048-9.69 M11.823,61.737l-9.436,2.204"/>
+	          
+	          <path class="star-check-1" fill="none" stroke="rgb(255, 168, 0)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+	          M42.681,47.839l6.817,6.817 M63.747,39.016l-14.249,15.64"/>
+        	</svg>
+          </a>
       </h3>
+      
+      <!-- 별모양 스크립트 -->
+       <script type="text/javascript">
+	   // Get a list of all svg elements
+	      icons = document.querySelectorAll('.icon-hook');
+	
+	      // Cycle through list
+	      for (var i = 0; i < icons.length; i++) {
+	        icons[i].addEventListener('click', function(event) {
+	          event.preventDefault();
+	       
+	          var icon = this;
+	          var currentClass = icon.getAttribute('class'); // The starting class
+	
+	          console.log(icon);
+	
+	          if (currentClass.indexOf('active') > -1) { 
+	            // Remove .active
+	            icon.setAttribute('class', currentClass.replace(' active', ''));
+	          } else { 
+	            // Add .active
+	            icon.setAttribute('class', currentClass + ' active');
+	          }
+	        }, false);
+	      }
+	      
+	      
+	      
+	      $(function(){
+	      		if(<%=starColor%> != 0){
+	      			$(".star-icon.star-icon-1").addClass("active");
+	      		}else{
+	      			$(".star-icon.star-icon-1").removeClass("active");
+	      		}
+	      	});
+	      
+	     
+	       	$(".icon-hook").on("click", function(){
+	      		// 비동기 통신으로 회원번호,가게 정보 저장
+	      		$.ajax({
+	      			url: "favorite.do",
+	      			data : {"storeNo": <%=storeNo%>, "memberNo": <%=tmp%>},
+	      			success : function(rNo){
+	      				if(rNo == 1) {
+		      				//alert("즐겨찾기에 추가되었습니다. [마이페이지->내가 즐겨찾는 가게]에서 확인하세요.");
+	      					/* $("#favoBtn").css("color", "rgb(255, 168, 0)"); */
+	      				}else if(rNo == 0){
+	      					//alert("즐겨찾기가 삭제되었습니다.");
+	      					/* $("#favoBtn").css("color", "black"); */
+	      				}else if(rNo == -1){
+	      					alert("알 수 없는 에러 발생 하였습니다.");
+	      				}else{
+	      					alert("즐겨찾기 저장에 실패했습니다. 로그인 후 다시 시도해주세요.")
+	      					
+	      				}
+	      				
+	      			}, error : function(str){
+	      				console.log("ajax통신실패");
+	      			}
+	      		});
+	      		
+	      	});
+      </script>
 
       <div class="blog-post" >
         <h2 class="blog-post-title"></h2>

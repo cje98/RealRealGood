@@ -407,7 +407,6 @@ public class StoreDAO {
 			pstmt.setString(3, st.getRealImgName());
 			pstmt.setString(4, st.getFilePath());
 			pstmt.setInt(5, st.getFileLevel());
-			pstmt.setString(6, st.getFileStatus());
 			
 			result2 = pstmt.executeUpdate();
 			

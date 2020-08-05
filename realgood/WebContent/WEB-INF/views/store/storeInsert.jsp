@@ -69,7 +69,7 @@
 		            
 		            <tr>
 		            	<td>
-		            		<label for="pwd1">가게 설명(필수)</label>
+		            		<label for="storeContent">가게 설명(필수)</label>
 		            	</td>
 		            	<td>
 			            	<div class="col-md-8">
@@ -80,7 +80,7 @@
 		            
 		            <tr>
 		            	<td>
-                            <label for="name">업종 분류(필수)</label>
+                            <label for="code">업종 분류(필수)</label>
 		            	</td>
 		            	<td>
 		            		<div class="col-md-6">

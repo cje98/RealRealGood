@@ -54,9 +54,11 @@ public class StoreDetailController extends HttpServlet {
 			}
 			request.setAttribute("mList", mList);
 			String path = "/WEB-INF/views/store/storeDetail.jsp";
+
 			request.setAttribute("storeInfoList", storeInfoList);
 			request.setAttribute("boardList", boardList);
 			
+
 			RequestDispatcher view = request.getRequestDispatcher(path);
 			view.forward(request, response);
 			
