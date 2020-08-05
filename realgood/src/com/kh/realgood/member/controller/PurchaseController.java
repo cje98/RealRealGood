@@ -33,6 +33,8 @@ public class PurchaseController extends HttpServlet {
 		try {
 			List<BuyList> list = new MemberService().PurchaseList(memberNo);
 			request.setAttribute("bList", list);
+			int test = 5;
+			session.setAttribute("test", test);
 			
 			String path = "/WEB-INF/views/member/purchase.jsp";
 			RequestDispatcher view = request.getRequestDispatcher(path);

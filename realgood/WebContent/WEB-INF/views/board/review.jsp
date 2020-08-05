@@ -7,8 +7,10 @@
 <%
 
 Board reviewList = (Board)request.getAttribute("reviewList");
-
+int boardNo = (Integer)request.getAttribute("boardNo");
 List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
+
+
 %>    
   
 <!doctype html>
@@ -196,8 +198,8 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 
 	<div class="test" style="display: inline-block; margin-left: 53%">
 			<% if(loginMember != null && (reviewList.getNickName().equals(loginMember.getNickName()  ))) {%>
-			<a href="delete?no=" class="btn btn-primary float-right">삭제</a> 
-			<a href="updateForm?no=" class="btn btn-primary float-right ml-1 mr-1">수정</a>
+			<a href="delete.do?no=<%=boardNo%>" class="btn btn-primary float-right">삭제</a> 
+			<a href="updateForm?no=<%=boardNo%>" class="btn btn-primary float-right ml-1 mr-1">수정</a>
 			<% } %>
 			<a href="<%=request.getContextPath()%>/store/detail.do?storeNum=<%=request.getParameter("storeNum")%>" class="btn btn-primary float-right">목록으로</a>
 			
