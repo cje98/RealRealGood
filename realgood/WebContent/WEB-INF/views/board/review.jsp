@@ -194,7 +194,7 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 	</div>
 </div>
 
-	<div class="test" style="display: inline-block; margin-left: 53%">
+	<div class="test" style="display: inline-block; margin-left: 58%">
 			<% if(loginMember != null && (reviewList.getNickName().equals(loginMember.getNickName()  ))) {%>
 			<a href="delete?no=" class="btn btn-primary float-right">삭제</a> 
 			<a href="updateForm?no=" class="btn btn-primary float-right ml-1 mr-1">수정</a>

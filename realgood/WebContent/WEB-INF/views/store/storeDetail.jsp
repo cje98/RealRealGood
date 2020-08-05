@@ -15,7 +15,7 @@
 	List<Board> boardList = (List<Board>)request.getAttribute("boardList");
 
 	
-	List<StoreInfoMenu> storeInfoList = (List<StoreInfoMenu>)request.getAttribute("storeInfoList");
+	StoreInfoMenu storeInfoList = (StoreInfoMenu)request.getAttribute("storeInfoList");
 
 %>
 
@@ -113,13 +113,12 @@
 	
     <% if(storeInfoList != null){ %>
     
-     <% for(StoreInfoMenu storeInfo : storeInfoList){ %>
   <div class="row" style="flex-wrap: nowrap;">
     <div class="col-md-8" style="margin: 15px 10% 0 -5% ">
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static" >
           <h3 class="mb-0"></h3>
-          <input type="hidden" value="<%=storeInfo.getStoreImgNum() %>">
+          <input type="hidden" value="<%=storeInfoList.getStoreImgNum() %>">
         </div>
       </div>
     </div>
@@ -139,12 +138,12 @@
 	
     <div class="col-md-6 blog-main" style="display: inline-block;">
       <h3 class="pb-4 mb-4 font-italic border-bottom">
-       	<%=storeInfo.getStoreName() %>
+       	<%=storeInfoList.getStoreName() %>
       </h3>
 
       <div class="blog-post" >
         <h2 class="blog-post-title"></h2>
-        <p class="blog-post-meta"><%=storeInfo.getStoreContent() %> </p>
+        <p class="blog-post-meta"><%=storeInfoList.getStoreContent() %> </p>
            
        <hr>
        
@@ -158,23 +157,22 @@
 	        
 				<tr>
 				    <th width="100px">주소</th>
-				    <td><%=storeInfo.getStoreAddress() %></td>  
+				    <td><%=storeInfoList.getStoreAddress() %></td>  
 				</tr>
 				<tr>
 				    <th>전화번호</th>
-				    <td><%=storeInfo.getStoreTel() %></td>                      
+				    <td><%=storeInfoList.getStoreTel() %></td>                      
 				</tr>
 				<tr>
 				    <th>음식종류</th>
-				    <td><%=storeInfo.getGroupName()%></td>             
+				    <td><%=storeInfoList.getGroupName()%></td>             
 				</tr>
 				<tr>
 				    <th>가격대</th>
-				    <td><%=storeInfo.getPriceMin()%>~
-				    <%=storeInfo.getPriceMax() %> 원
+				    <td><%=storeInfoList.getPriceMin()%>~
+				    <%=storeInfoList.getPriceMax() %> 원
 				    </td>                      
 				</tr>
-			<% } %>
 		<% } %>
 		</table>
 		
