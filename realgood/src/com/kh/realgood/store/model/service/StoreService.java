@@ -458,11 +458,11 @@ public class StoreService {
 	 * @return storeInfoList
 	 * @throws Exception
 	 */
-	public List<StoreInfoMenu> storeInfoList(int storeNum) throws Exception{
+	public StoreInfoMenu storeInfoList(int storeNum) throws Exception{
 
 		Connection conn = getConnection();
 
-		List<StoreInfoMenu> storeInfoList = dao.storeInfoList(conn, storeNum);
+		StoreInfoMenu storeInfoList = dao.storeInfoList(conn, storeNum);
 		
 		conn.close();
 
