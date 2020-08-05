@@ -1014,5 +1014,54 @@ public class StoreDAO {
 		}
 		return result;
 	}
+	
+	
+	/** 상세페이지 가게 정보
+	 * @param conn
+	 * @param storeNum
+	 * @return
+	 * @throws Exception
+	 */
+	public List<StoreInfoMenu> storeInfoList(Connection conn, int storeNum) throws Exception {
+
+		PreparedStatement pstmt = null;
+		List<StoreInfoMenu> storeInfoList = null;
+		StoreInfoMenu storeInfo = null;
+		ResultSet rset = null;
+		
+		
+		String query = prop.getProperty("storeInfoList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, storeNum);
+			
+			rset = pstmt.executeQuery();
+			
+			storeInfoList = new ArrayList<StoreInfoMenu>();
+			while(rset.next()) {
+				storeInfo = new StoreInfoMenu(rset.getString("STORE_ADDR"),
+						rset.getString("STORE_TEL"),
+						rset.getString("GROUP_NAME"),
+						rset.getInt("MIN_PRICE"),
+						rset.getInt("MAX_PRICE"),
+						rset.getString("NAME"),
+						rset.getString("STORE_CONTENT"),
+						rset.getInt("S_IMG_NUM"));
+						
+				storeInfoList.add(storeInfo);
+
+			}
+
+		} finally {
+			rset.close();
+			pstmt.close();
+		}
+			
+		
+		
+		
+		return storeInfoList;
+	}
 
 }

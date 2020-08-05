@@ -4,8 +4,8 @@ public class PageInfo {
 
 	private int currentPage; 	//현재 페이지 번호
 	private int listCount;   	//전체 게시글의 
-	private int limit = 10;       	//한 페이지에 보여질 게시글의 수
-	private int pagingBarSize = 10;  // 화면에 표시될 페이징바의 페이지 개수
+	private int limit=10;       	//한 페이지에 보여질 게시글의 수
+	private int pagingBarSize=10;  // 화면에 표시될 페이징바의 페이지 개수
 	
 	private int maxPage;		//전체 페이지 중 제일 마지막 페이지
 	private int startPage;		//페이징 시작 페이지 번호
@@ -14,7 +14,7 @@ public class PageInfo {
 	
 	private String group;
 	private String address;
-	
+	private int storeNum;
 	
 	
 	
@@ -25,17 +25,23 @@ public class PageInfo {
 
 
 	
-	public PageInfo(int currentPage, int listCount, String address,String group ) {
+	public PageInfo(int currentPage, int listCount, int storeNum) {
+		super();
+		this.currentPage = currentPage;
+		this.listCount = listCount;
+		this.storeNum = storeNum;
+	}
+
+	public PageInfo(int currentPage, int listCount, String address,String group) {
 		this.currentPage = currentPage;
 		this.listCount = listCount;
 		this.group = group;
 		this.address = address;
-		
 		makePageInfo();
 		
 	}
 
-	public PageInfo(int currentPage, int listCount, int limit, int pagingBarSize, String address,String group) {
+	public PageInfo(int currentPage, int listCount, int limit, int pagingBarSize, String address,String group, int storeNum) {
 		super();
 		this.currentPage = currentPage;
 		this.listCount = listCount;
@@ -43,7 +49,7 @@ public class PageInfo {
 		this.pagingBarSize = pagingBarSize;
 		this.group = group;
 		this.address = address;
-		
+		this.storeNum = storeNum;
 		
 		makePageInfo();
 	}
@@ -61,6 +67,14 @@ public class PageInfo {
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 		makePageInfo();
+	}
+
+	public int getStoreNum() {
+		return storeNum;
+	}
+
+	public void setStoreNum(int storeNum) {
+		this.storeNum = storeNum;
 	}
 
 	/**

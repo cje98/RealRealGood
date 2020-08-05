@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.realgood.board.model.dto.Board;
+import com.kh.realgood.board.model.service.BoardService;
 import com.kh.realgood.member.model.dto.Member;
 import com.kh.realgood.store.model.dto.StoreInfoMenu;
 import com.kh.realgood.store.model.service.StoreService;
@@ -30,8 +32,14 @@ public class StoreDetailController extends HttpServlet {
 			
 			Member loginMember = (Member)session.getAttribute("loginMember");
 			
+			
+			
+			List<StoreInfoMenu> storeInfoList = new StoreService().storeInfoList(storeNo);
+
+			List<Board> boardList = new BoardService().getBoardList(storeNo);
+
+			
 			if(!mList.isEmpty()) {
-				request.setAttribute("mList", mList);
 				
 				// 로그인되어있을때 로그인 한 멤버의 멤버 번호를 요청객체에 set하기
 				if(loginMember != null) {
@@ -43,10 +51,14 @@ public class StoreDetailController extends HttpServlet {
 					session.setAttribute("starColor", result);
 					
 				}
-				String path = "/WEB-INF/views/store/storeDetail.jsp";
-				RequestDispatcher view = request.getRequestDispatcher(path);
-				view.forward(request, response);
 			}
+			request.setAttribute("mList", mList);
+			String path = "/WEB-INF/views/store/storeDetail.jsp";
+			request.setAttribute("storeInfoList", storeInfoList);
+			request.setAttribute("boardList", boardList);
+			
+			RequestDispatcher view = request.getRequestDispatcher(path);
+			view.forward(request, response);
 			
 			
 		} catch (Exception e) {
