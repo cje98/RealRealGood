@@ -54,9 +54,12 @@ public class StoreDetailController extends HttpServlet {
 			}
 			request.setAttribute("mList", mList);
 			String path = "/WEB-INF/views/store/storeDetail.jsp";
+<<<<<<< HEAD
 			request.setAttribute("storeInfoList", storeInfoList);
 			request.setAttribute("boardList", boardList);
 			
+=======
+>>>>>>> branch 'master' of https://github.com/cje98/RealRealGood.git
 			RequestDispatcher view = request.getRequestDispatcher(path);
 			view.forward(request, response);
 			
