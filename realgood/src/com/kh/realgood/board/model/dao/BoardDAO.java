@@ -360,6 +360,7 @@ public class BoardDAO {
 		return fileList;
 	}
 
+	
 	/** 평점 Insert DAO
 	 * @param conn
 	 * @param board
@@ -376,6 +377,27 @@ public class BoardDAO {
 			pstmt.setString(2, board.getMemberId());
 			pstmt.setInt(3, board.getStoreNum());
 			
+			result = pstmt.executeUpdate();
+		} finally {
+			pstmt.close();
+		}
+		return result;
+	}
+	
+	/** 리뷰 삭제
+	 * @param conn
+	 * @param boardNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteBoard(Connection conn, int boardNo) throws Exception{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("deleteBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
 			result = pstmt.executeUpdate();
 		} finally {
 			pstmt.close();

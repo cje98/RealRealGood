@@ -108,6 +108,7 @@ public class BoardReviewController extends HttpServlet {
 			path = "reviewCheck.do?boardNo="+result;
 			request.setAttribute("board", board);
 			request.setAttribute("reviewList", reviewList);
+			request.setAttribute("storeNum", storeNum);
 			request.getSession().setAttribute("msg", msg);
 			request.getSession().setAttribute("status", status);
 			request.getSession().setAttribute("text", text);
