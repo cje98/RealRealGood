@@ -28,13 +28,13 @@ public class StoreAdminController extends HttpServlet {
 			if(result > 0) {
 				request.getSession().setAttribute("status", "success");
 				request.getSession().setAttribute("msg", "승인");
-				request.getSession().setAttribute("text", "승인하였습니다.");
+				request.getSession().setAttribute("text", "가게를 승인하였습니다.");
 				response.sendRedirect("adminApprove.do");
 				
 			}else {
 				request.getSession().setAttribute("status", "error");
 				request.getSession().setAttribute("msg", "삭제 실패");
-				request.getSession().setAttribute("text", "승인을 실패하였습니다.");
+				request.getSession().setAttribute("text", "가게 승인을 실패하였습니다.");
 				response.sendRedirect(request.getHeader("referer"));
 			}
 			
@@ -42,7 +42,7 @@ public class StoreAdminController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			request.setAttribute("errorMsg", "회원 삭제 중 오류 발생");
+			request.setAttribute("errorMsg", "관리자 승인 중 오류 발생");
 			
 			String path = "/WEB-INF/views/common/errorPage.jsp";
 			RequestDispatcher view = request.getRequestDispatcher(path);

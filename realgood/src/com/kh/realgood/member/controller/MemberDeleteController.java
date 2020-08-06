@@ -37,7 +37,7 @@ public class MemberDeleteController extends HttpServlet {
 			}else {
 				request.getSession().setAttribute("status", "error");
 				request.getSession().setAttribute("msg", "삭제 실패");
-				request.getSession().setAttribute("text", "삭제 실패하였다.");
+				request.getSession().setAttribute("text", "회원 삭제를 실패하였습니다.");
 				response.sendRedirect(request.getHeader("referer"));
 			}
 			

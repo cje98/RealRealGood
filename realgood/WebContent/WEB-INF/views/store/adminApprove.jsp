@@ -45,8 +45,9 @@
                     <div class="row mb-3 form-row">
                   <table class="table table-hover">
                         <tr>
-                            <td>체크여부</td>
                             <td>No.</td>
+                            <td>체크여부</td>
+                            <td>가게번호</td>
                             <td>가게명</td>
                             <td>가게주인아이디</td>
                             <td>승인 대기</td>
@@ -58,6 +59,7 @@
                         <% } else{ %>
 	                        <% for(int i = 0; i < aList.size(); i++){ %>
 	                        <tr>
+	                        	<td><%= i+1 %></td>
 	                            <td><input type="checkbox" name="adminStore"></td>
 	                            <td><%= aList.get(i).getStoreNum() %></td>
 	                            <td><%= aList.get(i).getStoreName()%></td>
@@ -108,7 +110,7 @@
 		   var tr = checkbox.parent().parent().eq(index);
            var td = tr.children();
 	
-           no = td.eq(1).text();
+           no = td.eq(2).text();
            noSum += no + " ";
         });
         

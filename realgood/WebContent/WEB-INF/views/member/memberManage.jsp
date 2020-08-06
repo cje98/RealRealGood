@@ -24,8 +24,8 @@
                     <div class="row mb-3 form-row">
                 <table class="table table-hover">
                         <tr>
-                            <td>체크여부</td>
                             <td>No.</td>
+                            <td>체크여부</td>
                             <td>아이디</td>
                             <td>이름</td>
                             <td>닉네임</td>
@@ -42,8 +42,8 @@
 						<% }else{ %>
 	               		    <% for(int i = 0; i < list.size(); i++) { %>
 		                        <tr>
-		                            <td><input type="checkbox" name="manageMember"></td>
 		                            <td><%= i+1 %></td>
+		                            <td><input type="checkbox" name="manageMember"></td>
 		                            <td><%= list.get(i).getId() %></td>
 		                            <td><%= list.get(i).getName() %></td>
 		                            <td><%= list.get(i).getNickName() %></td>
