@@ -293,7 +293,6 @@ public class BoardDAO {
 
 		PreparedStatement pstmt = null;
 		Board reviewList = null;
-		Board board = null;
 		ResultSet rset = null;
 		
 		String query = prop.getProperty("reviewInfo2");
@@ -301,21 +300,19 @@ public class BoardDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, boardNo);
-
 			rset = pstmt.executeQuery();
 
 			while(rset.next()) {
 				reviewList = new Board(rset.getString("NICKNAME"),
 						rset.getString("BOARD_CONTENT"),
 						rset.getInt("READ_COUNT"),
-						rset.getString("SNAME"),
 						rset.getTimestamp("BOARD_MODIFY_DT"),
-						rset.getString("ADDR") 
+						rset.getString("SNAME"),
+						rset.getString("ADDR")
 						);
 
 			}
 
-		
 		}finally {
 			rset.close();
 			pstmt.close();

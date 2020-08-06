@@ -129,7 +129,7 @@
           </div>
         </div>
     
-    <form action="<%=request.getContextPath()%>/board/update.do?boardNo=<%=board.getBoardNo()%>" method="post" 
+    <form action="<%=request.getContextPath()%>/board/update.do?boardNo=<%=board.getBoardNo()%>&storeNum=<%=request.getParameter("storeNum") %>" method="post" 
 				  enctype="multipart/form-data" role="form" onsubmit="return validate();"> 
     
         <div class="ReviewWritingPage__ContentWrap">
@@ -151,12 +151,12 @@
 
                     </div>
                   </div>
-                  <textarea name="content" id="content" class="ReviewEditor__Editor" maxlength="10000"  style="resize: none";><%=board.getBoardContent() %></textarea>
+                  <textarea name="content" id="content" class="ReviewEditor__Editor" maxlength="200"  style="resize: none";><%=board.getBoardContent() %></textarea>
                 </div>
                 <p class="ReviewEditor__TextLengthStateBox">
                   <span class="ReviewEditor__CurrentTextLength">0</span>
                   <span class="ReviewEditor__TextLengthStateDivider">/</span>
-                  <span class="ReviewEditor__MaxTextLength" >10,000</span>
+                  <span class="ReviewEditor__MaxTextLength" >200</span>
                 </p>
               </div>
             </div>
@@ -218,7 +218,7 @@
         <div class="ReviewWritingPage__ButtonsWrap">
           <div class="ReviewWritingPage__Buttons">
             <button class="ReviewWritingPage__CancelButton"  style="float: right; margin-left: 35px;" > 취소</button>
-            <button class="ReviewWritingPage__SubmitButton ReviewWritingPage__SubmitButton--Deactive" style="float: right;">리뷰 등록하기</button>
+            <button class="ReviewWritingPage__SubmitButton ReviewWritingPage__SubmitButton--Deactive" style="float: right;">리뷰 수정하기</button>
           </div>
         </div>
         

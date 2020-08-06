@@ -8,7 +8,10 @@
 
 Board reviewList = (Board)request.getAttribute("reviewList");
 int boardNo = (Integer)request.getAttribute("boardNo");
+
 int storeNum = Integer.parseInt(request.getParameter("storeNum"));
+
+
 List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 
 
@@ -140,7 +143,7 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 	            <span class="ReviewCard__UserName" style="text-align: left"> 작성자 :  <%=reviewList.getNickName() %></span>
 			</div>
 	          <div class="ReviewCard__CountInfo" style="text-align: left" >
-	            <div class="ReviewCard__UserReviewCountInfo" "><br>
+	            <div class="ReviewCard__UserReviewCountInfo" ><br>
 	              <span class="ReviewCard__UserReviewCount">작성일 : <%=reviewList.getBoardModifyDate() %></span>
 	            </div>
 	
@@ -164,8 +167,7 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 		<div style="clear: both";>
 			<% 
 			  String src = null;
-			  boolean flag = true;
-			  for(int i=0; i<4 ; i++) {
+			  for(int i=0; i<fileList.size(); i++) {
 			    for(Attachment at : fileList){
 			       if(at.getFileLevel() == i){
 			         src = request.getContextPath()+"/resources/uploadImages/"+at.getFileChangeName();
@@ -221,7 +223,7 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 	<div class="test" style="display: inline-block; margin-left: 58%">
 			<% if(loginMember != null && (reviewList.getNickName().equals(loginMember.getNickName()  ))) {%>
 			<a href="delete.do?no=<%=boardNo%>&storeNo=<%=storeNum%>" class="btn btn-primary float-right">삭제</a> 
-			<a href="<%=request.getContextPath()%>/board/updateForm.do?boardNo=<%=request.getParameter("boardNo")%>" class="btn btn-primary float-right ml-1 mr-1">수정</a>
+			<a href="<%=request.getContextPath()%>/board/updateForm.do?boardNo=<%=boardNo%>&storeNum=<%=storeNum%>" class="btn btn-primary float-right ml-1 mr-1">수정</a>
 			<% } %>
 			<a href="<%=request.getContextPath()%>/store/detail.do?storeNum=<%=request.getParameter("storeNum")%>" class="btn btn-primary float-right">목록으로</a>
 			

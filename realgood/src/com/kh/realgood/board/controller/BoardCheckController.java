@@ -26,16 +26,16 @@ public class BoardCheckController extends HttpServlet {
 		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		Board reviewList = null;
-		
+
 		
 		try {
 			reviewList = new BoardService().reviewInfo2(boardNo);
 			int readCountAdd = new BoardService().readCountAdd(boardNo); // 조회수 증가용
-			
+
 			// 이미지 조회
 			if(reviewList != null) {
 				List<Attachment> fileList = new BoardService().selectFiles(boardNo);
-				
+				System.out.println(fileList);
 				if(!fileList.isEmpty()) {
 					request.setAttribute("fileList", fileList);
 				}

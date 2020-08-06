@@ -30,7 +30,7 @@ public class BoardUpdate2Controller extends HttpServlet {
 		String path = null;
 		
 		int maxSize = 1024 * 1024 * 10;
-		
+
 		String root = request.getSession().getServletContext().getRealPath("/");
 		
 		String filePath = root + "resources\\uploadImages\\";
@@ -43,7 +43,7 @@ public class BoardUpdate2Controller extends HttpServlet {
 			List<Attachment> fList = new ArrayList<Attachment>();
 			
 			int boardNo = Integer.parseInt(mRequest.getParameter("boardNo"));
-
+			
 			String boardContent = mRequest.getParameter("content");
 			
 			Board board = new Board(boardNo, boardContent);
@@ -88,7 +88,7 @@ public class BoardUpdate2Controller extends HttpServlet {
 			if(result > 0) {
 				status = "success";
 				msg = "게시글 수정 성공";
-				path = "reviewCheck.do?boardNo="+result;
+				path = "reviewCheck.do?boardNo="+result+"&storeNum="+request.getParameter("storeNum");
 				
 			}else {
 				status = "error";

@@ -24,7 +24,7 @@ public class Board {
 	   private String store_addr;
 	   private String nickName;
 	   private int starScore;
-	   
+	   private String storeName;
 	   
 	public Board() {
 		super();
@@ -94,14 +94,14 @@ public class Board {
 		this.boardNo=boardNo;
 	}
 	
-	public Board( String nickName ,String boardContent, int readCount,  String name, Timestamp boardModifyDate, String store_addr
+	public Board( String nickName ,String boardContent, int readCount,  Timestamp boardModifyDate, String name,  String store_addr 
 			) {
 		super();
 		this.nickName = nickName;
 		this.boardContent = boardContent;
 		this.readCount = readCount;
-		this.name = name;
 		this.boardModifyDate = boardModifyDate;
+		this.name = name;
 		this.store_addr = store_addr;
 	}
 
@@ -113,6 +113,16 @@ public class Board {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+
+	public String getStoreName() {
+		return storeName;
+	}
+
+
+	public void setStoreName(String storeName) {
+		this.storeName = storeName;
 	}
 
 

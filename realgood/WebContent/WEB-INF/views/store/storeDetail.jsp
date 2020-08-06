@@ -168,27 +168,23 @@
 	
     <% if(storeInfo != null){ %>
     
-  <div class="row" style="flex-wrap: nowrap;">
-    <div class="col-md-8" style="margin: 15px 10% 0 -5% ">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static" >
           
         <% if(storeImgList != null){ %>
+ 		 <div class="row" style="flex-wrap: nowrap; width: 100%; height: 100%">
+    		<div class="col-md-11" style="margin: 25px 0 0 -15%" >
         	
-		<div style="clear: both">
 			<% 
 			  String src = null;
 			  for(int i=0; i<storeImgList.size() ; i++) {
 			    for(StoreImg si : storeImgList){
 			       if(si.getFileLevel() == i){
-			         src = request.getContextPath()+"/resources/uploadImages/"+si.getRealImgName();
+			         src = request.getContextPath()+"/resources/images/"+si.getRealImgName();
 		 	%> 	  
-			 <div style="width: 200px; height: 200px; display : inline-block">
-			    <img class="d-block w-100 boardImg" src="<%= src %>" />
+			 <div style="width: 400px; height: 300px; display: inline-block;">
+			    <img class="d-block w-100 boardImg" width="100%" height="100%" src="<%= src %>" />
 			    <input type="hidden" value=<%=storeImgList.get(i).getStoreImgNum()%>>
 			 </div> 
 		 <%  } } } %>
-       </div>
                 <% }else{ %>
           			          			
 					    <img class="d-block w-100 boardImg" src="<%=request.getContextPath()%>/resources/images/맛집어때 로고.png" />
@@ -199,11 +195,14 @@
           
           
           
+          
+          
+          
+          
+          
           <input type="hidden" value="<%=storeInfo.getStoreImgNum() %>">
-        </div>
-      </div>
     </div>
-    <div class="map-image" style="margin-top: 15px">
+    <div class="map-image" style="margin: 25px 0 0 -5%">
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p d-flex flex-column position-static">
         
@@ -215,7 +214,7 @@
   </div>
 </div>
 
-	  <div class="row" style="flex-wrap: nowrap; margin-left: 15%">
+	  <div class="row" style="flex-wrap: nowrap; margin-left: 10%">
 	
     <div class="col-md-6 blog-main" style="display: inline-block;">
       <h3 class="pb-4 mb-4 font-italic border-bottom">

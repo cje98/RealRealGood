@@ -1,8 +1,10 @@
-<%@page import="com.kh.realgood.store.model.dto.Store"%>
-<%@page import="java.util.List"%>
-<%@page import="com.kh.realgood.store.model.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.kh.realgood.store.model.dto.StoreInfoMenu"%>
+<%@page import="com.kh.realgood.board.model.dto.Board"%>
+<%@page import="com.kh.realgood.store.model.vo.PageInfo"%>
+<%@page import="com.kh.realgood.store.model.dto.Store"%>
+<%@page import="java.util.List"%>
     
 <% 
 	
@@ -11,7 +13,7 @@
 	
 	List<Member> list = (List<Member>)request.getAttribute("list");
 
-
+	
 %>
     
 <!doctype html>
@@ -129,7 +131,7 @@
       <section class="ReviewWritingPage__Container">
       
         <div class="ReviewWritingPage__Row">
-          <h5 class="RestaurantSubMessage__RestaurantName"><strong><%=storeNum %> </strong></h5>
+          <h5 class="RestaurantSubMessage__RestaurantName"><strong> </strong></h5>
           <div class="RestaurantSubMessage__SubMessageWrap">
             <span class="RestaurantSubMessage__SubMessage">에 대한 솔직한 리뷰를 써주세요.</span>
           </div>
@@ -157,12 +159,12 @@
 
                     </div>
                   </div>
-                  <textarea name="content" id="content" class="ReviewEditor__Editor" maxlength="10000" placeholder=" 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!" ; style="resize: none";></textarea>
+                  <textarea name="content" id="content" class="ReviewEditor__Editor" maxlength="200"  placeholder=" 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!" ; style="resize: none; height: 230px"></textarea>
                 </div>
                 <p class="ReviewEditor__TextLengthStateBox">
                   <span class="ReviewEditor__CurrentTextLength">0</span>
                   <span class="ReviewEditor__TextLengthStateDivider">/</span>
-                  <span class="ReviewEditor__MaxTextLength" >10,000</span>
+                  <span class="ReviewEditor__MaxTextLength" >200</span>
                 </p>
               </div>
             </div>

@@ -40,12 +40,12 @@ public class Attachment {
 	}
 
 
-	public Attachment(int fileNo, int parentBoardNo, String fileChangeName, String filePath, int boardNo) {
+	public Attachment(int fileNo, String fileChangeName, String filePath, int parentBoardNo,   int boardNo) {
 		super();
 		this.fileNo = fileNo;
-		this.parentBoardNo = parentBoardNo;
 		this.fileChangeName = fileChangeName;
 		this.filePath = filePath;
+		this.parentBoardNo = parentBoardNo;
 		this.boardNo = boardNo;
 	}
 
