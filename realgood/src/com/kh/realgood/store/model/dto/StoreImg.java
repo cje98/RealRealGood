@@ -21,6 +21,20 @@ public class StoreImg {
 
 
 
+	public StoreImg(int storeImgNum, String realImgName,  int fileLevel,String filePath) {
+		super();
+		this.storeImgNum = storeImgNum;
+		this.realImgName = realImgName;
+		this.fileLevel = fileLevel;
+		this.filePath = filePath;
+	}
+
+
+
+
+
+
+
 	public StoreImg(String realImgName, int fileLevel) {
 		super();
 		this.realImgName = realImgName;

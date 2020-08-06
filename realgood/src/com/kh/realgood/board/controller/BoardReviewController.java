@@ -85,11 +85,11 @@ public class BoardReviewController extends HttpServlet {
 					attachList.add(temp);
 				}
 			}
-			
+
 			
 			int result = new BoardService().insertBoard(board, attachList);
 
-			
+
 			Board reviewList = new BoardService().reviewInfo2(storeNum);
 			
 			if(result>0) {
@@ -104,7 +104,7 @@ public class BoardReviewController extends HttpServlet {
 				path = request.getHeader("referer");
 			}
 			
-//			path = "/WEB-INF/views/board/review.jsp";
+			path = "/WEB-INF/views/board/review.jsp";
 			path = "reviewCheck.do?boardNo="+result;
 			request.setAttribute("board", board);
 			request.setAttribute("reviewList", reviewList);

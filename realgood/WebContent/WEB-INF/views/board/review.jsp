@@ -8,7 +8,10 @@
 
 Board reviewList = (Board)request.getAttribute("reviewList");
 int boardNo = (Integer)request.getAttribute("boardNo");
+
 int storeNum = Integer.parseInt(request.getParameter("storeNum"));
+
+
 List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 
 
@@ -46,7 +49,9 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
         float: left;
       }
 
-
+            .trans6:hover{
+                transform: scale(4,4);
+            }
 
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
@@ -133,14 +138,14 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
      	<% if(reviewList != null) { %>
      	
 	<div class="container" style="width: 650px">
-	  <div class="card-deck mb-3 text-center">
+	  <div class="card-deck mb-3 text-center" style="height: 500px">
 	    <div class="card mb-4 shadow-sm">
 	      <div class="card-header" >
 	        <div class="ReviewCard__UserInfo">
 	            <span class="ReviewCard__UserName" style="text-align: left"> 작성자 :  <%=reviewList.getNickName() %></span>
 			</div>
 	          <div class="ReviewCard__CountInfo" style="text-align: left" >
-	            <div class="ReviewCard__UserReviewCountInfo" "><br>
+	            <div class="ReviewCard__UserReviewCountInfo" ><br>
 	              <span class="ReviewCard__UserReviewCount">작성일 : <%=reviewList.getBoardModifyDate() %></span>
 	            </div>
 	
@@ -161,7 +166,26 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 	      </div>
 	    </div>
         <% if(fileList != null){ %>
+		<div style="clear: both";>
+			<% 
+			  String src = null;
+			  for(int i=0; i<fileList.size(); i++) {
+			    for(Attachment at : fileList){
+			       if(at.getFileLevel() == i){
+			         src = request.getContextPath()+"/resources/uploadImages/"+at.getFileChangeName();
+		 	%> 	  
+			 <div style="width: 120px; height: 120px; display : inline-block">
+			    <img class="trans6" width="100%" height="100%" src="<%= src %>" />
+			    <input type="hidden" value=<%=fileList.get(i).getFileNo() %>>
+			 </div> 
+		 <%  } } } %>
+       </div>
+                <% } %>
+<%--         <% if(fileList != null){ %>
+		<div class="carousel slide m-3" id="carousel-325626">
+=======
 		<div class="carousel slide m-3" id="carousel-325626" style="clear: both;">
+>>>>>>> branch 'master' of https://github.com/cje98/RealRealGood.git
                     
                     <div class="carousel-inner boardImgArea" style="width: 200px; height: 150px; float: ">
                      <% 
@@ -192,23 +216,24 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
                     	<a class="carousel-control-prev" href="#carousel-325626" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-325626" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
                     <% } %>
                 </div>
-                <% } %>
+                <% } %> --%>
 		    </div>
 		</div>
 	</div>
 </div>
 
-	<div class="test" style="display: inline-block; margin-left: 53%">
+	<div class="test" style="display: inline-block; margin-left: 58%">
 			<% if(loginMember != null && (reviewList.getNickName().equals(loginMember.getNickName()  ))) {%>
-			<a href="delete.do?no=<%=boardNo%>&storeNo=<%=storeNum%>" id="delete" class="btn btn-primary float-right">삭제</a> 
-			<a href="updateForm?no=<%=boardNo%>" class="btn btn-primary float-right ml-1 mr-1">수정</a>
+			<a href="delete.do?no=<%=boardNo%>&storeNo=<%=storeNum%>" class="btn btn-primary float-right">삭제</a> 
+			<a href="<%=request.getContextPath()%>/board/updateForm.do?boardNo=<%=boardNo%>&storeNum=<%=storeNum%>" class="btn btn-primary float-right ml-1 mr-1">수정</a>
 			<% } %>
 			<a href="<%=request.getContextPath()%>/store/detail.do?storeNum=<%=request.getParameter("storeNum")%>" class="btn btn-primary float-right">목록으로</a>
 			
 				
 	</div>  	
 	<div style="display: inline-block; margin-left: 58%" >
-<%-- 	<a href="<%=request.getContextPath()%>/store/detail.do?storeNum=<%=request.getParameter("storeNum")%>">상세 페이지로 돌아가기</a>--%>   	<%}%>
+<%-- 	<a href="<%=request.getContextPath()%>/store/detail.do?storeNum=<%=request.getParameter("storeNum")%>">상세 페이지로 돌아가기</a>--%>   
+	<%}%>
    	
    	</div>
    	<br><br><br><br><br>

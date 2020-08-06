@@ -9,7 +9,7 @@ public class Attachment {
 	   private String filePath;
 	   private int fileLevel;
 	   private String fileStatus;
-	   
+	   private int boardNo;
 	   
 	public Attachment() {
 		super();
@@ -29,7 +29,6 @@ public class Attachment {
 	}
 	
 	
-	
 
 
 	public Attachment(int fileNo, int parentBoardNo, String fileChangeName, String filePath) {
@@ -38,6 +37,26 @@ public class Attachment {
 		this.parentBoardNo = parentBoardNo;
 		this.fileChangeName = fileChangeName;
 		this.filePath = filePath;
+	}
+
+
+	public Attachment(int fileNo, String fileChangeName, String filePath, int parentBoardNo,   int boardNo) {
+		super();
+		this.fileNo = fileNo;
+		this.fileChangeName = fileChangeName;
+		this.filePath = filePath;
+		this.parentBoardNo = parentBoardNo;
+		this.boardNo = boardNo;
+	}
+
+
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
 	}
 
 
@@ -115,8 +134,11 @@ public class Attachment {
 	public String toString() {
 		return "Attachment [fileNo=" + fileNo + ", parentBoardNo=" + parentBoardNo + ", fileOriginName="
 				+ fileOriginName + ", fileChangeName=" + fileChangeName + ", filePath=" + filePath + ", fileLevel="
-				+ fileLevel + ", fileStatus=" + fileStatus + "]";
+				+ fileLevel + ", fileStatus=" + fileStatus + ", boardNo=" + boardNo + "]";
 	}
+
+
+	
 
 	
 	

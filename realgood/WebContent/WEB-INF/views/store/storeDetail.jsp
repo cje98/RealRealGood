@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.kh.realgood.store.model.dto.StoreImg"%>
 <%@page import="com.kh.realgood.board.model.dto.Board"%>
 <%@page import="com.kh.realgood.store.model.dto.StoreInfoMenu"%>
 <%@page import="com.kh.realgood.store.model.dto.Store"%>
@@ -17,6 +18,9 @@
 	
 	StoreInfoMenu storeInfo = (StoreInfoMenu)request.getAttribute("storeInfoList");
 
+	
+	List<StoreImg> storeImgList = (List<StoreImg>)request.getAttribute("storeImgList");
+
 %>
 
 <!doctype html>
@@ -30,7 +34,7 @@
     <title>상세페이지 </title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/blog/">
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
     <link type="text/css" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" rel="stylesheet">
 	<link type="text/css" href="<%=request.getContextPath()%>/resources/css/blog.css" rel="stylesheet">
@@ -164,16 +168,87 @@
 	
     <% if(storeInfo != null){ %>
     
-  <div class="row" style="flex-wrap: nowrap;">
-    <div class="col-md-8" style="margin: 15px 10% 0 -5% ">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static" >
-          <h3 class="mb-0"></h3>
+          
+        <% if(storeImgList != null){ %>
+ 		 <div class="row" style="flex-wrap: nowrap; width: 100%; height: 100%">
+    		<div class="col-md-11" style="margin: 25px 0 0 -15%" >
+        <%if(storeImgList.size() == 1){ %>	
+			<% 
+			  String src = null;
+			  for(int i=0; i<storeImgList.size() ; i++) {
+			    for(StoreImg si : storeImgList){
+			       if(si.getFileLevel() == i){
+			         src = request.getContextPath()+"/resources/images/"+si.getRealImgName();
+		 	%> 	  
+			 <div style="width: 700px; height: 300px; display: inline-block;">
+			    <img class="d-block w-100 boardImg" width="100%" height="100%" src="<%= src %>" />
+			    <input type="hidden" value=<%=storeImgList.get(i).getStoreImgNum()%>>
+			 </div> 
+		 <%  } } } %>
+		 <%}else if(storeImgList.size() == 2){ %>
+		 
+		 	<% 
+			  String src = null;
+			  for(int i=0; i<storeImgList.size() ; i++) {
+			    for(StoreImg si : storeImgList){
+			       if(si.getFileLevel() == i){
+			         src = request.getContextPath()+"/resources/images/"+si.getRealImgName();
+		 	%> 	  
+			 <div style="width: 600px; height: 300px; display: inline-block;">
+			    <img class="d-block w-100 boardImg" width="100%" height="100%" src="<%= src %>" />
+			    <input type="hidden" value=<%=storeImgList.get(i).getStoreImgNum()%>>
+			 </div> 
+		 <%  } } } %>
+		 
+		 <%}else if(sotreImgList.size() == 3){ %>
+		 
+		 	<% 
+			  String src = null;
+			  for(int i=0; i<storeImgList.size() ; i++) {
+			    for(StoreImg si : storeImgList){
+			       if(si.getFileLevel() == i){
+			         src = request.getContextPath()+"/resources/images/"+si.getRealImgName();
+		 	%> 	  
+			 <div style="width: 500px; height: 300px; display: inline-block;">
+			    <img class="d-block w-100 boardImg" width="100%" height="100%" src="<%= src %>" />
+			    <input type="hidden" value=<%=storeImgList.get(i).getStoreImgNum()%>>
+			 </div> 
+		 <%  } } } %>
+		 
+		
+		 <%}else if(sotreImgList.size() == 4){ %>
+		 	<% 
+			  String src = null;
+			  for(int i=0; i<storeImgList.size() ; i++) {
+			    for(StoreImg si : storeImgList){
+			       if(si.getFileLevel() == i){
+			         src = request.getContextPath()+"/resources/images/"+si.getRealImgName();
+		 	%> 	  
+			 <div style="width: 400px; height: 300px; display: inline-block;">
+			    <img class="d-block w-100 boardImg" width="100%" height="100%" src="<%= src %>" />
+			    <input type="hidden" value=<%=storeImgList.get(i).getStoreImgNum()%>>
+			 </div> 
+		 <%  } } } %>
+		 
+		 
+                <% }else{ %>
+          			          			
+					    <img class="d-block w-100 boardImg" src="<%=request.getContextPath()%>/resources/images/맛집어때 로고.png" />
+          			
+        		<%} %>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
           <input type="hidden" value="<%=storeInfo.getStoreImgNum() %>">
-        </div>
-      </div>
     </div>
-    <div class="map-image" style="margin-top: 15px">
+    <div class="map-image" style="margin: 25px 0 0 -5%">
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p d-flex flex-column position-static">
         
@@ -185,7 +260,7 @@
   </div>
 </div>
 
-	  <div class="row" style="flex-wrap: nowrap; margin-left: 15%">
+	  <div class="row" style="flex-wrap: nowrap; margin-left: 10%">
 	
     <div class="col-md-6 blog-main" style="display: inline-block;">
       <h3 class="pb-4 mb-4 font-italic border-bottom">
@@ -272,11 +347,11 @@
 
       <div class="blog-post" >
         <h2 class="blog-post-title"></h2>
-        <p class="blog-post-meta"><%=storeInfo.getStoreContent() %> </p>
+        <p class="blog-post-meta" style="height: 50px"><%=storeInfo.getStoreContent() %> </p>
            
-       <hr>
+      
        
-        <p >조회수</p>
+        
 
           
 
@@ -319,8 +394,10 @@
       	
       	 </div>        
 
-		<% if(boardList.size() > 10) { %>
-		<button type="button" id="tmp">↓</button>
+		<% if(boardList.size() > 5) { %>
+		<div style="text-align: center;">
+		<a id="tmp" style="width: 500px; color: red; font-weight: bold;" >더보기&nbsp;<i class="fa fa-angle-double-down"  ></i></a>
+		</div>s
 		<% } %>
 		
 		<script>
@@ -337,9 +414,10 @@
 		var bSize = bList.length;
 		
 		if(bList.length != 0){
-			for(var i=0; i < 10; i++){
+			for(var i=0; i < 5; i++){
 				if(bSize <= i){
 					   	tmpSize = i;
+					   	
 						break;
 				}
 				var $div = $("<div>"); //리뷰 한칸 영역
@@ -369,10 +447,11 @@
 		
 		 $("#tmp").on("click",function(){
 			 if(tmpSize != bSize){
-			   tmpSize = ++tmpSize * 10;
-			   for(var i=10*(++loopTmp)+1; i < tmpSize; i++) {
+			   tmpSize = ++tmpSize + 5;
+			   for(var i=5*(++loopTmp)+1; i < tmpSize; i++) {
 				   if(bSize == i){
 					   tmpSize = i;
+					   $("#tmp").css("display","none");
 						break;
 				   }
 				   var $div = $("<div>");
@@ -380,13 +459,26 @@
 			       	var $p = $("<p>");
 					var $br = $("<br>");
 					var $hr = $("<hr>");
-				    $p.addClass("pclass");
+					
+					var $tr = $("<tr>").addClass("pclass");
+					var $td1 = $("<td width=\"180px\">");
+					
+					var $td2 = $("<td>");
+					
+					$td1.text(bList[i].nickName);
+					$td2.html(bList[i].boardModifyDate +"<br>"+ bList[i].boardContent);
+					
+					$tr.append($td1.append($input), $td2);
+					$("#tmp-area").append($("#tableId").append($tr));
+					
+					
+				/*     $p.addClass("pclass");
 				    $p.css({
 						width: "500px",
 						height: "250px",
 					   });
 				   	$p.html("닉네임 : " + bList[i].nickName + "<br>" + bList[i].boardContent +"<br>"+ bList[i].boardModifyDate);
-				   	$("#tmp-area").append($div.append($p, $input, $hr));
+				   	$("#tmp-area").append($div.append($p, $input, $hr)); */
 			   }
 		 }
 		   }); 
@@ -629,7 +721,7 @@
 	var geocoder = new kakao.maps.services.Geocoder();
 	
 	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('서울 서대문구 연세로 36', function(result, status) {
+	geocoder.addressSearch('<%=storeInfo.getStoreAddress()%>', function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -645,7 +737,7 @@
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">독수리다방</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;"><%=storeInfo.getStoreName()%></div>'
         });
         infowindow.open(map, marker);
 

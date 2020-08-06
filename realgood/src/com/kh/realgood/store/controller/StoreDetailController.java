@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.kh.realgood.board.model.dto.Board;
 import com.kh.realgood.board.model.service.BoardService;
 import com.kh.realgood.member.model.dto.Member;
+import com.kh.realgood.store.model.dto.StoreImg;
 import com.kh.realgood.store.model.dto.StoreInfoMenu;
 import com.kh.realgood.store.model.service.StoreService;
 
@@ -37,7 +38,8 @@ public class StoreDetailController extends HttpServlet {
 			StoreInfoMenu storeInfoList = new StoreService().storeInfoList(storeNo);
 
 			List<Board> boardList = new BoardService().getBoardList(storeNo);
-
+			
+			List<StoreImg> storeImgList = new StoreService().storeImgList(storeNo);
 			
 			if(!mList.isEmpty()) {
 				
@@ -49,7 +51,6 @@ public class StoreDetailController extends HttpServlet {
 					int result = new StoreService().checkStar(storeNo, memberNo);
 					
 					session.setAttribute("starColor", result);
-					
 				}
 			}
 			request.setAttribute("mList", mList);
@@ -57,6 +58,7 @@ public class StoreDetailController extends HttpServlet {
 
 			request.setAttribute("storeInfoList", storeInfoList);
 			request.setAttribute("boardList", boardList);
+			request.setAttribute("storeImgList", storeImgList);
 			
 
 			RequestDispatcher view = request.getRequestDispatcher(path);

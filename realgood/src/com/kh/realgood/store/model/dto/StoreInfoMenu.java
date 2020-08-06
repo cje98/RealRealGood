@@ -116,10 +116,10 @@ public class StoreInfoMenu {
 	}
 	
 	
-	public StoreInfoMenu(String storeTel, String storeAddress, String groupName, int priceMin, int priceMax, String storeName,String storeContent, int storeImgNum) {
+	public StoreInfoMenu(String storeAddress, String storeTel,  String groupName, int priceMin, int priceMax, String storeName,String storeContent, int storeImgNum) {
 		super();
-		this.storeTel = storeTel;
 		this.storeAddress = storeAddress;
+		this.storeTel = storeTel;
 		this.groupName = groupName;
 		this.priceMin = priceMin;
 		this.priceMax = priceMax;
