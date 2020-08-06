@@ -405,4 +405,28 @@ public class BoardDAO {
 		return result;
 	}
 
+	/** 조회수 증가용(댓글) DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return
+	 */
+	public int readCountAdd(Connection conn, int boardNo) throws Exception {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("readCountAdd");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			pstmt.close();
+		}
+		
+		return result;
+	}
+
 }

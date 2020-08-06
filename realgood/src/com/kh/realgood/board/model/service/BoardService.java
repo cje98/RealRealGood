@@ -205,6 +205,21 @@ public class BoardService {
 		return result;
 	}
 
+	/** 조회수 증가용 (댓글)
+	 * @param boardNo
+	 * @return
+	 */
+	public int readCountAdd(int boardNo) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.readCountAdd(conn, boardNo);
+		
+		if (result > 0) conn.commit();
+		else            conn.rollback();
+		
+		return result;
+	}
+
 	 
 	
 }

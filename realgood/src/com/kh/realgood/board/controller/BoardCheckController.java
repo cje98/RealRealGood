@@ -30,6 +30,7 @@ public class BoardCheckController extends HttpServlet {
 		
 		try {
 			reviewList = new BoardService().reviewInfo2(boardNo);
+			int readCountAdd = new BoardService().readCountAdd(boardNo); // 조회수 증가용
 			
 			// 이미지 조회
 			if(reviewList != null) {
