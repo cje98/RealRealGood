@@ -1,6 +1,6 @@
-<%@page import="com.kh.realgood.board.model.dto.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.kh.realgood.board.model.dto.Board"%>
 <%@page import="com.kh.realgood.store.model.dto.StoreInfoMenu"%>
 <%@page import="com.kh.realgood.store.model.dto.Store"%>
 <%@page import="java.util.List"%>
@@ -207,11 +207,11 @@
           </a>
       </h3>
       
-      <!-- 별모양 스크립트 -->
+     <!-- 별모양 스크립트 -->
        <script type="text/javascript">
 	   // Get a list of all svg elements
 	      icons = document.querySelectorAll('.icon-hook');
-	
+			console.log(icons.length);
 	      // Cycle through list
 	      for (var i = 0; i < icons.length; i++) {
 	        icons[i].addEventListener('click', function(event) {
@@ -222,7 +222,7 @@
 	
 	          console.log(icon);
 	
-	          if (currentClass.indexOf('active') > -1) { 
+	          if (currentClass.indexOf('active') > -1 || <%=loginMember == null%>) { 
 	            // Remove .active
 	            icon.setAttribute('class', currentClass.replace(' active', ''));
 	          } else { 
@@ -314,7 +314,10 @@
                
 	            
 	<% if (boardList != null){ %>
-      <div id="tmp-area"></div>      
+    	 <div id="tmp-area">
+      		<table id="tableId" class="table"></table>
+      	
+      	 </div>        
 
 		<% if(boardList.size() > 10) { %>
 		<button type="button" id="tmp">↓</button>
@@ -339,18 +342,27 @@
 					   	tmpSize = i;
 						break;
 				}
-				var $div = $("<div>");
+				var $div = $("<div>"); //리뷰 한칸 영역
+				
 				var $input = $("<input type=\"hidden\" value=\"" + bList[i].boardNo + "\">");
-				var $p = $("<p>");
+				var $p = $("<p>"); // 리뷰 한 칸 영역
+				var $div1 = $("<div>"); // 닉네임 들어가는 영역
+				var $div2 = $("<div>"); // 내용 들어가는 영역
+				
 				var $br = $("<br>");
 				var $hr = $("<hr>");
-			    $p.addClass("pclass");
-			    $p.css({
-					width: "500px",
-					height: "250px",
-				   });
-			   	$p.html("닉네임 : " + bList[i].nickName + "<br>" + bList[i].boardContent +"<br>"+ bList[i].boardModifyDate);
-			   	$("#tmp-area").append($div.append($p, $input, $hr));
+				
+				
+				var $tr = $("<tr>").addClass("pclass");
+				var $td1 = $("<td width=\"180px\">");
+				
+				var $td2 = $("<td>");
+				
+				$td1.text(bList[i].nickName);
+				$td2.html(bList[i].boardModifyDate +"<br>"+ bList[i].boardContent);
+				
+				$tr.append($td1.append($input), $td2);
+				$("#tmp-area").append($("#tableId").append($tr));
 			}
 		}
 		
@@ -382,16 +394,16 @@
 </script>       
 
     <script>
-     $("div").on("click",".pclass", function(){
-	        
-	        var name = $(this).parent().children().eq(1).val();
-	        console.log(name);
+	   $("div").on("click",".pclass", function(){
+	       
+	       var name = $(this).children().children().eq(0).val();
+	       console.log(name);
 	
-	        location.href="<%=request.getContextPath()%>/board/reviewCheck.do?boardNo="+name+"&storeNum=<%=request.getParameter("storeNum")%>";        
-			
-	     }).on("mouseenter", function(){
-	      $(this).parent().css("cursor","pointer");
-	   });
+	       location.href="<%=request.getContextPath()%>/board/reviewCheck.do?boardNo="+name+"&storeNum=<%=request.getParameter("storeNum")%>";        
+		
+	    }).on("mouseenter", function(){
+	     $(this).parent().css("cursor","pointer");
+	  });
 	  
 	  
 	  </script>
