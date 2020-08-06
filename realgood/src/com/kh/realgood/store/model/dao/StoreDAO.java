@@ -406,7 +406,6 @@ public class StoreDAO {
 			pstmt.setString(3, st.getRealImgName());
 			pstmt.setString(4, st.getFilePath());
 			pstmt.setInt(5, st.getFileLevel());
-			pstmt.setString(6, st.getFileStatus());
 			
 			result2 = pstmt.executeUpdate();
 			
@@ -1101,6 +1100,38 @@ public class StoreDAO {
 	    
 		
 		return storeImgList;
+		
+	}
+	
+	/** 댓글 개수 가져오기
+	 * @param conn
+	 * @param storeList
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Store> storeRipleCount(Connection conn, List<Store> storeList) throws Exception {
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      
+	      String query = prop.getProperty("storeRipleCount");
+	      for (int i = 0; i < storeList.size(); i++) {
+	         try {
+	            pstmt = conn.prepareStatement(query);
+	            pstmt.setInt(1, storeList.get(i).getStoreNum());
+	   
+	            rset = pstmt.executeQuery();
+	            if (rset.next()) {
+	               storeList.get(i).setRipleCount(rset.getInt(1));
+	            } else {
+	               storeList.get(i).setRipleCount(0);
+	            }
+	            
+	         } finally {
+	            rset.close();
+	            pstmt.close();
+	         }
+	      }
+	      return storeList;
 	}
 
 }

@@ -411,6 +411,7 @@ public class StoreService {
 		if(storeList != null) {
 			storeList = dao.selectListImg(conn, storeList); // 이미지 출력 용 dao 메소드
 	        storeList = dao.storeGpaScore(conn, storeList); // 가게 평점 출력 용 dao 메소드
+	        storeList = dao.storeRipleCount(conn, storeList); // 가게 댓글 개수 출력 용 dao 메소드
 		}
 		conn.close();
 		

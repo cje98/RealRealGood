@@ -23,6 +23,7 @@ public class Board {
 	   private String name;
 	   private String store_addr;
 	   private String nickName;
+	   private int starScore;
 	   
 	   
 	public Board() {
@@ -232,6 +233,16 @@ public class Board {
 
 	public void setStoreNum(int storeNum) {
 		this.storeNum = storeNum;
+	}
+
+
+	public int getStarScore() {
+		return starScore;
+	}
+
+
+	public void setStarScore(int starScore) {
+		this.starScore = starScore;
 	}
 
 

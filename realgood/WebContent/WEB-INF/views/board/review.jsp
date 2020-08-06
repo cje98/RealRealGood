@@ -7,8 +7,11 @@
 <%
 
 Board reviewList = (Board)request.getAttribute("reviewList");
-
+int boardNo = (Integer)request.getAttribute("boardNo");
+int storeNum = Integer.parseInt(request.getParameter("storeNum"));
 List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
+
+
 %>    
   
 <!doctype html>
@@ -134,9 +137,9 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 	    <div class="card mb-4 shadow-sm">
 	      <div class="card-header" >
 	        <div class="ReviewCard__UserInfo">
-	            <span class="ReviewCard__UserName" style=""> 작성자 :  <%=reviewList.getNickName() %></span>
-	
-	          <div class="ReviewCard__CountInfo" style="float: right;" >
+	            <span class="ReviewCard__UserName" style="text-align: left"> 작성자 :  <%=reviewList.getNickName() %></span>
+			</div>
+	          <div class="ReviewCard__CountInfo" style="text-align: left" >
 	            <div class="ReviewCard__UserReviewCountInfo" "><br>
 	              <span class="ReviewCard__UserReviewCount">작성일 : <%=reviewList.getBoardModifyDate() %></span>
 	            </div>
@@ -145,13 +148,13 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 	              <span class="ReviewCard__UserFollowerCount"></span>
 	            </div>
 	          </div>
-	        </div>
+	        
 	      </div>
       
       <div class="card-body" >
-        <h6 class="card-title pricing-card-title" style="float: left;">조회수 :  <%=reviewList.getReadCount() %> <small class="text-muted"></small></h6>
-        <div class="list-unstyled mt-3 mb-4"  style="float: left;" style="margin-top: 20px">
-          <div style="float: left;">
+        <h6 class="card-title pricing-card-title" style="text-align: left;">조회수 :  <%=reviewList.getReadCount() %> <small class="text-muted"></small></h6>
+        <div class="list-unstyled mt-3 mb-4"  style="text-align: left" style="margin-top: 20px">
+          <div style="text-align: left">
        		
         		<%=reviewList.getBoardContent()%>
         	
@@ -176,12 +179,15 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
                 <% } %>
 <%--         <% if(fileList != null){ %>
 		<div class="carousel slide m-3" id="carousel-325626">
+=======
+		<div class="carousel slide m-3" id="carousel-325626" style="clear: both;">
+>>>>>>> branch 'master' of https://github.com/cje98/RealRealGood.git
                     
-                    <div class="carousel-inner boardImgArea" style="width: 200px; height: 150px">
+                    <div class="carousel-inner boardImgArea" style="width: 200px; height: 150px; float: ">
                      <% 
 	                   		String src = null;
 	                    	boolean flag = true;
-                   			for(int i=0; i<4 ; i++) {
+                   			for(int i=0; i<fileList.size() ; i++) {
                    			 for(Attachment at : fileList){
 	                    	  if(at.getFileLevel() == i){
 	                    		 src = request.getContextPath()+"/resources/uploadImages/"+at.getFileChangeName();
@@ -202,8 +208,9 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 	     			 </div>
 	     			 
 	     			 
-	     			 
-                    <a class="carousel-control-prev" href="#carousel-325626" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-325626" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
+	     			 <% if(fileList.size() > 1){ %>
+                    	<a class="carousel-control-prev" href="#carousel-325626" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-325626" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
+                    <% } %>
                 </div>
                 <% } %> --%>
 		    </div>
@@ -213,7 +220,7 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 
 	<div class="test" style="display: inline-block; margin-left: 58%">
 			<% if(loginMember != null && (reviewList.getNickName().equals(loginMember.getNickName()  ))) {%>
-			<a href="delete?no=" class="btn btn-primary float-right">삭제</a> 
+			<a href="delete.do?no=<%=boardNo%>&storeNo=<%=storeNum%>" class="btn btn-primary float-right">삭제</a> 
 			<a href="<%=request.getContextPath()%>/board/updateForm.do?boardNo=<%=request.getParameter("boardNo")%>" class="btn btn-primary float-right ml-1 mr-1">수정</a>
 			<% } %>
 			<a href="<%=request.getContextPath()%>/store/detail.do?storeNum=<%=request.getParameter("storeNum")%>" class="btn btn-primary float-right">목록으로</a>

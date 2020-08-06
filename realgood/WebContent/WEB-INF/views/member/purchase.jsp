@@ -5,6 +5,7 @@
     
 <%
 	List<BuyList> list = (List<BuyList>)request.getAttribute("bList");
+	int test = (Integer)(session.getAttribute("test"));
 %>
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@
                     <div class="row mb-3 form-row">
                 <table class="table table-hover">
                     	<tr>
-                    		<td>구매번호</td>
+                    		<td>구매번호</td> 
                             <td>가게명</td>
                             <td>구매 메뉴</td>
                             <td>구매 날짜</td>

@@ -58,6 +58,7 @@ public class BoardService {
 		}
 		
 		if(result > 0) {
+			result = dao.insertStoreStarScore(conn, board);
 			result = boardNo;
 			conn.commit();
 		}else {
@@ -210,7 +211,7 @@ public class BoardService {
 	 */
 	public int updateView(Board board, List<Attachment> fList) throws Exception{
 
-Connection conn = getConnection();
+		Connection conn = getConnection();
 		
 		int result = 0;
 		
@@ -294,8 +295,40 @@ Connection conn = getConnection();
 	    	File deleteFile = new File(filePath + fileName);
 	    	deleteFile.delete();
 	    }
+		return result;
+	}    
 	    
-	    
+	/** 게시글 삭제 
+	 * @param boardNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteBoard(int boardNo) throws Exception{
+		Connection conn = getConnection();
+
+		int result = dao.deleteBoard(conn, boardNo);
+		if(result >0) {
+			conn.commit();
+		}else {
+			conn.rollback();
+		}
+		conn.close();
+		
+		return result;
+	}
+
+	/** 조회수 증가용 (댓글)
+	 * @param boardNo
+	 * @return
+	 */
+	public int readCountAdd(int boardNo) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.readCountAdd(conn, boardNo);
+		
+		if (result > 0) conn.commit();
+		else            conn.rollback();
+		
 		return result;
 	}
 
