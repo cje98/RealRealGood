@@ -132,7 +132,7 @@
                   <p class="card-text mb-auto"><%=store.getStoreContent()%></p>
                   <p class="card-text mb-auto"><%=store.getStoreAddress()%></p>
                   <p>
-                     <span class="ico-star1">★ <%=store.getStoreGpaScore()%></span><span class="riple"> 리뷰 개수 <%=store.getRipleCount()%></span>
+                     <span class="ico-star1">★ <%=store.getStoreGpaScore()%></span><span class="riple"> 리뷰 <%=store.getRipleCount()%></span>
                   </p>
                   <a class="stretched-link"></a>
                </div>
