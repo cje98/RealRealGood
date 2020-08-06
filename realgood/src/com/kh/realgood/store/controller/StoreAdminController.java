@@ -28,13 +28,13 @@ public class StoreAdminController extends HttpServlet {
 			if(result > 0) {
 				request.getSession().setAttribute("status", "success");
 				request.getSession().setAttribute("msg", "승인");
-				request.getSession().setAttribute("text", "승인하였다.");
+				request.getSession().setAttribute("text", "승인하였습니다.");
 				response.sendRedirect("adminApprove.do");
 				
 			}else {
 				request.getSession().setAttribute("status", "error");
 				request.getSession().setAttribute("msg", "삭제 실패");
-				request.getSession().setAttribute("text", "삭제 실패하였다.");
+				request.getSession().setAttribute("text", "승인을 실패하였습니다.");
 				response.sendRedirect(request.getHeader("referer"));
 			}
 			
