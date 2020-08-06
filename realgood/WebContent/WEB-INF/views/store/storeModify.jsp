@@ -30,7 +30,7 @@
 <body>
  <%@ include file="../common/header.jsp" %>
  	<div class="row my-5">
-	<%@ include file="sideMenu.jsp"%>
+	<%@ include file="sideMenu2.jsp"%>
 <%
 	
 	// 합쳐져있는 전화번호 '-'로 쪼개기
@@ -135,9 +135,9 @@
                     		 <!-- 주소 -->
 		                    <!-- 카카오 주소 API -->
 		                    <!-- http://postcode.map.daum.net/guide -->
-                    		<input type="text" name="post" id="sample6_postcode" placeholder="우편번호" value="<%=loginStore.getStoreZip()%>" required>
+                    		<input type="text" name="post" id="sample6_postcode" placeholder="우편번호" value="<%=loginStore.getStoreZip()%>" required readonly>
 							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" name="address1" id="sample6_address" placeholder="주소" size=50 value="<%=address[0]%>" required><br>
+							<input type="text" name="address1" id="sample6_address" placeholder="주소" size=50 value="<%=address[0]%>" required readonly><br>
 							<input type="text" name="address2" id="sample6_detailAddress" placeholder="상세주소" value="<%=address[1]%>" required>
 							</div>
                     	</td>
@@ -417,9 +417,9 @@
     	
     	
     	// 각 유효성 검사 결과를 저장할 객체
-    	var signUpCheck = {
+    	/* var signUpCheck = {
     		"storeContent" : false
-    	};
+    	}; */
 
     	 /* 	var tmp = 0;
 

@@ -50,7 +50,7 @@
 }
 
 .word{
-	word-break: keep-all;
+	word-break: break-all;
 }
 </style>
 </head>

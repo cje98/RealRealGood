@@ -131,9 +131,9 @@
 			            </td>
 			            <td>
 	                        <div>
-	                        <input type="text" name="post" id="sample6_postcode" placeholder="우편번호" required>
+	                        <input type="text" name="post" id="sample6_postcode" placeholder="우편번호" required readonly>
 							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" name="address1" id="sample6_address" size=50 placeholder="주소" required><br>
+							<input type="text" name="address1" id="sample6_address" size=50 placeholder="주소" required readonly><br>
 							<input type="text" name="address2" id="sample6_detailAddress" placeholder="상세주소">
 			            	</div>
 			            </td>
@@ -324,7 +324,7 @@
   }
      
  // 각 유효성 검사 결과를 저장할 객체
-	var signUpCheck = {
+	/* var signUpCheck = {
 		"storeName" : false,
 		"storeContent" : false
 		
@@ -384,7 +384,7 @@
 	
 		}
  	}
-
+ */
 </script>
 
 	
