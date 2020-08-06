@@ -151,12 +151,10 @@
 
                     </div>
                   </div>
-                  <textarea name="content" id="content" class="ReviewEditor__Editor" maxlength="200"  style="resize: none";><%=board.getBoardContent() %></textarea>
+                  <textarea name="content" id="content" class="ReviewEditor__Editor" maxlength="200"  style="resize: none; height: 230px"><%=board.getBoardContent() %></textarea>
                 </div>
                 <p class="ReviewEditor__TextLengthStateBox">
-                  <span class="ReviewEditor__CurrentTextLength">0</span>
-                  <span class="ReviewEditor__TextLengthStateDivider">/</span>
-                  <span class="ReviewEditor__MaxTextLength" >200</span>
+                   <span style="color:#aaa;" id="counter">(0 / 최대 200자)</span>
                 </p>
               </div>
             </div>
@@ -204,9 +202,6 @@
                 
                 <div class="ReviewWritingPage__PictureWrap" style="margin-top: 40px">
                   <div class="ReviewPictureCounter" style="top: 93px; left: 89px; display: block;">
-                    <span class="ReviewPictureCounter__CurrentLength">0</span>
-                    <span class="ReviewPictureCounter__Divider">/</span>
-                    <span class="ReviewPictureCounter__MaxLength">4</span>
                   </div>
                 <div class="DraggablePictureContainer__GuideLayer">
                   <span class="DraggablePictureContainer__GuideMessage">사진을 여기에 놓으세요.</span>
@@ -267,14 +262,14 @@
 					
 				for(Attachment at : fList){
 					src = request.getContextPath()+"/resources/uploadImages/"+at.getFileChangeName();
-																													// 현재 접근한 이미지의 changename을 가져옴
+																			// 현재 접근한 이미지의 changename을 가져옴
 			%>
 					var imgId;
 					switch (<%=at.getFileLevel()%>) {
-				    case 1: imgId = "#contentImg0"; break;
-				    case 2: imgId = "#contentImg1"; break;
-				    case 3: imgId = "#contentImg2"; break;
-				    case 4: imgId = "#contentImg3"; break;
+				    case 0: imgId = "#contentImg0"; break;
+				    case 1: imgId = "#contentImg1"; break;
+				    case 2: imgId = "#contentImg2"; break;
+				    case 3: imgId = "#contentImg3"; break;
 			 		}
 					
 					if(imgId != undefined){
@@ -292,9 +287,6 @@
 	    $(function () {
 	       $("#fileArea").hide();
 
-	      $("#contentImgArea0").click(function () {
-	        $("#img0").click();
-	      });
 	      $("#contentImgArea1").click(function () {
 	        $("#img1").click();
 	      });
@@ -304,13 +296,9 @@
 	      $("#contentImgArea3").click(function () {
 	        $("#img3").click();
 	      });
-	      
-	      $(".boardImg").on("click",function(){
-	    	  var index =  $(this).children("img").prop("id") + 1;
-	        console.log(index);
-	        $("#img" + index).click();
+	      $("#contentImgArea4").click(function () {
+	        $("#img4").click();
 	      });
-
 
 	    });
 		 
@@ -389,7 +377,19 @@
 
    </script>
        
-       
+              <script>
+       $('.ReviewEditor__Editor').keyup(function (e){
+    var content = $(this).val();
+    $('#counter').html("("+content.length+" / 최대 200자)");    //글자수 실시간 카운팅
+
+    if (content.length > 200){
+        alert("최대 200자까지 입력 가능합니다.");
+        $(this).val(content.substring(0, 200));
+        $('#counter').html("(200 / 최대 200자)");
+    }
+	});
+
+	</script>
        
        
 

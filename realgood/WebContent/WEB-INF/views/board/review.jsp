@@ -49,7 +49,9 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
         float: left;
       }
 
-
+            .trans6:hover{
+                transform: scale(4,4);
+            }
 
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
@@ -136,7 +138,7 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
      	<% if(reviewList != null) { %>
      	
 	<div class="container" style="width: 650px">
-	  <div class="card-deck mb-3 text-center">
+	  <div class="card-deck mb-3 text-center" style="height: 500px">
 	    <div class="card mb-4 shadow-sm">
 	      <div class="card-header" >
 	        <div class="ReviewCard__UserInfo">
@@ -173,7 +175,7 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 			         src = request.getContextPath()+"/resources/uploadImages/"+at.getFileChangeName();
 		 	%> 	  
 			 <div style="width: 120px; height: 120px; display : inline-block">
-			    <img class="d-block w-100 boardImg" src="<%= src %>" />
+			    <img class="trans6" width="100%" height="100%" src="<%= src %>" />
 			    <input type="hidden" value=<%=fileList.get(i).getFileNo() %>>
 			 </div> 
 		 <%  } } } %>
@@ -235,10 +237,12 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
    	
    	</div>
    	<br><br><br><br><br>
-	
-	
-	
-	
+   	<script>
+   	$("#delete").click(function() {
+		return confirm("정말로 삭제 하시겠습니까?");
+	});
+   	</script>
+   	
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"

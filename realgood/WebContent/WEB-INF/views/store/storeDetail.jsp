@@ -34,7 +34,7 @@
     <title>상세페이지 </title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/blog/">
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
     <link type="text/css" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" rel="stylesheet">
 	<link type="text/css" href="<%=request.getContextPath()%>/resources/css/blog.css" rel="stylesheet">
@@ -172,8 +172,52 @@
         <% if(storeImgList != null){ %>
  		 <div class="row" style="flex-wrap: nowrap; width: 100%; height: 100%">
     		<div class="col-md-11" style="margin: 25px 0 0 -15%" >
-        	
+        <%if(storeImgList.size() == 1){ %>	
 			<% 
+			  String src = null;
+			  for(int i=0; i<storeImgList.size() ; i++) {
+			    for(StoreImg si : storeImgList){
+			       if(si.getFileLevel() == i){
+			         src = request.getContextPath()+"/resources/images/"+si.getRealImgName();
+		 	%> 	  
+			 <div style="width: 700px; height: 300px; display: inline-block;">
+			    <img class="d-block w-100 boardImg" width="100%" height="100%" src="<%= src %>" />
+			    <input type="hidden" value=<%=storeImgList.get(i).getStoreImgNum()%>>
+			 </div> 
+		 <%  } } } %>
+		 <%}else if(storeImgList.size() == 2){ %>
+		 
+		 	<% 
+			  String src = null;
+			  for(int i=0; i<storeImgList.size() ; i++) {
+			    for(StoreImg si : storeImgList){
+			       if(si.getFileLevel() == i){
+			         src = request.getContextPath()+"/resources/images/"+si.getRealImgName();
+		 	%> 	  
+			 <div style="width: 600px; height: 300px; display: inline-block;">
+			    <img class="d-block w-100 boardImg" width="100%" height="100%" src="<%= src %>" />
+			    <input type="hidden" value=<%=storeImgList.get(i).getStoreImgNum()%>>
+			 </div> 
+		 <%  } } } %>
+		 
+		 <%}else if(sotreImgList.size() == 3){ %>
+		 
+		 	<% 
+			  String src = null;
+			  for(int i=0; i<storeImgList.size() ; i++) {
+			    for(StoreImg si : storeImgList){
+			       if(si.getFileLevel() == i){
+			         src = request.getContextPath()+"/resources/images/"+si.getRealImgName();
+		 	%> 	  
+			 <div style="width: 500px; height: 300px; display: inline-block;">
+			    <img class="d-block w-100 boardImg" width="100%" height="100%" src="<%= src %>" />
+			    <input type="hidden" value=<%=storeImgList.get(i).getStoreImgNum()%>>
+			 </div> 
+		 <%  } } } %>
+		 
+		
+		 <%}else if(sotreImgList.size() == 4){ %>
+		 	<% 
 			  String src = null;
 			  for(int i=0; i<storeImgList.size() ; i++) {
 			    for(StoreImg si : storeImgList){
@@ -185,6 +229,8 @@
 			    <input type="hidden" value=<%=storeImgList.get(i).getStoreImgNum()%>>
 			 </div> 
 		 <%  } } } %>
+		 
+		 
                 <% }else{ %>
           			          			
 					    <img class="d-block w-100 boardImg" src="<%=request.getContextPath()%>/resources/images/맛집어때 로고.png" />
@@ -236,11 +282,11 @@
           </a>
       </h3>
       
-      <!-- 별모양 스크립트 -->
+     <!-- 별모양 스크립트 -->
        <script type="text/javascript">
 	   // Get a list of all svg elements
 	      icons = document.querySelectorAll('.icon-hook');
-	
+			console.log(icons.length);
 	      // Cycle through list
 	      for (var i = 0; i < icons.length; i++) {
 	        icons[i].addEventListener('click', function(event) {
@@ -251,7 +297,7 @@
 	
 	          console.log(icon);
 	
-	          if (currentClass.indexOf('active') > -1) { 
+	          if (currentClass.indexOf('active') > -1 || <%=loginMember == null%>) { 
 	            // Remove .active
 	            icon.setAttribute('class', currentClass.replace(' active', ''));
 	          } else { 
@@ -301,11 +347,11 @@
 
       <div class="blog-post" >
         <h2 class="blog-post-title"></h2>
-        <p class="blog-post-meta"><%=storeInfo.getStoreContent() %> </p>
+        <p class="blog-post-meta" style="height: 50px"><%=storeInfo.getStoreContent() %> </p>
            
-       <hr>
+      
        
-        <p >조회수</p>
+        
 
           
 
@@ -343,10 +389,15 @@
                
 	            
 	<% if (boardList != null){ %>
-      <div id="tmp-area"></div>      
+    	 <div id="tmp-area">
+      		<table id="tableId" class="table"></table>
+      	
+      	 </div>        
 
-		<% if(boardList.size() > 10) { %>
-		<button type="button" id="tmp">↓</button>
+		<% if(boardList.size() > 5) { %>
+		<div style="text-align: center;">
+		<a id="tmp" style="width: 500px; color: red; font-weight: bold;" >더보기&nbsp;<i class="fa fa-angle-double-down"  ></i></a>
+		</div>s
 		<% } %>
 		
 		<script>
@@ -363,33 +414,44 @@
 		var bSize = bList.length;
 		
 		if(bList.length != 0){
-			for(var i=0; i < 10; i++){
+			for(var i=0; i < 5; i++){
 				if(bSize <= i){
 					   	tmpSize = i;
+					   	
 						break;
 				}
-				var $div = $("<div>");
+				var $div = $("<div>"); //리뷰 한칸 영역
+				
 				var $input = $("<input type=\"hidden\" value=\"" + bList[i].boardNo + "\">");
-				var $p = $("<p>");
+				var $p = $("<p>"); // 리뷰 한 칸 영역
+				var $div1 = $("<div>"); // 닉네임 들어가는 영역
+				var $div2 = $("<div>"); // 내용 들어가는 영역
+				
 				var $br = $("<br>");
 				var $hr = $("<hr>");
-			    $p.addClass("pclass");
-			    $p.css({
-					width: "500px",
-					height: "250px",
-				   });
-			   	$p.html("닉네임 : " + bList[i].nickName + "<br>" + bList[i].boardContent +"<br>"+ bList[i].boardModifyDate);
-			   	$("#tmp-area").append($div.append($p, $input, $hr));
+				
+				
+				var $tr = $("<tr>").addClass("pclass");
+				var $td1 = $("<td width=\"180px\">");
+				
+				var $td2 = $("<td>");
+				
+				$td1.text(bList[i].nickName);
+				$td2.html(bList[i].boardModifyDate +"<br>"+ bList[i].boardContent);
+				
+				$tr.append($td1.append($input), $td2);
+				$("#tmp-area").append($("#tableId").append($tr));
 			}
 		}
 		
 		
 		 $("#tmp").on("click",function(){
 			 if(tmpSize != bSize){
-			   tmpSize = ++tmpSize * 10;
-			   for(var i=10*(++loopTmp)+1; i < tmpSize; i++) {
+			   tmpSize = ++tmpSize + 5;
+			   for(var i=5*(++loopTmp)+1; i < tmpSize; i++) {
 				   if(bSize == i){
 					   tmpSize = i;
+					   $("#tmp").css("display","none");
 						break;
 				   }
 				   var $div = $("<div>");
@@ -397,13 +459,26 @@
 			       	var $p = $("<p>");
 					var $br = $("<br>");
 					var $hr = $("<hr>");
-				    $p.addClass("pclass");
+					
+					var $tr = $("<tr>").addClass("pclass");
+					var $td1 = $("<td width=\"180px\">");
+					
+					var $td2 = $("<td>");
+					
+					$td1.text(bList[i].nickName);
+					$td2.html(bList[i].boardModifyDate +"<br>"+ bList[i].boardContent);
+					
+					$tr.append($td1.append($input), $td2);
+					$("#tmp-area").append($("#tableId").append($tr));
+					
+					
+				/*     $p.addClass("pclass");
 				    $p.css({
 						width: "500px",
 						height: "250px",
 					   });
 				   	$p.html("닉네임 : " + bList[i].nickName + "<br>" + bList[i].boardContent +"<br>"+ bList[i].boardModifyDate);
-				   	$("#tmp-area").append($div.append($p, $input, $hr));
+				   	$("#tmp-area").append($div.append($p, $input, $hr)); */
 			   }
 		 }
 		   }); 
@@ -411,16 +486,16 @@
 </script>       
 
     <script>
-     $("div").on("click",".pclass", function(){
-	        
-	        var name = $(this).parent().children().eq(1).val();
-	        console.log(name);
+	   $("div").on("click",".pclass", function(){
+	       
+	       var name = $(this).children().children().eq(0).val();
+	       console.log(name);
 	
-	        location.href="<%=request.getContextPath()%>/board/reviewCheck.do?boardNo="+name+"&storeNum=<%=request.getParameter("storeNum")%>";        
-			
-	     }).on("mouseenter", function(){
-	      $(this).parent().css("cursor","pointer");
-	   });
+	       location.href="<%=request.getContextPath()%>/board/reviewCheck.do?boardNo="+name+"&storeNum=<%=request.getParameter("storeNum")%>";        
+		
+	    }).on("mouseenter", function(){
+	     $(this).parent().css("cursor","pointer");
+	  });
 	  
 	  
 	  </script>

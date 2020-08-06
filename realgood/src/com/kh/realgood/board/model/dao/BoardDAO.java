@@ -347,6 +347,7 @@ public class BoardDAO {
 				file.setBoardNo(rset.getInt("BOARD_NO"));
 				
 				fileList.add(file);
+				System.out.println(fileList);
 			}
 			
 		} finally {
