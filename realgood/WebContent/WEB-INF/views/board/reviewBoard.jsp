@@ -10,7 +10,7 @@
 	
 	String storeNum = (String)request.getParameter("storeNum");
 
-	
+	String store = (String)request.getAttribute("store");
 	List<Member> list = (List<Member>)request.getAttribute("list");
 
 	
@@ -131,7 +131,7 @@
       <section class="ReviewWritingPage__Container">
       
         <div class="ReviewWritingPage__Row">
-          <h5 class="RestaurantSubMessage__RestaurantName"><strong> </strong></h5>
+          <h5 class="RestaurantSubMessage__RestaurantName"><strong><%=store %></strong></h5>
           <div class="RestaurantSubMessage__SubMessageWrap">
             <span class="RestaurantSubMessage__SubMessage">에 대한 솔직한 리뷰를 써주세요.</span>
           </div>

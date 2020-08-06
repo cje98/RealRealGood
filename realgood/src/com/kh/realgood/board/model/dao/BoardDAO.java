@@ -527,5 +527,29 @@ public class BoardDAO {
 		
 		return result;
 	}
+	
+	public String storeInfomation(Connection conn, int storeNo) throws Exception{
+	      
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      String store = null;
+	      
+	      String query = prop.getProperty("storeInfomation");
+	      System.out.println(storeNo);
+	      try {
+	         pstmt = conn.prepareStatement(query);
+	         pstmt.setInt(1, storeNo);
+	         rset = pstmt.executeQuery();
+	         if(rset.next()) {
+	            
+	            store = rset.getString("name");
+	         }
+	      }finally {
+	         rset.close();
+	         pstmt.close();
+	      }
+
+	      return store;
+	   }
 
 }

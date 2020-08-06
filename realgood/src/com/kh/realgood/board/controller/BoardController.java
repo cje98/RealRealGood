@@ -19,22 +19,23 @@ public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		
 		String path = null;
-		RequestDispatcher view = null;
-		
-		int storeNum = Integer.parseInt(request.getParameter("storeNum"));
-		
-		try {
-			
-			path = "/WEB-INF/views/board/reviewBoard.jsp";
-			
-			view = request.getRequestDispatcher(path);
-			view.forward(request, response);	
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        RequestDispatcher view = null;
+      
+        int storeNo = Integer.parseInt(request.getParameter("storeNum"));
+        String store = null;
+
+        try {
+           store = new BoardService().storeInfomation(storeNo);
+
+           path = "/WEB-INF/views/board/reviewBoard.jsp";
+           request.setAttribute("store", store);
+           view = request.getRequestDispatcher(path);
+           view.forward(request, response);   
+         
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
 
 		
 		

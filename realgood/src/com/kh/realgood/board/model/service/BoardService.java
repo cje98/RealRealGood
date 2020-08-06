@@ -331,6 +331,18 @@ public class BoardService {
 		
 		return result;
 	}
+	
+	public String storeInfomation(int storeNo) throws Exception{
+
+	      Connection conn = getConnection();
+	      
+	      String store = dao.storeInfomation(conn, storeNo);
+	      
+	      conn.close();
+	      
+	      
+	      return store;
+	   }
 
 	 
 	
