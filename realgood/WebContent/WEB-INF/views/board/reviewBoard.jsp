@@ -223,7 +223,7 @@
         </div>
         <div class="ReviewWritingPage__ButtonsWrap">
           <div class="ReviewWritingPage__Buttons">
-            <button class="ReviewWritingPage__CancelButton"  style="float: right; margin-left: 35px;" > 취소</button>
+            <button type="button" class="ReviewWritingPage__CancelButton"  style="float: right; margin-left: 35px;" id="exit"> 취소</button>
             <button class="ReviewWritingPage__SubmitButton ReviewWritingPage__SubmitButton--Deactive" style="float: right;">리뷰 등록하기</button>
           </div>
         </div>
@@ -315,9 +315,15 @@
 	    }
 
        </script>
-       
+       	<script>
+	   	$("#exit").click(function() {
+	   		history.back();
+		});
+   	</script>
        
          <script>
+         
+         
 		(function () {
 		    var starEls = document.querySelectorAll('#star span.star');
 		    var rate = 0;
