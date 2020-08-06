@@ -200,7 +200,7 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 
 	<div class="test" style="display: inline-block; margin-left: 53%">
 			<% if(loginMember != null && (reviewList.getNickName().equals(loginMember.getNickName()  ))) {%>
-			<a href="delete.do?no=<%=boardNo%>&storeNo=<%=storeNum%>" class="btn btn-primary float-right">삭제</a> 
+			<a href="delete.do?no=<%=boardNo%>&storeNo=<%=storeNum%>" id="delete" class="btn btn-primary float-right">삭제</a> 
 			<a href="updateForm?no=<%=boardNo%>" class="btn btn-primary float-right ml-1 mr-1">수정</a>
 			<% } %>
 			<a href="<%=request.getContextPath()%>/store/detail.do?storeNum=<%=request.getParameter("storeNum")%>" class="btn btn-primary float-right">목록으로</a>
@@ -212,10 +212,12 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
    	
    	</div>
    	<br><br><br><br><br>
-	
-	
-	
-	
+   	<script>
+   	$("#delete").click(function() {
+		return confirm("정말로 삭제 하시겠습니까?");
+	});
+   	</script>
+   	
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
