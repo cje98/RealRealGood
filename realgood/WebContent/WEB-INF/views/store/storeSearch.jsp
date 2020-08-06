@@ -48,6 +48,10 @@
 .ico-star1 {
    color: rgb(255, 168, 0);
 }
+
+.word{
+	word-break: keep-all;
+}
 </style>
 </head>
 <body>
@@ -98,7 +102,7 @@
                      <% } %>
             <div
                class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-               <div class="col p-4 d-flex flex-column position-static">
+               <div class="col p-4 d-flex flex-column position-static word">
                   <strong class="d-inline-block mb-6 text-primary"><%=store.getStoreGroupName()%></strong>
                   <input type="hidden" value="<%=store.getStoreNum()%>">
                   <h3 class="mb-0"><%=store.getStoreName()%></h3>
@@ -124,7 +128,7 @@
          <div class="col-md-6">
             <div
                class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-               <div class="col p-4 d-flex flex-column position-static">
+               <div class="col p-4 d-flex flex-column position-static word">
                   <strong class="d-inline-block mb-6 text-primary"><%=store.getStoreGroupName()%></strong>
                   <input type="hidden" value="<%=store.getStoreNum()%>">
                   <h3 class="mb-0"><%=store.getStoreName()%></h3>
@@ -232,7 +236,7 @@
 
 
    <script type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c97c952ea049cff96693a7ef6202037d&libraries=services"></script>
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13f6a2155d7fead8358eb6587155a7bf&libraries=services"></script>
 
    <script>
    var mapContainer = document.getElementById('map');

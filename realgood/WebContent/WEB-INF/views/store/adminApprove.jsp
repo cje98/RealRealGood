@@ -43,7 +43,7 @@
             <%-- <form action="<%=request.getContextPath()%>/store/adminApprove.do" method="POST"> --%>
                     <h1>관리자 승인/대기</h1>
                     <div class="row mb-3 form-row">
-                <table class="table table-hover">
+                  <table class="table table-hover">
                         <tr>
                             <td>체크여부</td>
                             <td>No.</td>
