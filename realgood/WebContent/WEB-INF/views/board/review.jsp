@@ -158,6 +158,23 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 	      </div>
 	    </div>
         <% if(fileList != null){ %>
+		<div style="clear: both";>
+			<% 
+			  String src = null;
+			  boolean flag = true;
+			  for(int i=0; i<4 ; i++) {
+			    for(Attachment at : fileList){
+			       if(at.getFileLevel() == i){
+			         src = request.getContextPath()+"/resources/uploadImages/"+at.getFileChangeName();
+		 	%> 	  
+			 <div style="width: 120px; height: 120px; display : inline-block">
+			    <img class="d-block w-100 boardImg" src="<%= src %>" />
+			    <input type="hidden" value=<%=fileList.get(i).getFileNo() %>>
+			 </div> 
+		 <%  } } } %>
+       </div>
+                <% } %>
+<%--         <% if(fileList != null){ %>
 		<div class="carousel slide m-3" id="carousel-325626">
                     
                     <div class="carousel-inner boardImgArea" style="width: 200px; height: 150px">
@@ -188,7 +205,7 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 	     			 
                     <a class="carousel-control-prev" href="#carousel-325626" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-325626" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
                 </div>
-                <% } %>
+                <% } %> --%>
 		    </div>
 		</div>
 	</div>
@@ -197,14 +214,15 @@ List<Attachment> fileList = (List<Attachment>)request.getAttribute("fileList");
 	<div class="test" style="display: inline-block; margin-left: 58%">
 			<% if(loginMember != null && (reviewList.getNickName().equals(loginMember.getNickName()  ))) {%>
 			<a href="delete?no=" class="btn btn-primary float-right">삭제</a> 
-			<a href="updateForm?no=" class="btn btn-primary float-right ml-1 mr-1">수정</a>
+			<a href="<%=request.getContextPath()%>/board/updateForm.do?boardNo=<%=request.getParameter("boardNo")%>" class="btn btn-primary float-right ml-1 mr-1">수정</a>
 			<% } %>
 			<a href="<%=request.getContextPath()%>/store/detail.do?storeNum=<%=request.getParameter("storeNum")%>" class="btn btn-primary float-right">목록으로</a>
 			
 				
 	</div>  	
 	<div style="display: inline-block; margin-left: 58%" >
-<%-- 	<a href="<%=request.getContextPath()%>/store/detail.do?storeNum=<%=request.getParameter("storeNum")%>">상세 페이지로 돌아가기</a>--%>   	<%}%>
+<%-- 	<a href="<%=request.getContextPath()%>/store/detail.do?storeNum=<%=request.getParameter("storeNum")%>">상세 페이지로 돌아가기</a>--%>   
+	<%}%>
    	
    	</div>
    	<br><br><br><br><br>

@@ -1,6 +1,7 @@
-<%@page import="com.kh.realgood.board.model.dto.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.kh.realgood.store.model.dto.StoreImg"%>
+<%@page import="com.kh.realgood.board.model.dto.Board"%>
 <%@page import="com.kh.realgood.store.model.dto.StoreInfoMenu"%>
 <%@page import="com.kh.realgood.store.model.dto.Store"%>
 <%@page import="java.util.List"%>
@@ -15,7 +16,10 @@
 	List<Board> boardList = (List<Board>)request.getAttribute("boardList");
 
 	
-	StoreInfoMenu storeInfoList = (StoreInfoMenu)request.getAttribute("storeInfoList");
+	StoreInfoMenu storeInfo = (StoreInfoMenu)request.getAttribute("storeInfoList");
+
+	
+	List<StoreImg> storeImgList = (List<StoreImg>)request.getAttribute("storeImgList");
 
 %>
 
@@ -111,14 +115,40 @@
 	
 	
 	
-    <% if(storeInfoList != null){ %>
+    <% if(storeInfo != null){ %>
     
   <div class="row" style="flex-wrap: nowrap;">
     <div class="col-md-8" style="margin: 15px 10% 0 -5% ">
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static" >
-          <h3 class="mb-0"></h3>
-          <input type="hidden" value="<%=storeInfoList.getStoreImgNum() %>">
+          
+        <% if(storeImgList != null){ %>
+        	
+		<div style="clear: both">
+			<% 
+			  String src = null;
+			  for(int i=0; i<storeImgList.size() ; i++) {
+			    for(StoreImg si : storeImgList){
+			       if(si.getFileLevel() == i){
+			         src = request.getContextPath()+"/resources/uploadImages/"+si.getRealImgName();
+		 	%> 	  
+			 <div style="width: 200px; height: 200px; display : inline-block">
+			    <img class="d-block w-100 boardImg" src="<%= src %>" />
+			    <input type="hidden" value=<%=storeImgList.get(i).getStoreImgNum()%>>
+			 </div> 
+		 <%  } } } %>
+       </div>
+                <% }else{ %>
+          			          			
+					    <img class="d-block w-100 boardImg" src="<%=request.getContextPath()%>/resources/images/맛집어때 로고.png" />
+          			
+        		<%} %>
+          
+          
+          
+          
+          
+          <input type="hidden" value="<%=storeInfo.getStoreImgNum() %>">
         </div>
       </div>
     </div>
@@ -138,12 +168,12 @@
 	
     <div class="col-md-6 blog-main" style="display: inline-block;">
       <h3 class="pb-4 mb-4 font-italic border-bottom">
-       	<%=storeInfoList.getStoreName() %>
+       	<%=storeInfo.getStoreName() %>
       </h3>
 
       <div class="blog-post" >
         <h2 class="blog-post-title"></h2>
-        <p class="blog-post-meta"><%=storeInfoList.getStoreContent() %> </p>
+        <p class="blog-post-meta"><%=storeInfo.getStoreContent() %> </p>
            
        <hr>
        
@@ -157,20 +187,20 @@
 	        
 				<tr>
 				    <th width="100px">주소</th>
-				    <td><%=storeInfoList.getStoreAddress() %></td>  
+				    <td><%=storeInfo.getStoreAddress() %></td>  
 				</tr>
 				<tr>
 				    <th>전화번호</th>
-				    <td><%=storeInfoList.getStoreTel() %></td>                      
+				    <td><%=storeInfo.getStoreTel() %></td>                      
 				</tr>
 				<tr>
 				    <th>음식종류</th>
-				    <td><%=storeInfoList.getGroupName()%></td>             
+				    <td><%=storeInfo.getGroupName()%></td>             
 				</tr>
 				<tr>
 				    <th>가격대</th>
-				    <td><%=storeInfoList.getPriceMin()%>~
-				    <%=storeInfoList.getPriceMax() %> 원
+				    <td><%=storeInfo.getPriceMin()%>~
+				    <%=storeInfo.getPriceMax() %> 원
 				    </td>                      
 				</tr>
 		<% } %>
@@ -291,8 +321,6 @@
 	          	<%for(int i = 0; i < mList.size(); i++ ) {%>
 	              <option value="<%=mList.get(i).getMenuNum()%>"><%=mList.get(i).getMenuName() + "-" + mList.get(i).getPrice()+ "원"%></option>
 	          	<%}%>
-          	<%} else {%>
-          		  <option>메뉴없음</option>
           	<%}%>
            
           </select>
@@ -480,7 +508,7 @@
 	var geocoder = new kakao.maps.services.Geocoder();
 	
 	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('서울 서대문구 연세로 36', function(result, status) {
+	geocoder.addressSearch('<%=storeInfo.getStoreAddress()%>', function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -496,7 +524,7 @@
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">독수리다방</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;"><%=storeInfo.getStoreName()%></div>'
         });
         infowindow.open(map, marker);
 

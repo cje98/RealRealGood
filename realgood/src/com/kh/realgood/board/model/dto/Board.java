@@ -52,6 +52,13 @@ public class Board {
 
 
 
+	public Board(int boardNo, String boardContent) {
+		super();
+		this.boardNo = boardNo;
+		this.boardContent = boardContent;
+	}
+
+
 	public Board(int boardNo, String boardContent, String memberId, int readCount, Timestamp boardModifyDate) {
 		super();
 		this.boardNo = boardNo;
@@ -74,15 +81,16 @@ public class Board {
 	
 	
 	
-	public Board( String nickName ,String boardContent, int readCount, Timestamp boardCreateDate, String name, String store_addr
+	public Board( String nickName ,String boardContent, int readCount, String name, Timestamp boardCreateDate,  String store_addr, int boardNo
 			) {
 		super();
 		this.nickName = nickName;
 		this.boardContent = boardContent;
 		this.readCount = readCount;
-		this.boardCreateDate = boardCreateDate;
 		this.name = name;
+		this.boardCreateDate = boardCreateDate;
 		this.store_addr = store_addr;
+		this.boardNo=boardNo;
 	}
 	
 	public Board( String nickName ,String boardContent, int readCount,  String name, Timestamp boardModifyDate, String store_addr

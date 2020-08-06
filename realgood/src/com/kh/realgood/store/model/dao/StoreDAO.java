@@ -38,7 +38,6 @@ public class StoreDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, addr);
 			pstmt.setString(2, group);
-
 			rset = pstmt.executeQuery();
 			Store store = null;
 			list = new ArrayList<Store>();
@@ -1025,7 +1024,7 @@ public class StoreDAO {
 	public StoreInfoMenu storeInfoList(Connection conn, int storeNum) throws Exception {
 
 		PreparedStatement pstmt = null;
-		StoreInfoMenu storeInfoList = null;
+		StoreInfoMenu storeInfo = null;
 		ResultSet rset = null;
 		
 		
@@ -1037,8 +1036,8 @@ public class StoreDAO {
 			
 			rset = pstmt.executeQuery();
 			
-			while(rset.next()) {
-				storeInfoList = new StoreInfoMenu(rset.getString("STORE_ADDR"),
+			if(rset.next()) {
+				storeInfo = new StoreInfoMenu(rset.getString("STORE_ADDR"),
 						rset.getString("STORE_TEL"),
 						rset.getString("GROUP_NAME"),
 						rset.getInt("MIN_PRICE"),
@@ -1057,7 +1056,51 @@ public class StoreDAO {
 		
 		
 		
-		return storeInfoList;
+		return storeInfo;
+	}
+
+	/** 상세페이지 사진
+	 * @param conn
+	 * @param storeNo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<StoreImg> storeImgList(Connection conn, int storeNo) throws Exception {
+
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+	    List<StoreImg> storeImgList = null;
+	      
+	    String query = prop.getProperty("storeImgList");
+	    
+	    try {
+	    	
+	    	pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, storeNo);
+			rset = pstmt.executeQuery();
+			StoreImg storeImg = null;
+			storeImgList = new ArrayList<StoreImg>();
+			
+			
+			while(rset.next()) {
+				storeImg = new StoreImg(rset.getInt("S_IMG_NUM"),
+								rset.getString("S_RIMG_NAME"),
+								rset.getInt("S_FILEP_LEVEL"),
+								rset.getString("S_FILE_PATH"));
+					
+				storeImgList.add(storeImg);
+			}
+	    	
+	    	
+	    }finally {
+			rset.close();
+			pstmt.close();
+		}
+	    
+		
+		return storeImgList;
 	}
 
 }

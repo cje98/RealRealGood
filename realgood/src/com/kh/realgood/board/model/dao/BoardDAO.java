@@ -347,6 +347,7 @@ public class BoardDAO {
 				file.setFileChangeName(rset.getString("FILE_CHANGE_NAME"));
 				file.setFilePath(rset.getString("FILE_PATH"));
 				file.setFileLevel(rset.getInt("FILE_LEVEL"));
+				file.setBoardNo(rset.getInt("BOARD_NO"));
 				
 				fileList.add(file);
 			}
@@ -358,6 +359,107 @@ public class BoardDAO {
 		
 		
 		return fileList;
+	}
+
+	/** 게시글 수정 화면
+	 * @param conn
+	 * @param boardNo
+	 * @return board
+	 * @throws Exception
+	 */
+	public Board updateView(Connection conn, int boardNo) throws Exception{
+
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		Board board = null;
+		
+		String query = prop.getProperty("updateView");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				board = new Board(rset.getString("NICKNAME"),
+						rset.getString("BOARD_CONTENT"),
+						rset.getInt("READ_COUNT"),
+						rset.getString("SNAME"),
+						rset.getTimestamp("BOARD_MODIFY_DT"),
+						rset.getString("ADDR"),
+						rset.getInt("BOARD_NO"));
+			}
+			
+			
+		}finally {
+			rset.close();
+			pstmt.close();
+		}
+		
+		
+		return board;
+	}
+
+	/** 게시글 수정
+	 * @param conn
+	 * @param board
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateBoard(Connection conn, Board board) throws Exception{
+
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("updateBoard");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, board.getBoardContent());
+			pstmt.setInt(2, board.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		}finally {
+			pstmt.close();
+		}
+		
+		return result;
+	}
+
+	public int updateAttachment(Connection conn, Attachment newFile) throws Exception {
+
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query =prop.getProperty("updateAttachment");
+		
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, newFile.getFileOriginName());
+			pstmt.setString(2, newFile.getFileChangeName());
+			pstmt.setString(3, newFile.getFilePath());
+			pstmt.setInt(4, newFile.getFileNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			pstmt.close();
+		}
+		return result;
 	}
 
 }

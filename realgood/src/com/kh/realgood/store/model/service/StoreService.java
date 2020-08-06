@@ -468,6 +468,23 @@ public class StoreService {
 
 		return storeInfoList;
 	}
+	/** 상세 페이지 가게 이미지
+	 * @param storeNo
+	 * @return storeImg
+	 * @throws Exception
+	 */
+	public List<StoreImg> storeImgList(int storeNo) throws Exception {
+
+
+		Connection conn = getConnection();
+
+		List<StoreImg> storeImgList = dao.storeImgList(conn, storeNo);
+		
+		conn.close();
+
+		return storeImgList;
+		
+	}
 	
 	
 	
