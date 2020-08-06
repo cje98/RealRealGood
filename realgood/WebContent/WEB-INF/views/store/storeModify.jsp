@@ -1,9 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@page import="com.kh.realgood.store.model.dto.StoreMenu"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.kh.realgood.store.model.dto.StoreImg"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +30,7 @@
 <body>
  <%@ include file="../common/header.jsp" %>
  	<div class="row my-5">
-	<%@ include file="sideMenu.jsp"%>
+	<%@ include file="sideMenu2.jsp"%>
 <%
 	
 	// 합쳐져있는 전화번호 '-'로 쪼개기

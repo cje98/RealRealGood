@@ -12,6 +12,7 @@
     
    #corNum1, #corNum2, #corNum3{
    		display : inline-block;
+   		
    }
    
    #phone1, #phone2, #phone3{
@@ -21,6 +22,8 @@
 	.storeImg{
 		cursor : pointer;
 	}
+	
+	
 	
 </style>
 
@@ -51,18 +54,15 @@
 			            <td><label for="corNum1">사업자번호(필수)</label></td>
 			            <td>
 			            	<!-- 사업자번호1 -->
-				            <div class="col-md-3">
-	                          <input type="text" class="form-control corNum" id="corNum1"  maxlength="3" name="corNum1" required>
-	                        </div>
+				            <div class="col-md-8">
+	                         	<input type="text" class="form-control phone col-md-3" id="corNum1"  maxlength="3" name="corNum1" required>
 	                        <!-- 사업자번호2 -->
-	                        <div class="col-md-3">
-	                            <input type="text" class="form-control corNum" id="corNum2"  maxlength="2" name="corNum2" required>
+	                            <input type="text" class="form-control phone col-md-3" id="corNum2"  maxlength="2" name="corNum2" required>
+	                        <!-- 사업자번호3 -->
+	                        	<input type="text" class="form-control phone col-md-3" id="corNum3"  maxlength="5" name="corNum3" required>
 	                        </div>
 	                        
-	                        <!-- 사업자번호3 -->
-	                        <div class="col-md-3">
-	                            <input type="text" class="form-control corNum" id="corNum3"  maxlength="5" name="corNum3" required>
-	                        </div>
+	                        
 			            </td>
 			       
 		            </tr>
@@ -109,6 +109,22 @@
 	                            <select class="custom-select col-md-3" id="phone1" name="phone1" required>
 	                                <option>010</option>
 	                                <option>02</option>
+	                                <option>051</option>
+	                                <option>053</option>
+	                                <option>032</option>
+	                                <option>062</option>
+	                                <option>042</option>
+	                                <option>052</option>
+	                                <option>044</option>
+	                                <option>031</option>
+	                                <option>033</option>
+	                                <option>043</option>
+	                                <option>041</option>
+	                                <option>063</option>
+	                                <option>061</option>
+	                                <option>054</option>
+	                                <option>055</option>
+	                                <option>064</option>
 	                            </select>
 	                            <input type="text" class="form-control phone col-md-3" id="phone2"  maxlength="4" name="phone2" required>
 	                            <input type="text" class="form-control phone col-md-3" id="phone3"  maxlength="4" name="phone3" required>
@@ -131,9 +147,9 @@
 			            </td>
 			            <td>
 	                        <div>
-	                        <input type="text" name="post" id="sample6_postcode" placeholder="우편번호" required>
+	                        <input type="text" name="post" id="sample6_postcode" placeholder="우편번호" readonly required>
 							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" name="address1" id="sample6_address" size=50 placeholder="주소" required><br>
+							<input type="text" name="address1" id="sample6_address" size=50 placeholder="주소" readonly required><br>
 							<input type="text" name="address2" id="sample6_detailAddress" placeholder="상세주소">
 			            	</div>
 			            </td>
@@ -335,28 +351,28 @@
 	var $storeContent = $("#storeContent");
      
      
-    $storeName.on("input",function(){
-	    var regExp = /^[a-zA-Z가-힣\d ]{1,20}$/; 
+/*     $storeName.on("input",function(){
+	    var regExp = /^[a-zA-Z가-힣\d() ]{1,20}$/; 
 	    if(!regExp.test($storeName.val())){
 	    	signUpCheck.storeName = false;
 	    }else{	    	
 	    	signUpCheck.storeName = true;
 	    }
     });
-    
+     */
 	  
-    	
+  /*   	
     $storeContent.on("input",function(){
-    	var regExp = /^[a-zA-Z가-힣\d ]{1,200}$/;
+    	var regExp = /^[a-zA-Z가-힣\d`~!@#$%^&*|\\\'\";:\/? ]{1,200}$/;
     	if(!regExp.test($storeContent.val())){
     		signUpCheck.storeContent = false;
     	}else {
     		signUpCheck.storeContent = true;
     	}
     });
-    
+     */
  
-    
+    /* 
     
  	function validate() {
 
@@ -383,7 +399,7 @@
 		}
 	
 		}
- 	}
+ 	} */
 
 </script>
 
