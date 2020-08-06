@@ -40,7 +40,7 @@
     <div class="row my-5">
         <%@ include file="../common/adminSideMenu.jsp"%>
         <div class="col-sm-5">
-            <form action="<%=request.getContextPath()%>/store/adminApprove.do" method="POST">
+            <%-- <form action="<%=request.getContextPath()%>/store/adminApprove.do" method="POST"> --%>
                     <h1>관리자 승인/대기</h1>
                     <div class="row mb-3 form-row">
                 <table class="table table-hover">
@@ -70,7 +70,7 @@
                     </div>
                 <button id="adminBtn" class="btn btn-primary">승인</button>
                                    전체<input id="checkAll" type="checkbox" name="check" >
-            </form>
+            <!-- </form> -->
         </div>
     </div>
     
