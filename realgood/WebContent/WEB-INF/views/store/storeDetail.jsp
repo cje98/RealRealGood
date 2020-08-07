@@ -362,7 +362,6 @@
             bList.push(JSON.parse('<%=b%>'));
          <% } %>
 
-      //console.log(bList);
       var loopTmp = 0;
       var tmpSize = 1;
       var bSize = bList.length;
@@ -401,7 +400,7 @@
       
        $("#tmp").on("click",function(){
           if(tmpSize != bSize){
-            tmpSize = ++tmpSize + 5;
+            tmpSize = ++tmpSize * 5;
             for(var i=5*(++loopTmp)+1; i < tmpSize; i++) {
                if(bSize == i){
                   tmpSize = i;

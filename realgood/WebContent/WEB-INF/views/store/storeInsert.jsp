@@ -48,11 +48,11 @@
 		            </tr>
 		            
 		            <tr>
-			            <td><label for="corNum1 col-md-8">사업자번호(필수)</label></td>
+			            
 			             <td><label for="corNum1">사업자번호(필수)</label></td>
                      <td>
                         <!-- 사업자번호1 -->
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                                <input type="text" class="form-control phone col-md-3" id="corNum1"  maxlength="3" name="corNum1" required>
                            <!-- 사업자번호2 -->
                                <input type="text" class="form-control phone col-md-3" id="corNum2"  maxlength="2" name="corNum2" required>
