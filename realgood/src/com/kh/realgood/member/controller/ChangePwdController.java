@@ -57,7 +57,7 @@ public class ChangePwdController extends HttpServlet {
 			
 			response.sendRedirect("myPage.do");
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		
 		

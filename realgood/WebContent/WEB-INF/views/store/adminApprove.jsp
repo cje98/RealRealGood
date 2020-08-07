@@ -54,7 +54,7 @@
                         </tr>
                         <%if( aList.isEmpty()){ %>
                         <tr>
-                        	<td cols="5">승인할 내역이 없습니다.</td>
+                        	<td colspan="6">승인할 내역이 없습니다.</td>
                         </tr>
                         <% } else{ %>
 	                        <% for(int i = 0; i < aList.size(); i++){ %>
