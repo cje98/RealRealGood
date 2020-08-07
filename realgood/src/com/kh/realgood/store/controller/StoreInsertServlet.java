@@ -173,8 +173,10 @@ public class StoreInsertServlet extends HttpServlet {
 			
 			int result = new StoreService().storeInsert(storeInfo, id);
 			
-			int result2 = new StoreService().imgInsert(fList, result);
-			
+			// 이미지가 null이 아니면 삽입 null
+	         if(fList != null) {
+	            int result2 = new StoreService().imgInsert(fList, result);
+	         }
 			if(!list.isEmpty()) {
 				for(int i=0; i < (list.size()/4); i++) {
 					StoreMenu storeMenu = new StoreMenu(menuName[i], Integer.parseInt(menuPrice[i]), menuContents[i], menuMakeTime[i]);
@@ -186,7 +188,7 @@ public class StoreInsertServlet extends HttpServlet {
 			
 			int result3 = new StoreService().menuInsert(list2);
 			
-			if(result > 0 && result2 > 0 && result3 > 0) {
+			if(result > 0 && result3 > 0) {
 				
 				status = "success";
 				msg = "가게 정보 등록";

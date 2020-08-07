@@ -120,6 +120,7 @@
 								<li><a class="dropdown-item" href="<%=request.getContextPath()%>/member/changePwd.do"> 비밀번호 변경</a></li>
 								<li><a class="dropdown-item" href="<%=request.getContextPath()%>/member/myBoadrCk.do"> 작성 게시글 확인</a></li>
 								<li><a class="dropdown-item" href="<%=request.getContextPath()%>/member/purchase.do"> 구매내역</a></li>
+								<li><a class="dropdown-item" href="<%=request.getContextPath()%>/member/selectBookmark.do">즐겨찾기</a></li>
 								<li><a class="dropdown-item" href="<%=request.getContextPath()%>/member/removeMember.do"> 회원탈퇴</a></li>
 							</ul>
 						</li>
